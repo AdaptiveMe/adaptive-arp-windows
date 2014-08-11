@@ -29,7 +29,7 @@ namespace Sharpen
 			return Environment.ProcessorCount;
 		}
 
-		internal static long CurrentTimeMillis ()
+		public static long CurrentTimeMillis ()
 		{
 			return DateTime.UtcNow.ToMillisecondsSinceEpoch ();
 		}
