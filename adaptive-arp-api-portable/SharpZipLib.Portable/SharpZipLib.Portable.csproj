@@ -150,6 +150,18 @@
     <Compile Include="Zip\ZipOutputStream.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Portable.Runtime\Portable.Runtime.csproj">
+      <Project>{3901c90b-51c5-47ac-9bc7-af76a82f990e}</Project>
+      <Name>Portable.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portable.Security.Cryptography.ProtectedData\Portable.Security.Cryptography.ProtectedData.csproj">
+      <Project>{c30fa2ea-b2fc-4831-b7ec-5a6ef38ea24b}</Project>
+      <Name>Portable.Security.Cryptography.ProtectedData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portable.Security.Cryptography\Portable.Security.Cryptography.csproj">
+      <Project>{9186cc3d-dce0-40cf-9762-efabe6c342d2}</Project>
+      <Name>Portable.Security.Cryptography</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Portable.Store\Portable.Store.csproj">
       <Project>{3c43f2be-68ab-4488-ac6c-a74abb2bf481}</Project>
       <Name>Portable.Store</Name>
