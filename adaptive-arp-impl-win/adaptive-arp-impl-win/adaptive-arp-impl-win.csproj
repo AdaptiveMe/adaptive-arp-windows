@@ -9,20 +9,21 @@
     <ProjectGuid>{D27A8449-5314-4D4D-9C8C-55B3BAA6AB78}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>adaptive_arp_impl_win</RootNamespace>
-    <AssemblyName>adaptive-arp-impl-win</AssemblyName>
+    <RootNamespace>Adaptive.Arp.Impl</RootNamespace>
+    <AssemblyName>Adaptive.Arp.Impl.Win81</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <TargetPlatformVersion>8.1</TargetPlatformVersion>
-    <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile32</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -30,14 +31,14 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\ARM\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>ARM</PlatformTarget>
@@ -47,7 +48,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <OutputPath>bin\ARM\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -59,7 +60,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
@@ -69,7 +70,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -81,7 +82,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -91,7 +92,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -102,14 +103,277 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\..\adaptive-arp-api-portable\Sharpen.Portable\Sharpen.Portable.csproj">
+      <Project>{7199f6fc-22af-41f5-98f8-8419e2961654}</Project>
+      <Name>Sharpen.Portable</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\Acceleration.cs">
+      <Link>API\Acceleration.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\AccelerationListener.cs">
+      <Link>API\AccelerationListener.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAccelerometer.cs">
+      <Link>API\IAccelerometer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAdaptiveRP.cs">
+      <Link>API\IAdaptiveRP.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAds.cs">
+      <Link>API\IAds.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAlarm.cs">
+      <Link>API\IAlarm.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAmbientLight.cs">
+      <Link>API\IAmbientLight.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAnalytics.cs">
+      <Link>API\IAnalytics.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAudio.cs">
+      <Link>API\IAudio.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBarcode.cs">
+      <Link>API\IBarcode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBarometer.cs">
+      <Link>API\IBarometer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseApplication.cs">
+      <Link>API\IBaseApplication.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseCommerce.cs">
+      <Link>API\IBaseCommerce.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseCommunication.cs">
+      <Link>API\IBaseCommunication.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseData.cs">
+      <Link>API\IBaseData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseMedia.cs">
+      <Link>API\IBaseMedia.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseNotification.cs">
+      <Link>API\IBaseNotification.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBasePIM.cs">
+      <Link>API\IBasePIM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseReader.cs">
+      <Link>API\IBaseReader.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseSecurity.cs">
+      <Link>API\IBaseSecurity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseSensor.cs">
+      <Link>API\IBaseSensor.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseSocial.cs">
+      <Link>API\IBaseSocial.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseSystem.cs">
+      <Link>API\IBaseSystem.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseUI.cs">
+      <Link>API\IBaseUI.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBaseUtil.cs">
+      <Link>API\IBaseUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBluetooth.cs">
+      <Link>API\IBluetooth.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IBrowser.cs">
+      <Link>API\IBrowser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ICalendar.cs">
+      <Link>API\ICalendar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ICamera.cs">
+      <Link>API\ICamera.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ICapabilities.cs">
+      <Link>API\ICapabilities.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ICloud.cs">
+      <Link>API\ICloud.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ICompression.cs">
+      <Link>API\ICompression.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IConcurrent.cs">
+      <Link>API\IConcurrent.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IContact.cs">
+      <Link>API\IContact.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ICrypto.cs">
+      <Link>API\ICrypto.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IDatabase.cs">
+      <Link>API\IDatabase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IDataStream.cs">
+      <Link>API\IDataStream.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IDesktop.cs">
+      <Link>API\IDesktop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IDevice.cs">
+      <Link>API\IDevice.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IDisplay.cs">
+      <Link>API\IDisplay.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IFacebook.cs">
+      <Link>API\IFacebook.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IFile.cs">
+      <Link>API\IFile.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IGeolocation.cs">
+      <Link>API\IGeolocation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IGlobalization.cs">
+      <Link>API\IGlobalization.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IGooglePlus.cs">
+      <Link>API\IGooglePlus.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IGyroscope.cs">
+      <Link>API\IGyroscope.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IImaging.cs">
+      <Link>API\IImaging.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ILifecycle.cs">
+      <Link>API\ILifecycle.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ILinkedIn.cs">
+      <Link>API\ILinkedIn.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ILogging.cs">
+      <Link>API\ILogging.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IMagnetometer.cs">
+      <Link>API\IMagnetometer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IMail.cs">
+      <Link>API\IMail.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IManagement.cs">
+      <Link>API\IManagement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IMap.cs">
+      <Link>API\IMap.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IMessaging.cs">
+      <Link>API\IMessaging.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\INetworkInfo.cs">
+      <Link>API\INetworkInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\INetworkNaming.cs">
+      <Link>API\INetworkNaming.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\INetworkReachability.cs">
+      <Link>API\INetworkReachability.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\INetworkStatus.cs">
+      <Link>API\INetworkStatus.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\INFC.cs">
+      <Link>API\INFC.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\INotification.cs">
+      <Link>API\INotification.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\INotificationLocal.cs">
+      <Link>API\INotificationLocal.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IOAuth.cs">
+      <Link>API\IOAuth.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IOCR.cs">
+      <Link>API\IOCR.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IOpenId.cs">
+      <Link>API\IOpenId.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IOS.cs">
+      <Link>API\IOS.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IPrinting.cs">
+      <Link>API\IPrinting.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IProximity.cs">
+      <Link>API\IProximity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IQRCode.cs">
+      <Link>API\IQRCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IRSS.cs">
+      <Link>API\IRSS.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IRuntime.cs">
+      <Link>API\IRuntime.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ISecurity.cs">
+      <Link>API\ISecurity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IServices.cs">
+      <Link>API\IServices.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ISettings.cs">
+      <Link>API\ISettings.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ISocket.cs">
+      <Link>API\ISocket.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IStore.cs">
+      <Link>API\IStore.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ITelephony.cs">
+      <Link>API\ITelephony.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ITimer.cs">
+      <Link>API\ITimer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ITwitter.cs">
+      <Link>API\ITwitter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IUI.cs">
+      <Link>API\IUI.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IUpdate.cs">
+      <Link>API\IUpdate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IVibration.cs">
+      <Link>API\IVibration.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IVideo.cs">
+      <Link>API\IVideo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IWallet.cs">
+      <Link>API\IWallet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IXML.cs">
+      <Link>API\IXML.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <TargetPlatform Include="Windows, Version=8.1" />
+    <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

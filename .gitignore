@@ -154,3 +154,5 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 adaptive-arp-api-portable/packages
+
+adaptive-arp-impl-win/packages
