@@ -21,16 +21,17 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -86,11 +87,155 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sharpen\AbstractCollection.cs" />
+    <Compile Include="Sharpen\AbstractList.cs" />
+    <Compile Include="Sharpen\AbstractMap.cs" />
+    <Compile Include="Sharpen\AbstractSet.cs" />
+    <Compile Include="Sharpen\AccessController.cs" />
+    <Compile Include="Sharpen\AList.cs" />
+    <Compile Include="Sharpen\Arrays.cs" />
+    <Compile Include="Sharpen\AtomicBoolean.cs" />
+    <Compile Include="Sharpen\AtomicInteger.cs" />
+    <Compile Include="Sharpen\AtomicLong.cs" />
+    <Compile Include="Sharpen\AtomicReference.cs" />
+    <Compile Include="Sharpen\AtomicReferenceArray.cs" />
+    <Compile Include="Sharpen\Authenticator.cs" />
+    <Compile Include="Sharpen\BitSet.cs" />
+    <Compile Include="Sharpen\BufferedInputStream.cs" />
+    <Compile Include="Sharpen\BufferedOutputStream.cs" />
+    <Compile Include="Sharpen\BufferedReader.cs" />
+    <Compile Include="Sharpen\BufferedWriter.cs" />
+    <Compile Include="Sharpen\ByteArrayInputStream.cs" />
+    <Compile Include="Sharpen\ByteArrayOutputStream.cs" />
+    <Compile Include="Sharpen\ByteBuffer.cs" />
+    <Compile Include="Sharpen\ByteOrder.cs" />
+    <Compile Include="Sharpen\Callable.cs" />
+    <Compile Include="Sharpen\Channels.cs" />
+    <Compile Include="Sharpen\CharBuffer.cs" />
+    <Compile Include="Sharpen\CharSequence.cs" />
+    <Compile Include="Sharpen\CharsetDecoder.cs" />
+    <Compile Include="Sharpen\CharsetEncoder.cs" />
+    <Compile Include="Sharpen\CodingErrorAction.cs" />
+    <Compile Include="Sharpen\Collections.cs" />
+    <Compile Include="Sharpen\ConcurrentHashMap.cs" />
+    <Compile Include="Sharpen\ConcurrentMap.cs" />
+    <Compile Include="Sharpen\CopyOnWriteArrayList.cs" />
+    <Compile Include="Sharpen\CountDownLatch.cs" />
+    <Compile Include="Sharpen\CRC32.cs" />
+    <Compile Include="Sharpen\CyclicBarrier.cs" />
+    <Compile Include="Sharpen\DataConverter.cs" />
+    <Compile Include="Sharpen\DateFormat.cs" />
+    <Compile Include="Sharpen\DeflaterOutputStream.cs" />
+    <Compile Include="Sharpen\DigestInputStream.cs" />
+    <Compile Include="Sharpen\DigestOutputStream.cs" />
+    <Compile Include="Sharpen\EnumerableWrapper.cs" />
+    <Compile Include="Sharpen\EnumeratorWrapper.cs" />
+    <Compile Include="Sharpen\EnumSet.cs" />
+    <Compile Include="Sharpen\Exceptions.cs" />
+    <Compile Include="Sharpen\Executor.cs" />
+    <Compile Include="Sharpen\Executors.cs" />
+    <Compile Include="Sharpen\ExecutorService.cs" />
+    <Compile Include="Sharpen\Extensions.cs" />
+    <Compile Include="Sharpen\FileChannel.cs" />
+    <Compile Include="Sharpen\FileHelper.cs" />
+    <Compile Include="Sharpen\FileInputStream.cs" />
+    <Compile Include="Sharpen\FileLock.cs" />
+    <Compile Include="Sharpen\FilenameFilter.cs" />
+    <Compile Include="Sharpen\FileReader.cs" />
+    <Compile Include="Sharpen\FileWriter.cs" />
+    <Compile Include="Sharpen\FilterInputStream.cs" />
+    <Compile Include="Sharpen\FilterOutputStream.cs" />
+    <Compile Include="Sharpen\Future.cs" />
+    <Compile Include="Sharpen\GZIPInputStream.cs" />
+    <Compile Include="Sharpen\GZIPOutputStream.cs" />
+    <Compile Include="Sharpen\InflaterInputStream.cs" />
+    <Compile Include="Sharpen\InheritableThreadLocal.cs" />
+    <Compile Include="Sharpen\InputStream.cs" />
+    <Compile Include="Sharpen\InputStreamReader.cs" />
+    <Compile Include="Sharpen\Iterable.cs" />
+    <Compile Include="Sharpen\Iterator.cs" />
+    <Compile Include="Sharpen\JavaCalendar.cs" />
+    <Compile Include="Sharpen\LinkageError.cs" />
+    <Compile Include="Sharpen\LinkedHashMap.cs" />
+    <Compile Include="Sharpen\LinkedHashSet.cs" />
+    <Compile Include="Sharpen\ListIterator.cs" />
+    <Compile Include="Sharpen\MappedByteBuffer.cs" />
+    <Compile Include="Sharpen\Matcher.cs" />
+    <Compile Include="Sharpen\MessageDigest.cs" />
+    <Compile Include="Sharpen\MessageFormat.cs" />
+    <Compile Include="Sharpen\ObjectInputStream.cs" />
+    <Compile Include="Sharpen\ObjectOutputStream.cs" />
+    <Compile Include="Sharpen\OutputStream.cs" />
+    <Compile Include="Sharpen\OutputStreamWriter.cs" />
+    <Compile Include="Sharpen\PasswordAuthentication.cs" />
+    <Compile Include="Sharpen\Pattern.cs" />
+    <Compile Include="Sharpen\PipedInputStream.cs" />
+    <Compile Include="Sharpen\PipedOutputStream.cs" />
+    <Compile Include="Sharpen\PrintWriter.cs" />
+    <Compile Include="Sharpen\PrivilegedAction.cs" />
+    <Compile Include="Sharpen\Process.cs" />
+    <Compile Include="Sharpen\Proxy.cs" />
+    <Compile Include="Sharpen\ProxySelector.cs" />
+    <Compile Include="Sharpen\RandomAccessFile.cs" />
+    <Compile Include="Sharpen\ReentrantLock.cs" />
+    <Compile Include="Sharpen\Reference.cs" />
+    <Compile Include="Sharpen\ReferenceQueue.cs" />
+    <Compile Include="Sharpen\ResourceBundle.cs" />
+    <Compile Include="Sharpen\Runnable.cs" />
+    <Compile Include="Sharpen\Runtime.cs" />
+    <Compile Include="Sharpen\ScheduledThreadPoolExecutor.cs" />
+    <Compile Include="Sharpen\SimpleDateFormat.cs" />
+    <Compile Include="Sharpen\SingletonList.cs" />
+    <Compile Include="Sharpen\SoftReference.cs" />
+    <Compile Include="Sharpen\SSLContext.cs" />
+    <Compile Include="Sharpen\StackOverflowError.cs" />
+    <Compile Include="Sharpen\SynchronizedList.cs" />
+    <Compile Include="Sharpen\Thread.cs" />
+    <Compile Include="Sharpen\ThreadFactory.cs" />
+    <Compile Include="Sharpen\ThreadPoolExecutor.cs" />
+    <Compile Include="Sharpen\TimeUnit.cs" />
+    <Compile Include="Sharpen\TreeSet.cs" />
+    <Compile Include="Sharpen\TrustManager.cs" />
+    <Compile Include="Sharpen\URLEncoder.cs" />
+    <Compile Include="Sharpen\WeakReference.cs" />
+    <Compile Include="Sharpen\WrappedSystemStream.cs" />
+    <Compile Include="Sharpen\X509Certificate.cs" />
+    <Compile Include="Sharpen\X509TrustManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Portable.Runtime\Portable.Runtime.csproj">
+      <Project>{3901c90b-51c5-47ac-9bc7-af76a82f990e}</Project>
+      <Name>Portable.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portable.Security.Cryptography\Portable.Security.Cryptography.csproj">
+      <Project>{9186cc3d-dce0-40cf-9762-efabe6c342d2}</Project>
+      <Name>Portable.Security.Cryptography</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Portable.Store\Portable.Store.csproj">
+      <Project>{3c43f2be-68ab-4488-ac6c-a74abb2bf481}</Project>
+      <Name>Portable.Store</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="PCLStorage">
+      <HintPath>..\packages\PCLStorage.0.9.6\lib\portable-win8+wpa81\PCLStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLStorage.Abstractions">
+      <HintPath>..\packages\PCLStorage.0.9.6\lib\portable-win8+wpa81\PCLStorage.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
