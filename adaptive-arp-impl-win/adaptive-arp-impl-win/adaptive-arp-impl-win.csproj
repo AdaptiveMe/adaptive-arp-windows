@@ -115,6 +115,54 @@
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\AccelerationListener.cs">
       <Link>API\AccelerationListener.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\AttachmentData.cs">
+      <Link>API\AttachmentData.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\Contact.cs">
+      <Link>API\Contact.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactAddress.cs">
+      <Link>API\ContactAddress.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactEmail.cs">
+      <Link>API\ContactEmail.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactPersonalInfo.cs">
+      <Link>API\ContactPersonalInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactPhone.cs">
+      <Link>API\ContactPhone.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactProfessionalInfo.cs">
+      <Link>API\ContactProfessionalInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactSocial.cs">
+      <Link>API\ContactSocial.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactTag.cs">
+      <Link>API\ContactTag.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactUid.cs">
+      <Link>API\ContactUid.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ContactWebsite.cs">
+      <Link>API\ContactWebsite.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\DeviceInfo.cs">
+      <Link>API\DeviceInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\Email.cs">
+      <Link>API\Email.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\EmailAddress.cs">
+      <Link>API\EmailAddress.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\Geolocation.cs">
+      <Link>API\Geolocation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAccelerationListener.cs">
+      <Link>API\IAccelerationListener.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IAccelerometer.cs">
       <Link>API\IAccelerometer.cs</Link>
     </Compile>
@@ -211,6 +259,9 @@
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IContact.cs">
       <Link>API\IContact.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IContactResultCallback.cs">
+      <Link>API\IContactResultCallback.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\ICrypto.cs">
       <Link>API\ICrypto.cs</Link>
     </Compile>
@@ -237,6 +288,9 @@
     </Compile>
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IGeolocation.cs">
       <Link>API\IGeolocation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IGeolocationListener.cs">
+      <Link>API\IGeolocationListener.cs</Link>
     </Compile>
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IGlobalization.cs">
       <Link>API\IGlobalization.cs</Link>
@@ -273,6 +327,9 @@
     </Compile>
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IMessaging.cs">
       <Link>API\IMessaging.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IMessagingCallback.cs">
+      <Link>API\IMessagingCallback.cs</Link>
     </Compile>
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\INetworkInfo.cs">
       <Link>API\INetworkInfo.cs</Link>
@@ -363,6 +420,9 @@
     </Compile>
     <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\IXML.cs">
       <Link>API\IXML.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\adaptive-arp-api\adaptive-arp-api-csharp\Adaptive.Arp.Api\Adaptive\Arp\Api\OSInfo.cs">
+      <Link>API\OSInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
