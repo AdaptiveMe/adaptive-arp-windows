@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="Adaptive.Arp.Rt.WinPhone.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Adaptive.Arp.Rt.WinPhone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <WebView x:Name="WebViewControl"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             NavigationCompleted="Browser_NavigationCompleted" />
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton
+                    x:Name="ForwardAppBarButton"
+                    x:Uid="ForwardAppBarButton"
+                    Click="ForwardAppBarButton_Click"
+                    Icon="Forward"
+                    Label="forward"/>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton
+                    x:Name="HomeAppBarButton"
+                    x:Uid="HomeAppBarButton"
+                    Click="HomeAppBarButton_Click"
+                    Label="home"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
