@@ -156,3 +156,4 @@ $RECYCLE.BIN/
 adaptive-arp-api-portable/packages
 
 adaptive-arp-impl-win/packages
+*.nupkg
