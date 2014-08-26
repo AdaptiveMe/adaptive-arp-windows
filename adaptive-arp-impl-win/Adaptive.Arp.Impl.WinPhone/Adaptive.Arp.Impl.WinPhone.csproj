@@ -87,6 +87,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Adaptive.Arp.Api">
+      <HintPath>..\packages\Adaptive.Arp.Api.1.0.12\lib\portable-win81+wpa81\Adaptive.Arp.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Adaptive.Arp.Impl">
+      <HintPath>..\packages\Adaptive.Arp.Impl.1.0.12\lib\portable-win81+wpa81\Adaptive.Arp.Impl.dll</HintPath>
+    </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\wpa81\PCLCrypto.dll</HintPath>
     </Reference>
