@@ -157,3 +157,4 @@ adaptive-arp-api-portable/packages
 
 adaptive-arp-impl-win/packages
 *.nupkg
+adaptive-arp-rt-win/packages/
