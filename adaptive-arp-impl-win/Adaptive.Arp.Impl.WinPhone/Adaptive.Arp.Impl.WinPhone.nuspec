@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>1.0.12</version>
+    <title>Adaptive Runtime Platform Windows Phone Implementation</title>
+    <authors>Carlos Lozano Diez</authors>
+    <owners>Carlos Lozano Diez</owners>
+    <licenseUrl>https://raw.githubusercontent.com/AdaptiveMe/adaptive-arp-windows/master/adaptive-arp-impl-win/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/AdaptiveMe/adaptive-arp-windows/tree/master/adaptive-arp-impl-win</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/AdaptiveMe/adaptive-arp-windows/master/adaptive-arp-impl-win/adaptive-arp-impl-win/AdaptiveLogo.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Adaptive Runtime Platform ARP Windows Phone Implementation.</description>
+    <releaseNotes>Initial Release Canditate: Windows Phone 8.1</releaseNotes>
+    <copyright>Copyright 2014 Carlos Lozano Diez ta Adaptive.me</copyright>
+    <tags>Adaptive.me Adaptive Runtime Platform ARP WindowsPhone Implementation.</tags>
+  </metadata>
+</package>
