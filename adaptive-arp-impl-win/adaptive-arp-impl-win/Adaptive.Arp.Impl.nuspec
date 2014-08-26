@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>1.0</version>
+    <title>Adaptive Runtime Platform PCL Implementation</title>
+    <authors>Carlos Lozano Diez</authors>
+    <owners>Carlos Lozano Diez</owners>
+    <licenseUrl>https://raw.githubusercontent.com/AdaptiveMe/adaptive-arp-windows/master/adaptive-arp-impl-win/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/AdaptiveMe/adaptive-arp-windows/tree/master/adaptive-arp-impl-win</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/AdaptiveMe/adaptive-arp-windows/master/adaptive-arp-impl-win/adaptive-arp-impl-win/AdaptiveLogo.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Adaptive Runtime Platform ARP PCL Implementation.</description>
+    <releaseNotes>Initial Release Canditate.</releaseNotes>
+    <copyright>Copyright 2014 Carlos Lozano Diez ta Adaptive.me</copyright>
+    <tags>Adaptive.me Adaptive Runtime Platform ARP PCL Implementation.</tags>
+  </metadata>
+</package>

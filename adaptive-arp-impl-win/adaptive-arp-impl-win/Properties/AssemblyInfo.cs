@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("adaptive-arp-impl-win")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Adaptive Runtime Platform")]
+[assembly: AssemblyDescription("Adaptive Runtime Platform ARP PCL Implementation")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("adaptive-arp-impl-win")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Adaptive.me")]
+[assembly: AssemblyProduct("Adaptive.Arp.Impl")]
+[assembly: AssemblyCopyright("Copyright ©  2014 Carlos Lozano Diez t/a Adaptive.me")]
+[assembly: AssemblyTrademark("Adaptive.me ARP Adaptive Runtime Platform")]
 [assembly: AssemblyCulture("")]
 
 // Version information for an assembly consists of the following four values:
