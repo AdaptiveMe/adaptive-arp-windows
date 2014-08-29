@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Adaptive.Arp.Api">
-      <HintPath>..\packages\Adaptive.Arp.Api.1.0.14\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+      <HintPath>..\packages\Adaptive.Arp.Api.1.0.15\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\portable-net40+sl50+win+wpa81+wp80\PCLCrypto.dll</HintPath>
@@ -132,6 +132,8 @@
     <None Include="Adaptive.Arp.Impl.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <None Include="nuget-push.cmd" />
+    <None Include="nuget.cmd" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

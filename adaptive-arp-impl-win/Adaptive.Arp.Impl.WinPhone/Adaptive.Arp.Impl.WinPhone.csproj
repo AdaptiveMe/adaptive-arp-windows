@@ -81,14 +81,17 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="Adaptive.Arp.Impl.WinPhone.nuspec" />
+    <None Include="nuget-push.cmd" />
+    <None Include="nuget.cmd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Adaptive.Arp.Api">
-      <HintPath>..\packages\Adaptive.Arp.Api.1.0.12\lib\portable-win81+wpa81\Adaptive.Arp.Api.dll</HintPath>
+    <Reference Include="Adaptive.Arp.Api, Version=1.0.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Adaptive.Arp.Api.1.0.15\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
     <Reference Include="Adaptive.Arp.Impl">
       <HintPath>..\packages\Adaptive.Arp.Impl.1.0.12\lib\portable-win81+wpa81\Adaptive.Arp.Impl.dll</HintPath>
