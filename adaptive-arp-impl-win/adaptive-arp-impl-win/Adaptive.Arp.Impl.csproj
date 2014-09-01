@@ -15,7 +15,7 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile32</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile157</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -105,12 +105,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TargetPlatform Include="Windows Phone, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Adaptive.Arp.Api">
-      <HintPath>..\packages\Adaptive.Arp.Api.1.0.15\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+      <HintPath>..\packages\Adaptive.Arp.Api.1.0.18\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\portable-net40+sl50+win+wpa81+wp80\PCLCrypto.dll</HintPath>

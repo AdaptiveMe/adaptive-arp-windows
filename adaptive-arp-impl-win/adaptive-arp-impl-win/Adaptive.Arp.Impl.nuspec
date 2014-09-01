@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.15</version>
+    <version>1.0.18</version>
     <title>Adaptive Runtime Platform PCL Implementation</title>
     <authors>Carlos Lozano Diez</authors>
     <owners>Carlos Lozano Diez</owners>
