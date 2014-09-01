@@ -5,14 +5,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Adaptive.Arp.Rt.WinPhone")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Adaptive Runtime Platform RT")]
+[assembly: AssemblyDescription("Adaptive Runtime Platform RT for Windows Phone 8.1")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Adaptive.me")]
 [assembly: AssemblyProduct("Adaptive.Arp.Rt.WinPhone")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright ©  2014 Carlos Lozano Diez t/a Adaptive.me")]
+[assembly: AssemblyTrademark("Adaptive.me ARP Adaptive Runtime Platform")]
 [assembly: AssemblyCulture("")]
+
 
 // Version information for an assembly consists of the following four values:
 //
