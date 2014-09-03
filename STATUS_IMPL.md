@@ -38,7 +38,7 @@ This is the implementation status at 2 Sep 2014 11:43:17 GMT.
 
 
 ## Interfaces/Protocols
-| Name | API | Android-L |  |  |
+| Name | API | Win 8.1 | WinPhone 8.1 | WinPhoneSilverlight 8.1 |
 |-------|------|--------|------|-------|
 | IAccelerationListener | :white_check_mark: |  |  |  |
 | IAccelerometer | :white_check_mark: |  |  |  |
