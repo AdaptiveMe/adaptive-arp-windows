@@ -92,11 +92,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Adaptive.Arp.Api">
-      <HintPath>..\packages\Adaptive.Arp.Api.1.0.18\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+    <Reference Include="Adaptive.Arp.Api, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Adaptive.Arp.Api.1.0.22\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Adaptive.Arp.Impl">
-      <HintPath>..\packages\Adaptive.Arp.Impl.1.0.18\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Impl.dll</HintPath>
+    <Reference Include="Adaptive.Arp.Impl, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Adaptive.Arp.Impl.1.0.22\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Impl.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\wp8\PCLCrypto.dll</HintPath>
