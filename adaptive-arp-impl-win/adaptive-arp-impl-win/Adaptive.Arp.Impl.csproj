@@ -103,6 +103,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="Windows Phone, Version=8.1" />
@@ -111,7 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Adaptive.Arp.Api">
-      <HintPath>..\packages\Adaptive.Arp.Api.1.0.22\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+      <HintPath>..\packages\Adaptive.Arp.Api.1.0.26\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\portable-net40+sl50+win+wpa81+wp80\PCLCrypto.dll</HintPath>

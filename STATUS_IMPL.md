@@ -75,15 +75,15 @@ This is the implementation status at 2 Sep 2014 11:43:17 GMT.
 | ICloud |  |  |  |  |
 | ICompression |  |  |  |  |
 | IConcurrent |  |  |  |  |
-| IContact | :white_check_mark: |  |  |  |
-| IContactPhotoResultCallback | :white_check_mark: |  |  |  |
-| IContactResultCallback | :white_check_mark: |  |  |  |
+| IContact | :white_check_mark: | :white_check_mark: |  |  |
+| IContactPhotoResultCallback | :white_check_mark: | :white_check_mark: |  |  |
+| IContactResultCallback | :white_check_mark: | :white_check_mark: |  |  |
 | ICrypto |  |  |  |  |
 | IDataStream |  |  |  |  |
 | IDatabase | :white_check_mark: |  |  |  |
 | IDatabaseResultCallback | :white_check_mark: |  |  |  |
 | IDesktop |  |  |  |  |
-| IDevice | :white_check_mark: |  |  |  |
+| IDevice | :white_check_mark: | :white_check_mark: |  |  |
 | IDisplay |  |  |  |  |
 | IFacebook |  |  |  |  |
 | IFile | :white_check_mark: |  |  |  |
@@ -102,18 +102,18 @@ This is the implementation status at 2 Sep 2014 11:43:17 GMT.
 | ILifecycle | :white_check_mark: |  |  |  |
 | ILifecycleListener | :white_check_mark: |  |  |  |
 | ILinkedIn |  |  |  |  |
-| ILogging | :white_check_mark: |  |  |  |
+| ILogging | :white_check_mark: | :white_check_mark: |  |  |
 | IMagnetometer |  |  |  |  |
 | IMail |  |  |  |  |
 | IManagement |  |  |  |  |
 | IMap |  |  |  |  |
-| IMessaging | :white_check_mark: |  |  |  |
-| IMessagingCallback | :white_check_mark: |  |  |  |
+| IMessaging | :white_check_mark: | :white_check_mark: |  |  |
+| IMessagingCallback | :white_check_mark: | :white_check_mark: |  |  |
 | INFC |  |  |  |  |
 | INetworkInfo |  |  |  |  |
 | INetworkNaming |  |  |  |  |
-| INetworkReachability | :white_check_mark: |  |  |  |
-| INetworkReachabilityCallback | :white_check_mark: |  |  |  |
+| INetworkReachability | :white_check_mark: | :white_check_mark: |  |  |
+| INetworkReachabilityCallback | :white_check_mark: | :white_check_mark: |  |  |
 | INetworkStatus |  |  |  |  |
 | INotification |  |  |  |  |
 | INotificationLocal |  |  |  |  |
@@ -126,8 +126,8 @@ This is the implementation status at 2 Sep 2014 11:43:17 GMT.
 | IQRCode |  |  |  |  |
 | IRSS |  |  |  |  |
 | IRuntime | :white_check_mark: |  |  |  |
-| ISecureKVResultCallback | :white_check_mark: |  |  |  |
-| ISecurity | :white_check_mark: |  |  |  |
+| ISecureKVResultCallback | :white_check_mark: | :white_check_mark: |  |  |
+| ISecurity | :white_check_mark: | :white_check_mark: |  |  |
 | IService | :white_check_mark: |  |  |  |
 | IServiceResultCallback | :white_check_mark: |  |  |  |
 | ISession | :white_check_mark: |  |  |  |
@@ -135,7 +135,7 @@ This is the implementation status at 2 Sep 2014 11:43:17 GMT.
 | ISocket |  |  |  |  |
 | IStore |  |  |  |  |
 | ITableResultCallback | :white_check_mark: |  |  |  |
-| ITelephony | :white_check_mark: |  |  |  |
+| ITelephony | :white_check_mark: | :white_check_mark: |  |  |
 | ITimer |  |  |  |  |
 | ITwitter |  |  |  |  |
 | IUI |  |  |  |  |
