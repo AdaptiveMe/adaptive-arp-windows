@@ -21,7 +21,7 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
             //Windows.Graphics.Display.DisplayInformation.AutoRotationPreferences = Windows.Graphics.Display.DisplayOrientations.
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();            
-            webView.Navigate(new Uri("http://www.google.com"));
+            webView.Navigate(new Uri("http://docs.sencha.com/touch/2.3.0/touch-build/examples/kitchensink/index.html"));
         }
 
         // Sample code for building a localized ApplicationBar
