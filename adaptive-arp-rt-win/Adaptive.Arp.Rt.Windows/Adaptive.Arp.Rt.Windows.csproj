@@ -15,6 +15,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Adaptive.Arp.Rt.Windows_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <NuGetPackageImportStamp>8d5915a4</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -134,6 +135,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Adaptive.Arp.Api">
+      <HintPath>..\packages\Adaptive.Arp.Api.1.0.31\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Adaptive.Arp.Impl">
+      <HintPath>..\packages\Adaptive.Arp.Impl.1.0.22\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Adaptive.Arp.Impl.Windows">
+      <HintPath>..\packages\Adaptive.Arp.Impl.Windows.1.0.18\lib\win81\Adaptive.Arp.Impl.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\win81\PCLCrypto.dll</HintPath>
     </Reference>
@@ -150,24 +160,16 @@
       <HintPath>..\packages\Validation.2.0.4.14103\lib\portable-windows8+net40+sl5+wp8+wpa81+wp81+MonoAndroid+MonoTouch\Validation.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\adaptive-arp-impl-win\adaptive-arp-impl-win\Adaptive.Arp.Impl.csproj">
-      <Project>{d27a8449-5314-4d4d-9c8c-55b3baa6ab78}</Project>
-      <Name>Adaptive.Arp.Impl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\adaptive-arp-impl-win\Adaptive.Arp.Impl.Windows\Adaptive.Arp.Impl.Windows.csproj">
-      <Project>{d0645498-72ce-4347-b28b-047b274684d3}</Project>
-      <Name>Adaptive.Arp.Impl.Windows</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
