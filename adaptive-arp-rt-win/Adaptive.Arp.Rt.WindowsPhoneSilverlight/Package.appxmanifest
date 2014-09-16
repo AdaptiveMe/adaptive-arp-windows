@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="c68b6980-da91-43c0-9deb-19d3008af817" PhonePublisherId="0a6b0ae1-9801-4282-9c0f-f9eadfcf0b4b" />
   <Properties>
     <DisplayName>Adaptive.Arp.Rt.WindowsPhoneSilverlight</DisplayName>
-    <PublisherDisplayName>Carlos Lozano Diez</PublisherDisplayName>
+    <PublisherDisplayName>adaptive.me</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -20,11 +20,18 @@
         <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png">
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
+        <m3:InitialRotationPreference>
+          <m3:Rotation Preference="portrait"/>
+          <m3:Rotation Preference="portraitFlipped"/>
+          <m3:Rotation Preference="landscape"/>
+          <m3:Rotation Preference="landscapeFlipped"/>
+        </m3:InitialRotationPreference>
       </m3:VisualElements>
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="AgHost.BackgroundTask">
           <BackgroundTasks>
             <Task Type="systemEvent" />
+            <m2:Task Type="location" />
           </BackgroundTasks>
         </Extension>
       </Extensions>

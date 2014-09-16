@@ -17,9 +17,11 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
         public MainPage()
         {
             InitializeComponent();
-
+            //SupportedPageOrientations = SupportedPageOrientation.Portrait | SupportedPageOrientation.Landscape;
+            //Windows.Graphics.Display.DisplayInformation.AutoRotationPreferences = Windows.Graphics.Display.DisplayOrientations.
             // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
+            //BuildLocalizedApplicationBar();            
+            webView.Navigate(new Uri("http://www.google.com"));
         }
 
         // Sample code for building a localized ApplicationBar
