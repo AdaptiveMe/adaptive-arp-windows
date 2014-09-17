@@ -9,7 +9,7 @@ namespace Adaptive.Arp.Impl
 {
     public class AppRegistryImpl : IAppRegistry
     {
-        private IAnalytics analytics { public set; private get; }
+        private IAnalytics analytics {  set; get; }
 
         public IAnalytics GetApplicationAnalytics()
         {

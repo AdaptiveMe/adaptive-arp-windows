@@ -44,6 +44,11 @@ namespace Adaptive.Arp.Impl
             throw new NotImplementedException();
         }
 
+        public void StartServer()
+        {
+            throw new NotImplementedException();
+        }
+
         public void StopServer()
         {
             throw new NotImplementedException();
