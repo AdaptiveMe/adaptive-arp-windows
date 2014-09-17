@@ -18,7 +18,7 @@
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <NuGetPackageImportStamp>3ceab0da</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>785f7aaf</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -84,6 +84,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AccelerometerImpl.cs" />
     <Compile Include="ContactImpl.cs" />
     <Compile Include="DeviceImpl.cs" />
     <Compile Include="LoggingImpl.cs" />
@@ -102,44 +103,34 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\adaptive-arp-impl-win\Adaptive.Arp.Impl.csproj">
+      <Project>{d27a8449-5314-4d4d-9c8c-55b3baa6ab78}</Project>
+      <Name>Adaptive.Arp.Impl</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Adaptive.Arp.Api">
-      <HintPath>..\..\adaptive-arp-rt-win\packages\Adaptive.Arp.Api.1.0.31\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
-    </Reference>
-    <Reference Include="Adaptive.Arp.Impl, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Adaptive.Arp.Impl.1.0.22\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Impl.dll</HintPath>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\Adaptive.Arp.Api.1.0.42.1\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto">
-      <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\wp8\PCLCrypto.dll</HintPath>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\PCLCrypto.0.5.1.14165\lib\wp8\PCLCrypto.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto.Abstractions">
-      <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\wp8\PCLCrypto.Abstractions.dll</HintPath>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\PCLCrypto.0.5.1.14165\lib\wp8\PCLCrypto.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="PCLStorage">
-      <HintPath>..\packages\PCLStorage.0.9.6\lib\wp8\PCLStorage.dll</HintPath>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\PCLStorage.0.9.6\lib\wp8\PCLStorage.dll</HintPath>
     </Reference>
     <Reference Include="PCLStorage.Abstractions">
-      <HintPath>..\packages\PCLStorage.0.9.6\lib\wp8\PCLStorage.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Compression">
-      <HintPath>..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Compression.3.9.85\lib\wp8\System.IO.Compression.dll</HintPath>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\PCLStorage.0.9.6\lib\wp8\PCLStorage.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Validation">
-      <HintPath>..\packages\Validation.2.0.4.14103\lib\portable-windows8+net40+sl5+wp8+wpa81+wp81+MonoAndroid+MonoTouch\Validation.dll</HintPath>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\Validation.2.0.4.14103\lib\portable-windows8+net40+sl5+wp8+wpa81+wp81+MonoAndroid+MonoTouch\Validation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
-  <Import Project="..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
-    <Error Condition="!Exists('..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets'))" />
-  </Target>
-  <Import Project="..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets" Condition="Exists('..\..\adaptive-arp-rt-win\packages\Microsoft.Bcl.Compression.3.9.85\build\wp8\Microsoft.Bcl.Compression.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
