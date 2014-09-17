@@ -112,6 +112,7 @@
     <Compile Include="AppServerManagerImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityImpl.cs" />
+    <Compile Include="Util\TimeUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="Windows Phone, Version=8.1" />
