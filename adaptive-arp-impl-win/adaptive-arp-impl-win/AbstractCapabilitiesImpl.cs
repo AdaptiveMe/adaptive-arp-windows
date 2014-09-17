@@ -1,5 +1,4 @@
-﻿using Adaptive.Arp.Api;
-/*
+﻿/*
  * =| ADAPTIVE RUNTIME PLATFORM |=======================================================================================
  *
  * (C) Copyright 2013-2014 Carlos Lozano Diez t/a Adaptive.me <http://adaptive.me>.
@@ -26,51 +25,45 @@
  *
  * =====================================================================================================================
  */
-using System;
+using Adaptive.Arp.Api;
 
 namespace Adaptive.Arp.Impl
 {
-    public class AppContextImpl : IAppContext
+    public abstract class AbstractCapabilitiesImpl : ICapabilities
     {
-        private Object applicationContext;
-        private IAppContext.Type applicationContextType;
-
-        public AppContextImpl()
+        public override bool HasButtonSupport(ICapabilities.Button type)
         {
-
+            return false;
         }
 
-        public AppContextImpl(object context, IAppContext.Type type)
+        public override bool HasCommunicationSupport(ICapabilities.Communication type)
         {
-            this.applicationContext = context;
-            this.applicationContextType = type;
+            return false;
         }
 
-        public void setContext(object context, IAppContext.Type type)
+        public override bool HasDataSupport(ICapabilities.Data type)
         {
-            if (context != null)
-            {
-                this.applicationContext = context;
-                if (type != null)
-                {
-                    this.applicationContextType = type;
-                }
-                else
-                {
-                    // TODO: Type unknown.
-                    //this.applicationContextType = IAppContext.Type.Unknown;
-                }
-            }
+            return false;
         }
 
-        public override object GetContext()
+        public override bool HasMediaSupport(ICapabilities.Media type)
         {
-            return this.applicationContext;
+            return false;
         }
 
-        public override IAppContext.Type GetContextType()
+        public override bool HasNetSupport(ICapabilities.Net type)
         {
-            return this.applicationContextType;
+            return false;
+        }
+
+        public override bool HasNotificationSupport(ICapabilities.Notification type)
+        {
+            return false;
+        }
+
+        public override bool HasSensorSupport(ICapabilities.Sensor type)
+        {
+            return false;
         }
     }
 }

@@ -110,6 +110,7 @@
     <Compile Include="AppResourceHandlerImpl.cs" />
     <Compile Include="AppServerImpl.cs" />
     <Compile Include="AppServerManagerImpl.cs" />
+    <Compile Include="AbstractCapabilitiesImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityImpl.cs" />
     <Compile Include="Util\TimeUtils.cs" />

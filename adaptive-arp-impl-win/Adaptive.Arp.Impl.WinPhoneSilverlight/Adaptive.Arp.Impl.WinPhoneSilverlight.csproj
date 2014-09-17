@@ -85,6 +85,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AccelerometerImpl.cs" />
+    <Compile Include="CapabilitiesImpl.cs" />
     <Compile Include="ContactImpl.cs" />
     <Compile Include="DeviceImpl.cs" />
     <Compile Include="LoggingImpl.cs" />
