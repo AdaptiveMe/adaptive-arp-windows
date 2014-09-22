@@ -30,51 +30,29 @@ using System;
 
 namespace Adaptive.Arp.Impl
 {
-    public class AppServerImpl : IAppServer
+    public abstract class AbstractAppServerImpl : IAppServer
     {
+        
         public string GetBaseURI()
         {
-            throw new NotImplementedException();
+            return GetScheme() + "://" + GetHost() + ":" + GetPort() + GetPath();
         }
 
-        public string GetHost()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string GetHost();
 
-        public string GetPath()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string GetPath();
 
-        public int GetPort()
-        {
-            throw new NotImplementedException();
-        }
 
-        public string GetScheme()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract int GetPort();
 
-        public void PauseServer()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string GetScheme();
 
-        public void ResumeServer()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void PauseServer();
 
-        public void StartServer()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void ResumeServer();
 
-        public void StopServer()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void StartServer();
+
+        public abstract void StopServer();
     }
 }

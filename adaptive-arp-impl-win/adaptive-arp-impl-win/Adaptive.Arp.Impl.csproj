@@ -108,8 +108,8 @@
     <Compile Include="AppContextWebviewImpl.cs" />
     <Compile Include="AppRegistryImpl.cs" />
     <Compile Include="AppResourceHandlerImpl.cs" />
-    <Compile Include="AppServerImpl.cs" />
-    <Compile Include="AppServerManagerImpl.cs" />
+    <Compile Include="AbstractAppServerImpl.cs" />
+    <Compile Include="AbstractAppServerManagerImpl.cs" />
     <Compile Include="AbstractCapabilitiesImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityImpl.cs" />

@@ -30,16 +30,18 @@ using System.Collections.Generic;
 
 namespace Adaptive.Arp.Impl
 {
-    public class AppServerManagerImpl : IAppServerManager
+    public abstract class AbstractAppServerManagerImpl : IAppServerManager
     {
         private List<IAppServerListener> serverListenerList;
         private List<IAppServer> serverList;
 
-        public AppServerManagerImpl()
+        public AbstractAppServerManagerImpl()
         {
             serverListenerList = new List<IAppServerListener>();
             serverList = new List<IAppServer>();
         }
+
+        public abstract IAppServer createServerInstance();
 
         public void AddServerListener(IAppServerListener listener)
         {
@@ -101,8 +103,8 @@ namespace Adaptive.Arp.Impl
         {
             foreach (IAppServerListener listener in serverListenerList)
             {
-                IAppServer server = new AppServerImpl();      
-                // Start server missing???
+                IAppServer server = null;//new AppServerImpl();
+                server.StartServer();
                 listener.OnStart(server);
             }
         }

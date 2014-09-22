@@ -88,6 +88,7 @@
     <Compile Include="CapabilitiesImpl.cs" />
     <Compile Include="ContactImpl.cs" />
     <Compile Include="DeviceImpl.cs" />
+    <Compile Include="Internals\WebServer.cs" />
     <Compile Include="LoggingImpl.cs" />
     <Compile Include="MessagingImpl.cs" />
     <Compile Include="NetworkReachabilityImpl.cs" />
