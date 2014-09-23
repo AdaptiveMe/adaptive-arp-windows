@@ -1,8 +1,8 @@
 ﻿using Adaptive.Arp.Impl;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Networking.Sockets;
@@ -26,64 +26,85 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
 
     public class AppServerImpl : AbstractAppServerImpl
     {
+        private static List<StreamSocket> socketList = new List<StreamSocket>();
 
         // Used only for when handling requests with file handler.
+        #region File based support
+        /*
         IsolatedStorageFile fileIsolatedStorage = null;
         protected Random filenameRandomizer = null;
+        */
+        #endregion
 
         // Internal Events
         public event ErrorOccured errorOccured;
 
         // Server Stuff
-        private StreamSocketListener serverListener = new StreamSocketListener();
+        private StreamSocketListener serverListener = null;
         private bool serverIsListening = false;
         private Dictionary<Regex, RuleDeletage> serverRules;
         private string serverIp = "127.0.0.1";
         private string serverPort = "-1";
+        private int concurrentCount = 0;
 
 
-        public AppServerImpl(Dictionary<Regex, RuleDeletage> rules, string ip, string port, bool useFileSystem)
+        public AppServerImpl(Dictionary<Regex, RuleDeletage> rules, string ip, string port)
         {
             //assign passed rules to the server
             serverRules = rules;
-            try
-            {
-                //try to turn on the server
-                
+            serverIp = ip;
+            serverPort = port;
+            serverIsListening = false;
+        }
 
-                Task.Run(async () =>
-                {
-                    // Receive connection events
-                    // This serverListener handles very large posts such as file uploads but at a performance penalty.
-                    // serverListener.ConnectionReceived += listener_ConnectionReceived_HandleAsFile;
-                    // This serverListener handles requests in memory for fast performance but does not handle large posts efficiently.
-                    serverListener.ConnectionReceived += listener_ConnectionReceived_HandleInMemory;
-                    
-                    //bing do ip:port
-                    await serverListener.BindEndpointAsync(new Windows.Networking.HostName(ip), port);
-                    
-                    serverIp = ip;
-                    serverPort = port;
-                    serverIsListening = true;
-                });
-            }
-            catch (Exception ex)
+        public int getConcurrentCount()
+        {
+            return this.concurrentCount;
+        }
+
+        public bool addRule(Regex regEx, RuleDeletage rule)
+        {
+            bool added = false;
+
+            if (serverRules == null)
             {
-                //if possible fire the error event with the exception message
-                if (errorOccured != null)
-                {
-                    errorOccured(-1, ex.Message);
-                }
+                serverRules = new Dictionary<Regex, RuleDeletage>();
             }
 
+            if (!serverRules.ContainsKey(regEx))
+            {
+                serverRules.Add(regEx, rule);
+                added = true;
+            }
+            return added;
+        }
+
+        public bool removeRule(Regex regEx)
+        {
+            if (serverRules != null)
+            {
+                return serverRules.Remove(regEx);
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public AppServerImpl(Dictionary<Regex, RuleDeletage> rules, string port)
-            : this(rules, "127.0.0.1", "8080", false)
+            : this(rules, "127.0.0.1", "8080")
         {
 
         }
 
+        public AppServerImpl(string port)
+            : this(new Dictionary<Regex, RuleDeletage>(), "127.0.0.1", "8080")
+        {
+
+        }
+
+        #region Support for store and process.
+        /*
         void listener_ConnectionReceived_HandleAsFile(StreamSocketListener sender, StreamSocketListenerConnectionReceivedEventArgs args)
         {
             if (fileIsolatedStorage == null)
@@ -145,6 +166,8 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                 }
             });
         }
+         */
+        #endregion
 
         void listener_ConnectionReceived_HandleInMemory(StreamSocketListener sender, StreamSocketListenerConnectionReceivedEventArgs args)
         {
@@ -154,20 +177,28 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                 return;
             }
 
-            // Temporary file to handle large post requests
-            MemoryStream memoryStream = new MemoryStream();
+            // Increment current count of processes being served.
+            lock (socketList)
+            {
+                concurrentCount++;
+                socketList.Add(args.Socket);
+            }
 
-            // Socket reader
-            StreamSocket socket = args.Socket;
-            DataReader dataReader = new DataReader(socket.InputStream);
-            dataReader.InputStreamOptions = InputStreamOptions.Partial;
-
-            // Data dataReader flags and options
-            bool readFinished = false;
-            uint readMaxBufferSize = 4096;
 
             Task.Run(async () =>
             {
+                // Socket reader
+                //StreamSocket socket = args.Socket;
+                DataReader dataReader = new DataReader(args.Socket.InputStream);
+                dataReader.InputStreamOptions = InputStreamOptions.Partial;
+
+                // Temporary stream
+                MemoryStream memoryStream = new MemoryStream();
+
+                // Data dataReader flags and options
+                bool readFinished = false;
+                uint readMaxBufferSize = 4096;
+
                 while (!readFinished)
                 {
                     // await a full buffer or eof
@@ -197,17 +228,226 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                     // Flush stream and reset position to start.
                     memoryStream.Flush();
                     memoryStream.Position = 0;
-                    parseRequest(memoryStream, socket);
+                    parseRequest(memoryStream, args.Socket);
                 }
             });
         }
 
-        public void parseRequest(MemoryStream stream, StreamSocket socket)
+        public void parseRequest(MemoryStream inStream, StreamSocket socket)
         {
+            try
+            {
 
-            StreamReader streamReader = new StreamReader(stream);
+
+                StreamReader streamReader = new StreamReader(inStream);
+                AppServerRequestResponse request = new AppServerRequestResponse();
+
+                string readLine = streamReader.ReadLine();
+                if (readLine != null && readLine.Length > 0)
+                {
+                    // Process request type.
+                    if (readLine.Substring(0, 3) == "GET")
+                    {
+                        request.httpMethod = "GET";
+                        request.httpUri = readLine.Substring(4);
+                        request.httpUri = Regex.Replace(request.httpUri, " HTTP.*$", "");
+
+                    }
+                    else if (readLine.Substring(0, 4) == "POST")
+                    {
+                        request.httpMethod = "POST";
+                        request.httpUri = readLine.Substring(5);
+                        request.httpUri = Regex.Replace(request.httpUri, " HTTP.*$", "");
+                    }
+
+
+                    // Process request headers.
+                    Dictionary<string, string> headers = new Dictionary<string, string>();
+                    string readLineHeader = "";
+                    do
+                    {
+                        readLineHeader = streamReader.ReadLine();
+                        string[] headerSeparator = new string[] { ":" };
+                        string[] headerElements = readLineHeader.Split(headerSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
+                        if (headerElements.Length > 0)
+                        {
+                            headers.Add(headerElements[0], headerElements[1]);
+                        }
+                    } while (readLineHeader.Length > 0);
+                    request.httpHeaders = headers;
+
+                    // Assign content body (remaining stream).
+                    request.httpContent = streamReader.BaseStream;
+
+                    // Response writer.
+                    DataWriter dataWriter = new DataWriter(socket.OutputStream);
+
+                    // Process rules.
+                    bool ruleFound = false;
+                    if (serverRules != null)
+                    {
+                        // For each rule
+                        foreach (Regex rule_part in serverRules.Keys)
+                        {
+                            //if it matches the URL
+                            if (rule_part.IsMatch(request.httpUri))
+                            {
+                                try
+                                {
+                                    // Call delegate.
+                                    AppServerRequestResponse toSend = serverRules[rule_part](request);
+                                    ruleFound = true;
+
+                                    // Process response headers.
+                                    if (toSend.httpHeaders.ContainsKey("Location"))
+                                        // Location change.
+                                        dataWriter.WriteString("HTTP/1.1 302\r\n");
+                                    else
+                                        // OK.
+                                        dataWriter.WriteString("HTTP/1.1 200 OK\r\n");
+
+                                    dataWriter.WriteString("Content-Length: " + toSend.httpContent.Length + "\r\n");
+                                    foreach (string key in toSend.httpHeaders.Keys)
+                                    {
+                                        dataWriter.WriteString(key + ": " + toSend.httpHeaders[key] + "\r\n");
+                                    }
+                                    dataWriter.WriteString("Connection: close\r\n");
+
+                                    String osPlatform = Environment.OSVersion.Platform.ToString();
+#if WINDOWS_APP || WINDOWS 
+                            osPlatform = "Windows";
+#endif
+#if WINDOWS_PHONE_APP || WINDOWS_PHONE
+                                    osPlatform = "Windows Phone";
+#endif
+#if WINDOWS_PHONE_APP || WINDOWS_PHONE && SILVERLIGHT
+                                    osPlatform = "Windows Phone Silverlight";
+#endif
+                                    // Internal headers.
+                                    dataWriter.WriteString("X-Server: Adaptive 1.0 (" + osPlatform + " " + Environment.OSVersion.Version + "/" + Environment.OSVersion.Platform + "/" + Environment.ProcessorCount + " Cores)\r\n");
+                                    dataWriter.WriteString("X-ServerBind: http://" + this.serverIp + ":" + this.serverPort + "/\r\n");
+
+                                    // Process body.
+                                    dataWriter.WriteString("\r\n");
+                                    //lock (this)
+                                    //{
+                                    // Reset stream to beginning.
+                                    toSend.httpContent.Seek(0, SeekOrigin.Begin);
+                                    Task.Run(async () =>
+                                    {
+                                        try
+                                        {
+                                            // Commit Headers
+                                            await dataWriter.FlushAsync(); // flush output
+                                            await dataWriter.StoreAsync(); // store output
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Debug.WriteLine("HeaderBlock: " + ex.StackTrace);
+                                        }
+                                        try
+                                        {
+
+                                            // write data to output using 1024 buffer
+                                            while (toSend.httpContent.Position < toSend.httpContent.Length)
+                                            {
+                                                byte[] buffer;
+                                                if (toSend.httpContent.Length - toSend.httpContent.Position < 1024)
+                                                {
+                                                    buffer = new byte[toSend.httpContent.Length - toSend.httpContent.Position];
+                                                }
+                                                else
+                                                {
+                                                    buffer = new byte[1024];
+                                                }
+                                                toSend.httpContent.Read(buffer, 0, buffer.Length);
+                                                dataWriter.WriteBytes(buffer);
+
+
+                                            }
+
+                                            // Commit Body
+                                            await dataWriter.FlushAsync(); // flush output
+                                            await dataWriter.StoreAsync(); // store output
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Debug.WriteLine("BodyBlock: " + ex.StackTrace);
+                                        }
+                                        try
+                                        {
+                                            toSend.httpContent.Close();
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Debug.WriteLine("CloseBlock: " + ex.StackTrace);
+                                        }
+                                    });
+                                    //}
+                                    break;
+                                }
+                                catch (Exception ex)
+                                {
+                                    Debug.WriteLine(ex.StackTrace);
+                                }
+                            }
+                        }
+                    }
+
+                    if (ruleFound == false)
+                    {
+                        dataWriter.WriteString("HTTP/1.1 404 Not Found\r\n");
+                        dataWriter.WriteString("Content-Type: text/html\r\n");
+                        dataWriter.WriteString("Content-Length: 9\r\n");
+                        dataWriter.WriteString("Pragma: no-cache\r\n");
+                        dataWriter.WriteString("Connection: close\r\n");
+                        dataWriter.WriteString("\r\n");
+                        dataWriter.WriteString("Not found");
+                        Task.Run(async () =>
+                        {
+                            await dataWriter.FlushAsync();
+                            await dataWriter.StoreAsync();
+                        });
+                    }
+
+                }
+                // Decrement current requests being processes.
+                lock (socketList)
+                {
+                    concurrentCount--;
+                    /**
+                     * This list keeps StreamSocket alive to avoid premature disposal of the object (ObjectDisposedException of StreamSocket underlying DataWriter). 
+                     * One would expect the runtime to keep reference counts correctly BUT with async calls, it clearly falls over when under stress. So this list
+                     * is crucial and only does something useful when the local server is processing > 8 calls concurrently. If you remove it, expect ObjectDisposedExceptions.
+                     * This synthetically keeps Socket objects alive, with their reference in the list, long enough to process the request. On clear, the references are 
+                     * released and the object is disposed. We do this every 50 entries to avoid more overhead. It works. C!
+                     */
+                    if (socketList.Count > 100)
+                    {
+                        socketList.RemoveRange(0, 50);
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("ENDBLOCK: " + ex.StackTrace);
+            }
+        }
+
+        #region Support for store and process.
+        /*
+        public void parseRequest(string request_file, StreamSocket socket)
+        {
+            concurrentCount++;
+            Debug.WriteLine("Concurrent petitions: {0}", concurrentCount);
+
+            IsolatedStorageFileStream fileIsolated = fileIsolatedStorage.OpenFile(request_file, FileMode.Open);
+            StreamReader streamReader = new StreamReader(fileIsolated);
             AppServerRequestResponse request = new AppServerRequestResponse();
 
+            // Read data.
             string readLine = streamReader.ReadLine();
             if (readLine != null && readLine.Length > 0)
             {
@@ -217,7 +457,6 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                     request.httpMethod = "GET";
                     request.httpUri = readLine.Substring(4);
                     request.httpUri = Regex.Replace(request.httpUri, " HTTP.*$", "");
-
                 }
                 else if (readLine.Substring(0, 4) == "POST")
                 {
@@ -225,7 +464,6 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                     request.httpUri = readLine.Substring(5);
                     request.httpUri = Regex.Replace(request.httpUri, " HTTP.*$", "");
                 }
-
 
                 // Process request headers.
                 Dictionary<string, string> headers = new Dictionary<string, string>();
@@ -343,153 +581,12 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                     });
                 }
             }
-            stream.Dispose();
-            stream = null;
-        }
-
-        public void parseRequest(string request_file, StreamSocket socket)
-        {
-            IsolatedStorageFileStream fileIsolated = fileIsolatedStorage.OpenFile(request_file, FileMode.Open);
-            StreamReader streamReader = new StreamReader(fileIsolated);
-            AppServerRequestResponse request = new AppServerRequestResponse();
-
-            // Read data.
-            string readLine = streamReader.ReadLine();
-            if (readLine != null && readLine.Length > 0)
-            {
-                // Process request type.
-                if (readLine.Substring(0, 3) == "GET")
-                {
-                    request.httpMethod = "GET";
-                    request.httpUri = readLine.Substring(4);
-                    request.httpUri = Regex.Replace(request.httpUri, " HTTP.*$", "");
-                }
-                else if (readLine.Substring(0, 4) == "POST")
-                {
-                    request.httpMethod = "POST";
-                    request.httpUri = readLine.Substring(5);
-                    request.httpUri = Regex.Replace(request.httpUri, " HTTP.*$", "");
-                }
-
-                // Process request headers.
-                Dictionary<string, string> headers = new Dictionary<string, string>();
-                string readLineHeader = "";
-                do
-                {
-                    readLineHeader = streamReader.ReadLine();
-                    string[] headerSeparator = new string[] {":"};
-                    string[] headerElements = readLineHeader.Split(headerSeparator, 2, StringSplitOptions.RemoveEmptyEntries);
-                    if (headerElements.Length > 0)
-                    {
-                        headers.Add(headerElements[0], headerElements[1]);
-                    }
-                } while (readLineHeader.Length > 0);
-                request.httpHeaders = headers;
-
-                // Assign content body (remaining stream).
-                request.httpContent = streamReader.BaseStream;
-
-                // Response writer.
-                DataWriter dataWriter = new DataWriter(socket.OutputStream);
-
-                // Process rules.
-                bool ruleFound = false;
-                if (serverRules != null)
-                {
-                    //for every rule...
-                    foreach (Regex rule_part in serverRules.Keys)
-                    {
-                        //if it matches the URL
-                        if (rule_part.IsMatch(request.httpUri))
-                        {
-                            // Call delegate.
-                            AppServerRequestResponse toSend = serverRules[rule_part](request);
-                            ruleFound = true;
-
-                            // Process response headers.
-                            if (toSend.httpHeaders.ContainsKey("Location"))
-                                // Location change.
-                                dataWriter.WriteString("HTTP/1.1 302\r\n");
-                            else
-                                // OK.
-                                dataWriter.WriteString("HTTP/1.1 200 OK\r\n");
-
-                            dataWriter.WriteString("Content-Length: " + toSend.httpContent.Length + "\r\n");
-                            foreach (string key in toSend.httpHeaders.Keys)
-                            {
-                                dataWriter.WriteString(key + ": " + toSend.httpHeaders[key] + "\r\n");
-                            }
-                            dataWriter.WriteString("Connection: close\r\n");
-
-                            String osPlatform = Environment.OSVersion.Platform.ToString();
-#if WINDOWS_APP || WINDOWS 
-                            osPlatform = "Windows";
-#endif
-#if WINDOWS_PHONE_APP || WINDOWS_PHONE
-                            osPlatform = "Windows Phone";
-#endif
-#if WINDOWS_PHONE_APP || WINDOWS_PHONE && SILVERLIGHT
-                            osPlatform = "Windows Phone Silverlight";
-#endif
-                            // Internal headers.
-                            dataWriter.WriteString("X-Server: Adaptive 1.0 (" + osPlatform + " " + Environment.OSVersion.Version + "/" + Environment.OSVersion.Platform + "/" + Environment.ProcessorCount + " Cores)\r\n");
-                            dataWriter.WriteString("X-ServerBind: http://" + this.serverIp + ":" + this.serverPort + "/\r\n");
-
-                            // Process body.
-                            dataWriter.WriteString("\r\n");
-                            lock (this)
-                            {
-                                // Reset stream to beginning.
-                                toSend.httpContent.Seek(0, SeekOrigin.Begin);
-                                Task.Run(async () =>
-                                {
-                                    await dataWriter.StoreAsync(); // store output
-                                    await dataWriter.FlushAsync(); // flush output
-
-                                    // write data to output using 1024 buffer
-                                    while (toSend.httpContent.Position < toSend.httpContent.Length)
-                                    {
-                                        byte[] buffer;
-                                        if (toSend.httpContent.Length - toSend.httpContent.Position < 1024)
-                                        {
-                                            buffer = new byte[toSend.httpContent.Length - toSend.httpContent.Position];
-                                        }
-                                        else
-                                        {
-                                            buffer = new byte[1024];
-                                        }
-                                        toSend.httpContent.Read(buffer, 0, buffer.Length);
-                                        dataWriter.WriteBytes(buffer);
-
-                                        await dataWriter.StoreAsync();
-                                        await dataWriter.FlushAsync();
-                                    }
-                                    toSend.httpContent.Close();
-                                });
-                            }
-                            break;
-                        }
-                    }
-                }
-
-                if (ruleFound == false)
-                {
-                    dataWriter.WriteString("HTTP/1.1 404 Not Found\r\n");
-                    dataWriter.WriteString("Content-Type: text/html\r\n");
-                    dataWriter.WriteString("Content-Length: 9\r\n");
-                    dataWriter.WriteString("Pragma: no-cache\r\n");
-                    dataWriter.WriteString("Connection: close\r\n");
-                    dataWriter.WriteString("\r\n");
-                    dataWriter.WriteString("Not found");
-                    Task.Run(async () =>
-                    {
-                        await dataWriter.StoreAsync();
-                    });
-                }
-            }
             fileIsolated.Dispose();
             fileIsolated = null;
+            concurrentCount--;
         }
+        */
+        #endregion
 
         public string getServerAddress()
         {
@@ -522,42 +619,109 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
 
         public override string GetHost()
         {
-            throw new NotImplementedException();
+            return this.serverIp;
         }
 
         public override int GetPort()
         {
-            throw new NotImplementedException();
+            return Convert.ToInt32(this.serverPort);
         }
 
         public override string GetScheme()
         {
-            throw new NotImplementedException();
+            return "http";
         }
 
         public override void PauseServer()
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("Pausing server.");
+            this.StopServer();
         }
 
         public override void ResumeServer()
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("Resuming server.");
+            this.StartServer();
         }
 
         public override void StartServer()
         {
-            throw new NotImplementedException();
+            bool serverInitializing = false;
+            while (!serverIsListening)
+            {
+                try
+                {
+                    if (!serverInitializing)
+                    {
+                        Task serverTask = new Task(async () =>
+                        {
+                            serverListener = new StreamSocketListener();
+                            //bing do ip:port
+                            try
+                            {
+                                serverInitializing = true;
+                                Debug.WriteLine("Trying to bind to {0}:{1}.", this.serverIp, this.serverPort);
+                                this.serverListener.ConnectionReceived += listener_ConnectionReceived_HandleInMemory;
+                                await serverListener.BindEndpointAsync(new Windows.Networking.HostName(serverIp), serverPort);
+                                this.serverIsListening = true;
+                                serverInitializing = false;
+                                Debug.WriteLine("Bound to  {0}:{1}.", this.serverIp, this.serverPort);
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.WriteLine("Failed to bind to  {0}:{1} with error {2}.", this.serverIp, this.serverPort, e.Message);
+                                serverInitializing = false;
+                            }
+                        });
+                        serverTask.Start();
+                        serverTask.Wait(2000);
+                    }
+                    //Task.WaitAny(serverTask);
+                    /*
+                    Task.Run(async () =>
+                    {
+                        serverListener = new StreamSocketListener();
+                        //bing do ip:port
+                        try
+                        {
+                            Debug.WriteLine("Trying to bind to {0}:{1}.", this.serverIp, this.serverPort);
+                            this.serverListener.ConnectionReceived += listener_ConnectionReceived_HandleInMemory;
+                            await serverListener.BindEndpointAsync(new Windows.Networking.HostName(serverIp), serverPort);           
+                            this.serverIsListening = true;
+                            Debug.WriteLine("Bound to  {0}:{1}.", this.serverIp, this.serverPort);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.WriteLine("Failed to bind to  {0}:{1} with error {2}.", this.serverIp, this.serverPort, e.Message);
+                        }
+                    });
+                     */
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine("Failed to bind to  {0}:{1} with error {2}.", this.serverIp, this.serverPort, e.Message);
+                    serverIsListening = false;
+                    serverInitializing = false;
+                }
+            }
         }
 
         public override void StopServer()
         {
-            throw new NotImplementedException();
+            if (this.serverIsListening)
+            {
+                this.serverListener.Dispose();
+                this.serverListener = null;
+                this.serverIsListening = false;
+                socketList.Clear();
+                Debug.WriteLine("Unbound from  {0}:{1}.", this.serverIp, this.serverPort);
+                GC.Collect();
+            }
         }
 
         public override string GetPath()
         {
-            throw new NotImplementedException();
+            return "/";
         }
     }
 }

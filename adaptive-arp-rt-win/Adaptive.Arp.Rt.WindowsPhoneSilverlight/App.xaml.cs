@@ -7,11 +7,21 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Adaptive.Arp.Rt.WindowsPhoneSilverlight.Resources;
+using Adaptive.Impl.WindowsPhoneSilverlight;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
 {
+
     public partial class App : Application
     {
+        public static AppServerImpl server = null;
+
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
@@ -35,6 +45,32 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
             // Language display initialization
             InitializeLanguage();
 
+            //get all network adapters
+            var adapters = Windows.Networking.Connectivity.NetworkInformation.GetHostNames();
+            bool found = false;
+            string ip = "127.0.0.1";
+            if (adapters != null && adapters.Count > 0)
+            {
+
+                foreach (var adapter in adapters)
+                {
+
+                    if (adapter.IPInformation != null)
+                    {
+                        //find the Wifi adapter (interface type == 71)
+                        if (adapter.IPInformation.NetworkAdapter.IanaInterfaceType == 71 && (adapter.Type == Windows.Networking.HostNameType.Ipv4 || adapter.Type == Windows.Networking.HostNameType.Ipv6))
+                        {
+                            //if found assign it's ip to a variable
+                            found = true;
+                            ip = adapter.RawName;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            server = new AppServerImpl(null, ip, "8080");
+
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
             {
@@ -55,36 +91,47 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            Regex rgx = new Regex("^/*");
+            server.addRule(rgx, homePage);
+
         }
 
         // Code to execute when a contract activation such as a file open or save picker returns 
         // with the picked file or other return values
-        private void Application_ContractActivated(object sender, Windows.ApplicationModel.Activation.IActivatedEventArgs e)
+        public void Application_ContractActivated(object sender, Windows.ApplicationModel.Activation.IActivatedEventArgs e)
         {
+            Debug.WriteLine("ContractActivated");
         }
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            server.StartServer();
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            Debug.WriteLine("Activated");
+            server.ResumeServer();
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            Debug.WriteLine("Deactivated");
+            server.PauseServer();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            Debug.WriteLine("Closing");
+            server.StopServer();
         }
 
         // Code to execute if a navigation fails
@@ -105,6 +152,64 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+        }
+
+        private AppServerRequestResponse homePage(AppServerRequestResponse request)
+        {
+            //prepare the response object
+            AppServerRequestResponse newResponse = new AppServerRequestResponse();
+
+            //create a new dictionary for headers - this could be done using a more advanced class for webResponse object - i just used a simple struct
+            newResponse.httpHeaders = new Dictionary<string, string>();
+
+            //add httpContent type httpHeaders
+            newResponse.httpHeaders.Add("Content-Type", "text/html");
+
+            Stream resposneText = new MemoryStream();
+            StreamWriter contentWriter = new StreamWriter(resposneText);
+            contentWriter.AutoFlush = false;
+
+            if (request.httpUri.Equals("/index.html"))
+            {
+                contentWriter.WriteLine("<html>");
+                contentWriter.WriteLine("   <head>");
+                contentWriter.WriteLine("       <title>Dummy Page</title>");
+                contentWriter.WriteLine("   </head>");
+                contentWriter.WriteLine("   <body>");
+                contentWriter.WriteLine("   <h1>Adaptive RT</h1>");
+                contentWriter.WriteLine("   <div><iframe id src=\"/iframe1.html\" width=\"100%\" height=\"15%\"></iframe></div>");
+                contentWriter.WriteLine("   <div><iframe id src=\"/iframe1.html\" width=\"100%\" height=\"15%\"></iframe></div>");
+                contentWriter.WriteLine("   <div><iframe id src=\"/iframe1.html\" width=\"100%\" height=\"15%\"></iframe></div>");
+                contentWriter.WriteLine("   <div><iframe id src=\"/iframe1.html\" width=\"100%\" height=\"15%\"></iframe></div>");
+                contentWriter.WriteLine("   <a href=\"/index.html\"><h2><b>Refresh!</b></h2></a>");
+                contentWriter.WriteLine("   </body>");
+                contentWriter.WriteLine("</html>");
+
+            }
+            else
+            {
+                contentWriter.WriteLine("<html>");
+                contentWriter.WriteLine("   <head>");
+                contentWriter.WriteLine("       <title>Dummy Page</title>");
+                contentWriter.WriteLine("       <meta http-equiv=\"refresh\" content=\"0\">");
+                contentWriter.WriteLine("   </head>");
+                contentWriter.WriteLine("   <body>");
+                contentWriter.WriteLine("   <h1>Adaptive RT</h1>");
+                contentWriter.WriteLine("   <p><b>Platform: </b>" + Environment.OSVersion.Platform + "</p>");
+                contentWriter.WriteLine("   <p><b>Device Name: </b>" + Microsoft.Phone.Info.DeviceStatus.DeviceName + "</p>");
+                contentWriter.WriteLine("   <p><b>Device Name: </b>" + DateTime.Now.ToString("HH:mm:ss.ff dd-MM-yyyy") + "</p>");
+                contentWriter.WriteLine("   <p><b>Request: </b>" + request.httpUri + "</p>");
+                contentWriter.WriteLine("   <p><b>Concurrent: </b>" + server.getConcurrentCount() + "</p>");
+                contentWriter.WriteLine("   <a href=\"/\"><h2><b>Refresh!</b></h2></a>");
+                contentWriter.WriteLine("   </body>");
+                contentWriter.WriteLine("</html>");
+            }
+            contentWriter.Flush();
+            //assign the response
+            newResponse.httpContent = resposneText;
+
+            //return the response
+            return newResponse;
         }
 
         #region Phone application initialization

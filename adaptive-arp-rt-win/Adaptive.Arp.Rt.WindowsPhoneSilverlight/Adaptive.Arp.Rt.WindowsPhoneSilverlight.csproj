@@ -167,12 +167,6 @@
     <Reference Include="Adaptive.Arp.Api">
       <HintPath>..\packages\Adaptive.Arp.Api.1.0.42.1\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Adaptive.Arp.Impl">
-      <HintPath>..\packages\Adaptive.Arp.Impl.1.0.22\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Adaptive.Arp.Impl.WinPhoneSilverlight">
-      <HintPath>..\packages\Adaptive.Arp.Impl.WinPhoneSilverlight.1.0.18\lib\wp81\Adaptive.Arp.Impl.WinPhoneSilverlight.dll</HintPath>
-    </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\wp8\PCLCrypto.dll</HintPath>
     </Reference>
@@ -188,6 +182,16 @@
     <Reference Include="Validation">
       <HintPath>..\packages\Validation.2.0.4.14103\lib\portable-windows8+net40+sl5+wp8+wpa81+wp81+MonoAndroid+MonoTouch\Validation.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\adaptive-arp-impl-win\adaptive-arp-impl-win\Adaptive.Arp.Impl.csproj">
+      <Project>{d27a8449-5314-4d4d-9c8c-55b3baa6ab78}</Project>
+      <Name>Adaptive.Arp.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\adaptive-arp-impl-win\Adaptive.Arp.Impl.WinPhoneSilverlight\Adaptive.Arp.Impl.WinPhoneSilverlight.csproj">
+      <Project>{2ccad07b-5ad1-4a10-aa34-26a823e3e8ad}</Project>
+      <Name>Adaptive.Arp.Impl.WinPhoneSilverlight</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

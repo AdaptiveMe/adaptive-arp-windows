@@ -8,6 +8,11 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Adaptive.Arp.Rt.WindowsPhoneSilverlight.Resources;
+using Adaptive.Impl.WindowsPhoneSilverlight;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.IO;
+
 
 namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
 {
@@ -21,7 +26,43 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
             //Windows.Graphics.Display.DisplayInformation.AutoRotationPreferences = Windows.Graphics.Display.DisplayOrientations.
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();            
-            webView.Navigate(new Uri("http://docs.sencha.com/touch/2.3.0/touch-build/examples/kitchensink/index.html"));
+            
+
+            Debug.WriteLine("Server started at base URI {0}.", App.server.GetBaseURI());
+            //webView.Navigate(new Uri("http://docs.sencha.com/touch/2.3.0/touch-build/examples/kitchensink/index.html"));
+            webView.Navigate(new Uri(App.server.GetBaseURI() + "index.html"));
+        }
+
+        private AppServerRequestResponse homePage(AppServerRequestResponse response)
+        {
+            //prepare the response object
+            AppServerRequestResponse newResponse = new AppServerRequestResponse();
+
+            //create a new dictionary for headers - this could be done using a more advanced class for webResponse object - i just used a simple struct
+            newResponse.httpHeaders = new Dictionary<string, string>();
+
+            //add httpContent type httpHeaders
+            newResponse.httpHeaders.Add("Content-Type", "text/html");
+
+            Stream resposneText = new MemoryStream();
+            StreamWriter contentWriter = new StreamWriter(resposneText);
+            contentWriter.WriteLine("<html>");
+            contentWriter.WriteLine("   <head>");
+            contentWriter.WriteLine("       <title>Dummy Page</title>");
+            contentWriter.WriteLine("   </head>");
+            contentWriter.WriteLine("   <body>");
+            contentWriter.WriteLine("   <h1>Adaptive RT</h1>");
+            contentWriter.WriteLine("   <p><b>Platform: </b>" + Environment.OSVersion.Platform + "</p>");
+            contentWriter.WriteLine("   <p><b>Device Name: </b>" + Microsoft.Phone.Info.DeviceStatus.DeviceName + "</p>");
+            contentWriter.WriteLine("   <p><b>Device Name: </b>" + DateTime.Now.ToString("HH:mm:ss.ff dd-MM-yyyy") + "</p>");
+            contentWriter.WriteLine("   </body>");
+            contentWriter.WriteLine("</html>");
+            contentWriter.Flush();
+            //assign the response
+            newResponse.httpContent = resposneText;
+
+            //return the response
+            return newResponse;
         }
 
         // Sample code for building a localized ApplicationBar
