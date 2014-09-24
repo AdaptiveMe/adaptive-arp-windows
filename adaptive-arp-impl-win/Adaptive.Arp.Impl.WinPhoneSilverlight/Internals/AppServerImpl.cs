@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.Networking;
 using Windows.Networking.Connectivity;
@@ -56,6 +57,7 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
             this.serverIp = ip;
             this.serverPort = port;
             this.serverIsListening = false;
+            
         }
 
         public int getConcurrentCount()
@@ -624,15 +626,29 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
             return "http";
         }
 
+        private CancellationTokenSource tokenCancel = new CancellationTokenSource();
+
         public override void PauseServer()
         {
             Debug.WriteLine("Pausing server.");
-            this.StopServer();
+            try
+            {
+                Task.Run(async () =>
+                {
+                    await Task.Delay(15000, tokenCancel.Token);
+                    this.StopServer();
+                    Debug.WriteLine("Paused server.");
+                });
+            }
+            catch (TaskCanceledException ex)
+            {
+            }
         }
 
         public override void ResumeServer()
         {
             Debug.WriteLine("Resuming server.");
+            tokenCancel.Cancel();
             this.StartServer();
         }
 

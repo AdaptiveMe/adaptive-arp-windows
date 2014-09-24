@@ -139,7 +139,15 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
 
             //create a new dictionary for headers - this could be done using a more advanced class for webResponse object - i just used a simple struct
             newResponse.httpHeaders = new Dictionary<string, string>();
-
+            if (request.httpUri == "/")
+            {
+                if (existsLocalResource("/index.html"))
+                {
+                    request.httpUri = "/index.html";
+                } else if (existsLocalResource("/index.htm")) {
+                    request.httpUri = "/index.htm";
+                }
+            }
             //add httpContent type httpHeaders
 
 
