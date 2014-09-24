@@ -30,23 +30,35 @@ using System;
 
 namespace Adaptive.Arp.Impl
 {
-    public class AppContextImpl : IAppContext
+    public abstract class AbstractAppContextImpl : IAppContext
     {
         private Object applicationContext;
         private IAppContext.Type applicationContextType;
+        private static IAppContext instance;
 
-        public AppContextImpl()
+        public static IAppContext Instance
         {
-
+            get
+            {
+                return AbstractAppContextImpl.instance;
+            }
         }
 
-        public AppContextImpl(object context, IAppContext.Type type)
+        private AbstractAppContextImpl()
+        {
+            if (AbstractAppContextImpl.instance == null)
+            {
+                AbstractAppContextImpl.instance = this;
+            }
+        }
+
+        public AbstractAppContextImpl(object context, IAppContext.Type type) : this()
         {
             this.applicationContext = context;
             this.applicationContextType = type;
         }
 
-        public void setContext(object context, IAppContext.Type type)
+        public  void SetContext(object context, IAppContext.Type type)
         {
             if (context != null)
             {
@@ -57,18 +69,17 @@ namespace Adaptive.Arp.Impl
                 }
                 else
                 {
-                    // TODO: Type unknown.
-                    //this.applicationContextType = IAppContext.Type.Unknown;
+                    this.applicationContextType = IAppContext.Type.Unknown;
                 }
             }
         }
 
-        public override object GetContext()
+        public sealed override object GetContext()
         {
             return this.applicationContext;
         }
 
-        public override IAppContext.Type GetContextType()
+        public sealed override IAppContext.Type GetContextType()
         {
             return this.applicationContextType;
         }

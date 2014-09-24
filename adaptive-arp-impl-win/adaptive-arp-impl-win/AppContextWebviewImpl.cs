@@ -30,17 +30,29 @@ using System.Collections.Generic;
 
 namespace Adaptive.Arp.Impl
 {
-    public class AppContextWebviewImpl : IAppContextWebview
+    public abstract class AppContextWebviewImpl : IAppContextWebview
     {
         private object webViewPrimary;
         private List<object> webViewList;
+        private static IAppContextWebview instance;
 
-        public AppContextWebviewImpl()
+        public static IAppContextWebview Instance
         {
+            get
+            {
+                return AppContextWebviewImpl.instance;
+            }
+        }
+        private AppContextWebviewImpl()
+        {
+            if (AppContextWebviewImpl.instance == null)
+            {
+                AppContextWebviewImpl.instance = this;
+            }
             this.webViewList = new List<object>();
         }
 
-        public AppContextWebviewImpl(object webViewPrimary) : this()
+        private AppContextWebviewImpl(object webViewPrimary) : this()
         {
             this.webViewPrimary = webViewPrimary;
             if (this.webViewPrimary != null)

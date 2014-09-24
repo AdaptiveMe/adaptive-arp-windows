@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.Networking;
+using Windows.Networking.Connectivity;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 
@@ -42,24 +44,23 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
         // Server Stuff
         private StreamSocketListener serverListener = null;
         private bool serverIsListening = false;
-        private Dictionary<Regex, RuleDeletage> serverRules;
+        private Dictionary<Regex, RuleDeletage> serverRules = null;
         private string serverIp = "127.0.0.1";
         private string serverPort = "-1";
-        private int concurrentCount = 0;
+        private bool serverIpAll = false;
+        private static int concurrentCount = 0;
 
 
-        public AppServerImpl(Dictionary<Regex, RuleDeletage> rules, string ip, string port)
+        public AppServerImpl(string ip, string port)
         {
-            //assign passed rules to the server
-            serverRules = rules;
-            serverIp = ip;
-            serverPort = port;
-            serverIsListening = false;
+            this.serverIp = ip;
+            this.serverPort = port;
+            this.serverIsListening = false;
         }
 
         public int getConcurrentCount()
         {
-            return this.concurrentCount;
+            return AppServerImpl.concurrentCount;
         }
 
         public bool addRule(Regex regEx, RuleDeletage rule)
@@ -91,17 +92,11 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
             }
         }
 
-        public AppServerImpl(Dictionary<Regex, RuleDeletage> rules, string port)
-            : this(rules, "127.0.0.1", "8080")
+        public AppServerImpl(string port) : this("127.0.0.1", port)
         {
-
+            this.serverIpAll = true;
         }
 
-        public AppServerImpl(string port)
-            : this(new Dictionary<Regex, RuleDeletage>(), "127.0.0.1", "8080")
-        {
-
-        }
 
         #region Support for store and process.
         /*
@@ -237,8 +232,6 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
         {
             try
             {
-
-
                 StreamReader streamReader = new StreamReader(inStream);
                 AppServerRequestResponse request = new AppServerRequestResponse();
 
@@ -259,7 +252,6 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                         request.httpUri = readLine.Substring(5);
                         request.httpUri = Regex.Replace(request.httpUri, " HTTP.*$", "");
                     }
-
 
                     // Process request headers.
                     Dictionary<string, string> headers = new Dictionary<string, string>();
@@ -647,6 +639,10 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
         public override void StartServer()
         {
             bool serverInitializing = false;
+
+            serverListener = new StreamSocketListener();
+            serverListener.ConnectionReceived += listener_ConnectionReceived_HandleInMemory;
+
             while (!serverIsListening)
             {
                 try
@@ -655,55 +651,76 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                     {
                         Task serverTask = new Task(async () =>
                         {
-                            serverListener = new StreamSocketListener();
-                            //bing do ip:port
                             try
                             {
                                 serverInitializing = true;
                                 Debug.WriteLine("Trying to bind to {0}:{1}.", this.serverIp, this.serverPort);
-                                this.serverListener.ConnectionReceived += listener_ConnectionReceived_HandleInMemory;
-                                await serverListener.BindEndpointAsync(new Windows.Networking.HostName(serverIp), serverPort);
+                                
+                                if (this.serverIpAll)
+                                {
+                                    Debug.WriteLine("Binding on all IPv4 and IPv6 interfaces.");
+                                    await serverListener.BindServiceNameAsync(this.serverPort);
+                                    Debug.WriteLine("Bound to {0}:{1}.", this.serverIp, this.serverPort);
+                                    foreach (string ip in getIpAll()) Debug.WriteLine("Bound also to {0}:{1}.", ip, this.serverPort);
+                                }
+                                else
+                                {
+                                    Debug.WriteLine("Binding on loopback interface.");
+                                    await serverListener.BindEndpointAsync(new Windows.Networking.HostName(this.serverIp), this.serverPort);
+                                    Debug.WriteLine("Bound to {0}:{1}.", this.serverIp, this.serverPort);                                  
+                                }       
                                 this.serverIsListening = true;
                                 serverInitializing = false;
-                                Debug.WriteLine("Bound to  {0}:{1}.", this.serverIp, this.serverPort);
                             }
                             catch (Exception e)
                             {
-                                Debug.WriteLine("Failed to bind to  {0}:{1} with error {2}.", this.serverIp, this.serverPort, e.Message);
                                 serverInitializing = false;
+                                if (!this.serverIsListening)
+                                {
+                                    Debug.WriteLine("Failed to bind to {0}:{1} with error {2}.", this.serverIp, this.serverPort, e);
+                                    // Try with next port
+                                    int nextPort = Convert.ToInt32(this.serverPort);
+                                    if (nextPort > 1024 && nextPort < 32000)
+                                    {
+                                        nextPort++;
+                                        this.serverPort = Convert.ToString(nextPort);
+                                    }
+                                }
                             }
                         });
                         serverTask.Start();
                         serverTask.Wait(2000);
                     }
-                    //Task.WaitAny(serverTask);
-                    /*
-                    Task.Run(async () =>
-                    {
-                        serverListener = new StreamSocketListener();
-                        //bing do ip:port
-                        try
-                        {
-                            Debug.WriteLine("Trying to bind to {0}:{1}.", this.serverIp, this.serverPort);
-                            this.serverListener.ConnectionReceived += listener_ConnectionReceived_HandleInMemory;
-                            await serverListener.BindEndpointAsync(new Windows.Networking.HostName(serverIp), serverPort);           
-                            this.serverIsListening = true;
-                            Debug.WriteLine("Bound to  {0}:{1}.", this.serverIp, this.serverPort);
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.WriteLine("Failed to bind to  {0}:{1} with error {2}.", this.serverIp, this.serverPort, e.Message);
-                        }
-                    });
-                     */
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("Failed to bind to  {0}:{1} with error {2}.", this.serverIp, this.serverPort, e.Message);
+                    Debug.WriteLine("Error binding to {0}:{1} with error {2}.", this.serverIp, this.serverPort, e.Message);
                     serverIsListening = false;
                     serverInitializing = false;
                 }
             }
+        }
+
+        private List<string> getIpAll()
+        {
+            List<string> ipList = new List<string>();
+            IReadOnlyList<HostName> hostList = NetworkInformation.GetHostNames();
+
+            foreach (HostName host in hostList) {
+                /*
+                Debug.WriteLine("--------------------------------------------------------------");
+                Debug.WriteLine("CanonicalName: {0}", host.CanonicalName);
+                Debug.WriteLine("DisplayName: {0}", host.DisplayName);
+                Debug.WriteLine("IPInformation: {0}", host.IPInformation);
+                Debug.WriteLine("RawName: {0}", host.RawName);
+                Debug.WriteLine("Type: {0}", host.Type);
+                */
+                if ((host.Type == HostNameType.Ipv4 || host.Type == HostNameType.Ipv6) && host.IPInformation!=null)
+                {
+                    ipList.Add(host.RawName);
+                }
+            }
+            return ipList;
         }
 
         public override void StopServer()
@@ -714,7 +731,7 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
                 this.serverListener = null;
                 this.serverIsListening = false;
                 socketList.Clear();
-                Debug.WriteLine("Unbound from  {0}:{1}.", this.serverIp, this.serverPort);
+                Debug.WriteLine("Unbound from {0}:{1}.", this.serverIp, this.serverPort);
                 GC.Collect();
             }
         }

@@ -30,83 +30,116 @@ using System;
 
 namespace Adaptive.Arp.Impl
 {
-    public class AppRegistryImpl : IAppRegistry
+    public abstract class AbstractAppRegistryImpl : IAppRegistry
     {
-        private IAnalytics analytics {  set; get; }
+        protected AbstractAppRegistryImpl()
+        {
+
+        }
 
         public IAnalytics GetApplicationAnalytics()
         {
-            return analytics;
+            return this.ApplicationAnalytics;
         }
 
         public IGlobalization GetApplicationGlobalization()
         {
-            throw new NotImplementedException();
+            return this.ApplicationGlobalization;
         }
 
         public ILifecycle GetApplicationLifecycle()
         {
-            throw new NotImplementedException();
+            return this.ApplicationLifecycle;
         }
 
         public IManagement GetApplicationManagement()
         {
-            throw new NotImplementedException();
+            return this.ApplicationManagement;
         }
 
         public IPrinting GetApplicationPrinting()
         {
-            throw new NotImplementedException();
+            return this.ApplicationPrinting;
         }
 
         public ISettings GetApplicationSettings()
         {
-            throw new NotImplementedException();
+            return this.ApplicationSettings;
         }
 
         public IUpdate GetApplicationUpdate()
         {
-            throw new NotImplementedException();
+            return this.ApplicationUpdate;
         }
 
         public IAppContext GetPlatformContext()
         {
-            throw new NotImplementedException();
+            return this.PlatformContext;
         }
 
         public IAppContextWebview GetPlatformContextWeb()
         {
-            throw new NotImplementedException();
+            return this.PlatformContextWeb;
         }
 
         public IAppResourceHandler GetPlatformResourceHandler()
         {
-            throw new NotImplementedException();
+            return this.PlatformResourceHandler;
         }
 
         public ICapabilities GetSystemCapabilities()
         {
-            throw new NotImplementedException();
+            return this.SystemCapabilities;
         }
 
         public IDevice GetSystemDevice()
         {
-            throw new NotImplementedException();
+            return this.SystemDevice;
         }
 
         public IDisplay GetSystemDisplay()
         {
-            throw new NotImplementedException();
+            return this.SystemDisplay;
         }
 
         public IOS GetSystemOS()
         {
-            throw new NotImplementedException();
+            return this.SystemOS;
         }
 
         public IRuntime GetSystemRuntime()
         {
-            throw new NotImplementedException();
+            return this.SystemRuntime;
         }
+
+        protected IAnalytics ApplicationAnalytics { get; set; }
+
+        protected IGlobalization ApplicationGlobalization { get; set; }
+
+        protected ILifecycle ApplicationLifecycle { get; set; }
+
+        protected IManagement ApplicationManagement { get; set; }
+
+        protected IPrinting ApplicationPrinting { get; set; }
+
+        protected ISettings ApplicationSettings { get; set; }
+
+        protected IUpdate ApplicationUpdate { get; set; }
+
+        protected IAppContext PlatformContext { get; set; }
+
+        protected IAppContextWebview PlatformContextWeb { get; set; }
+
+        protected IAppResourceHandler PlatformResourceHandler { get; set; }
+
+        protected ICapabilities SystemCapabilities { get; set; }
+
+        protected IDevice SystemDevice { get; set; }
+
+        protected IDisplay SystemDisplay { get; set; }
+
+        protected IOS SystemOS { get; set; }
+
+        protected IRuntime SystemRuntime { get; set; }
     }
 }

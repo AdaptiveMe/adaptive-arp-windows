@@ -12,6 +12,8 @@ using Adaptive.Impl.WindowsPhoneSilverlight;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Reflection;
+using System.Windows.Resources;
 
 
 namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
@@ -30,7 +32,25 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
 
             Debug.WriteLine("Server started at base URI {0}.", App.server.GetBaseURI());
             //webView.Navigate(new Uri("http://docs.sencha.com/touch/2.3.0/touch-build/examples/kitchensink/index.html"));
+            webView.IsGeolocationEnabled = true;
+
             webView.Navigate(new Uri(App.server.GetBaseURI() + "index.html"));
+
+            Debug.WriteLine("Does resource exist? {0}", existsLocalResource("index.html"));
+            Debug.WriteLine("Does resource exist? {0}", loadLocalResource("index.html").ContentType);
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Debug.WriteLine("Current assembly is {0}", assembly.GetName().Name);
+        }
+
+        private bool existsLocalResource(string relativePath)
+        {
+            return Application.GetResourceStream(new Uri(@"/" + Assembly.GetExecutingAssembly().GetName().Name + ";component/Web/" + relativePath, UriKind.Relative)) != null;
+        }
+
+        private StreamResourceInfo loadLocalResource(string relativePath)
+        {
+            return Application.GetResourceStream(new Uri(@"/" + Assembly.GetExecutingAssembly().GetName().Name + ";component/Web/" + relativePath, UriKind.Relative));
         }
 
         private AppServerRequestResponse homePage(AppServerRequestResponse response)

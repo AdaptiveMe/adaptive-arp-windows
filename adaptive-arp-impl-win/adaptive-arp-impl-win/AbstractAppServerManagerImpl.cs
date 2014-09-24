@@ -27,6 +27,7 @@
  * =====================================================================================================================
  */
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Adaptive.Arp.Impl
 {
@@ -41,11 +42,11 @@ namespace Adaptive.Arp.Impl
             serverList = new List<IAppServer>();
         }
 
-        public abstract IAppServer createServerInstance();
+        public abstract IAppServer CreateServerInstance();
 
         public void AddServerListener(IAppServerListener listener)
         {
-            if (listener !=null && !serverListenerList.Contains(listener))
+            if (listener != null && !serverListenerList.Contains(listener))
             {
                 serverListenerList.Add(listener);
             }
@@ -58,17 +59,23 @@ namespace Adaptive.Arp.Impl
 
         public void PauseServer(IAppServer server)
         {
-            foreach (IAppServerListener listener in serverListenerList)
+            Task.Factory.StartNew(() =>
             {
-                listener.OnPausing(server);
-            }
+                foreach (IAppServerListener listener in serverListenerList)
+                {
+                    listener.OnPausing(server);
+                }
+            });
 
             server.PauseServer();
 
-            foreach (IAppServerListener listener in serverListenerList)
+            Task.Factory.StartNew(() =>
             {
-                listener.OnPaused(server);
-            }
+                foreach (IAppServerListener listener in serverListenerList)
+                {
+                    listener.OnPaused(server);
+                }
+            });
         }
 
         public void RemoveServerListener(IAppServerListener listener)
@@ -86,59 +93,81 @@ namespace Adaptive.Arp.Impl
 
         public void ResumeServer(IAppServer server)
         {
-            foreach (IAppServerListener listener in serverListenerList)
+            Task.Factory.StartNew(() =>
             {
-                listener.OnResuming(server);
-            }
+                foreach (IAppServerListener listener in serverListenerList)
+                {
+                    listener.OnResuming(server);
+                }
+            });
 
             server.ResumeServer();
 
-            foreach (IAppServerListener listener in serverListenerList)
+            Task.Factory.StartNew(() =>
             {
-                listener.OnResumed(server);
-            }
+                foreach (IAppServerListener listener in serverListenerList)
+                {
+                    listener.OnResumed(server);
+                }
+            });
         }
 
         public void StartServer()
         {
-            foreach (IAppServerListener listener in serverListenerList)
+            IAppServer server = CreateServerInstance();
+            server.StartServer();
+
+            Task.Factory.StartNew(() =>
             {
-                IAppServer server = null;//new AppServerImpl();
-                server.StartServer();
-                listener.OnStart(server);
-            }
+                foreach (IAppServerListener listener in serverListenerList)
+                {
+                    listener.OnStart(server);
+                }
+            });
         }
 
         public void StopServer(IAppServer server)
         {
-            foreach (IAppServerListener listener in serverListenerList)
+            Task.Factory.StartNew(() =>
             {
-                listener.OnStopping(server);
-            }
+                foreach (IAppServerListener listener in serverListenerList)
+                {
+                    listener.OnStopping(server);
+                }
+            });
 
             server.StopServer();
 
-            foreach (IAppServerListener listener in serverListenerList)
+            Task.Factory.StartNew(() =>
             {
-                listener.OnStopped(server);
-            }
+                foreach (IAppServerListener listener in serverListenerList)
+                {
+                    listener.OnStopped(server);
+                }
+            });
         }
 
         public void StopServers()
         {
             foreach (IAppServer server in serverList)
             {
-                foreach (IAppServerListener listener in serverListenerList)
+                Task.Factory.StartNew(() =>
                 {
-                    listener.OnStopping(server);
-                }
+                    foreach (IAppServerListener listener in serverListenerList)
+                    {
+                        listener.OnStopping(server);
+                    }
+                });
 
                 server.StopServer();
 
-                foreach (IAppServerListener listener in serverListenerList)
+                Task.Factory.StartNew(() =>
                 {
-                    listener.OnStopped(server);
-                }
+                    foreach (IAppServerListener listener in serverListenerList)
+                    {
+                        listener.OnStopped(server);
+                    }
+                });
             }
         }
     }

@@ -104,9 +104,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AbstractAccelerometerImpl.cs" />
-    <Compile Include="AppContextImpl.cs" />
+    <Compile Include="AbstractAppContextImpl.cs" />
     <Compile Include="AppContextWebviewImpl.cs" />
-    <Compile Include="AppRegistryImpl.cs" />
+    <Compile Include="AbstractAppRegistryImpl.cs" />
     <Compile Include="AppResourceHandlerImpl.cs" />
     <Compile Include="AbstractAppServerImpl.cs" />
     <Compile Include="AbstractAppServerManagerImpl.cs" />

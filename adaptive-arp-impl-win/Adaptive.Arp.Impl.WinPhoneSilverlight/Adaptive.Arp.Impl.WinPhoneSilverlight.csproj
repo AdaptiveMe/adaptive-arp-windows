@@ -85,10 +85,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AccelerometerImpl.cs" />
+    <Compile Include="AppRegistryImpl.cs" />
     <Compile Include="CapabilitiesImpl.cs" />
     <Compile Include="ContactImpl.cs" />
     <Compile Include="DeviceImpl.cs" />
     <Compile Include="Internals\AppServerImpl.cs" />
+    <Compile Include="Internals\AppServerManagerImpl.cs" />
     <Compile Include="LoggingImpl.cs" />
     <Compile Include="MessagingImpl.cs" />
     <Compile Include="NetworkReachabilityImpl.cs" />
