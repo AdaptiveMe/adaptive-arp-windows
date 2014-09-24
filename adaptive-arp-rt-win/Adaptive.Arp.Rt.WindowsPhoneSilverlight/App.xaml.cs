@@ -101,7 +101,7 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             Debug.WriteLine("Deactivated");
-            server.PauseServer();
+            server.PauseServer();            
         }
 
         // Code to execute when the application is closing (eg, user hit Back)

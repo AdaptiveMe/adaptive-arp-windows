@@ -626,29 +626,15 @@ namespace Adaptive.Impl.WindowsPhoneSilverlight
             return "http";
         }
 
-        private CancellationTokenSource tokenCancel = new CancellationTokenSource();
-
         public override void PauseServer()
         {
             Debug.WriteLine("Pausing server.");
-            try
-            {
-                Task.Run(async () =>
-                {
-                    await Task.Delay(15000, tokenCancel.Token);
-                    this.StopServer();
-                    Debug.WriteLine("Paused server.");
-                });
-            }
-            catch (TaskCanceledException ex)
-            {
-            }
+            this.StopServer();
         }
 
         public override void ResumeServer()
         {
             Debug.WriteLine("Resuming server.");
-            tokenCancel.Cancel();
             this.StartServer();
         }
 
