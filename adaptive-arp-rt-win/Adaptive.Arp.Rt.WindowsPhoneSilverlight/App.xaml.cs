@@ -197,7 +197,23 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
             }
             else
             {
-                Debug.WriteLine("---- MISSING {0}", request.httpUri);
+                if (request.httpUri == "/service/system/GetUnityContext")
+                {
+                    newResponse.httpHeaders.Add("Content-Type", "application/json");
+                    //contentWriter.Write("{ \"Windows\" : true, \"iPod\" : false, \"iPad\" : false, \"iPhone\" : false, \"Android\" : false, \"Blackberry\" : false, \"TabletDevice\" : false }");
+                    contentWriter.Write("{ \"Emulator\" : true }");
+                    contentWriter.Flush();
+                }
+                else if (request.httpUri == "/service/system/DismissSplashScreen")
+                {
+                    newResponse.httpHeaders.Add("Content-Type", "application/json");
+                    contentWriter.Write("false");
+                    contentWriter.Flush();
+                }
+                else
+                {
+                    Debug.WriteLine("---- MISSING {0}", request.httpUri);
+                }
             }
 
             /*
@@ -569,6 +585,7 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
         {".onetoc2", "application/onenote"},
         {".orderedtest", "application/xml"},
         {".osdx", "application/opensearchdescription+xml"},
+        {".otf", "font/opentype"},
         {".p10", "application/pkcs10"},
         {".p12", "application/x-pkcs12"},
         {".p7b", "application/x-pkcs7-certificates"},
