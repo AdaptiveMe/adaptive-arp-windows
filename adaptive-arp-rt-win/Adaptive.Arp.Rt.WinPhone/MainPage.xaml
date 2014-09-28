@@ -11,7 +11,7 @@
     <WebView x:Name="WebViewControl"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
-             NavigationCompleted="Browser_NavigationCompleted" />
+             NavigationCompleted="Browser_NavigationCompleted" NavigationStarting="WebViewControl_NavigationStarting" />
 
     <Page.BottomAppBar>
         <CommandBar>

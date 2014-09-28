@@ -14,7 +14,10 @@
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <NuGetPackageImportStamp>2a6da7f5</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>933e7f3d</NuGetPackageImportStamp>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <AppxBundle>Auto</AppxBundle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -25,6 +28,7 @@
     <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -100,8 +104,131 @@
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
     <Content Include="Assets\StoreLogo.scale-240.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
-    <Content Include="Html\css\phone.css" />
-    <Content Include="Html\index.html" />
+    <Content Include="Html\app\config\i18n-config.xml" />
+    <Content Include="Html\app\config\io-services-config.xml" />
+    <Content Include="Html\app\config\launch-config.xml" />
+    <Content Include="Html\app\config\notification-config.xml" />
+    <Content Include="Html\res\Avatar.mov" />
+    <Content Include="Html\res\sample.m4a" />
+    <Content Include="Html\res\SystemAlert.wav" />
+    <Content Include="Html\WebResources\Contents\tobecopied.txt" />
+    <Content Include="Html\WebResources\www\app.js" />
+    <Content Include="Html\WebResources\www\assets\bar\toolbar_glow.png" />
+    <Content Include="Html\WebResources\www\assets\bar\UIButtonBarBlackOpaqueBackground.png" />
+    <Content Include="Html\WebResources\www\assets\bar\UIButtonBarBlackTranslucentBackground.png" />
+    <Content Include="Html\WebResources\www\assets\bar\UIButtonBarDefaultBackground.png" />
+    <Content Include="Html\WebResources\www\assets\bar\UINavigationBarBlackOpaqueBackground.png" />
+    <Content Include="Html\WebResources\www\assets\bar\UINavigationBarBlackTranslucentBackground.png" />
+    <Content Include="Html\WebResources\www\assets\bar\UINavigationBarDefaultBackground.png" />
+    <Content Include="Html\WebResources\www\assets\button\iPhoneButton.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackBackPressed.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackButtonPressed.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackForwardPressed.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackOpaqueBack.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackOpaqueButton.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackOpaqueForward.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackTranslucentBack.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackTranslucentButton.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarBlackTranslucentForward.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarDefaultBack.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarDefaultBackPressed.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarDefaultButton.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarDefaultButtonPressed.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarDefaultForward.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarDefaultForwardPressed.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarDoneButton.png" />
+    <Content Include="Html\WebResources\www\assets\button\UINavigationBarDoneButtonPressed.png" />
+    <Content Include="Html\WebResources\www\assets\pixel.png" />
+    <Content Include="Html\WebResources\www\assets\pullrefresh\blackArrow.png" />
+    <Content Include="Html\WebResources\www\assets\pullrefresh\loader.gif" />
+    <Content Include="Html\WebResources\www\assets\scrollindicator\UIScrollerIndicatorBlack.png" />
+    <Content Include="Html\WebResources\www\assets\scrollindicator\UIScrollerIndicatorDefault.png" />
+    <Content Include="Html\WebResources\www\assets\scrollindicator\UIScrollerIndicatorDefaultHorizontalMiddle.png" />
+    <Content Include="Html\WebResources\www\assets\scrollindicator\UIScrollerIndicatorDefaultVerticalMiddle.png" />
+    <Content Include="Html\WebResources\www\assets\scrollindicator\UIScrollerIndicatorWhite.png" />
+    <Content Include="Html\WebResources\www\assets\search\background_default.png" />
+    <Content Include="Html\WebResources\www\assets\search\border.png" />
+    <Content Include="Html\WebResources\www\assets\search\cancel_normal.png" />
+    <Content Include="Html\WebResources\www\assets\search\cancel_touched.png" />
+    <Content Include="Html\WebResources\www\assets\search\magnifying_glass.png" />
+    <Content Include="Html\WebResources\www\assets\tableview\UIPinStripe.png" />
+    <Content Include="Html\WebResources\www\assets\tableview\UISectionListHeaderBackground.png" />
+    <Content Include="Html\WebResources\www\assets\tableview\UITableNext.png" />
+    <Content Include="Html\WebResources\www\assets\tableview\UITableNextButton.png" />
+    <Content Include="Html\WebResources\www\assets\tableview\UITableNextButtonPressed.png" />
+    <Content Include="Html\WebResources\www\assets\tableview\UITableNextSelected.png" />
+    <Content Include="Html\WebResources\www\assets\tableview\UITableSelection.png" />
+    <Content Include="Html\WebResources\www\assets\tableview\UITableSelectionGray.png" />
+    <Content Include="Html\WebResources\www\index.html" />
+    <Content Include="Html\WebResources\www\js\appverse-gui-sencha.js" />
+    <Content Include="Html\WebResources\www\js\appverse.js" />
+    <Content Include="Html\WebResources\www\js\available_testcases.js" />
+    <Content Include="Html\WebResources\www\js\callbacks.js" />
+    <Content Include="Html\WebResources\www\js\Config.js" />
+    <Content Include="Html\WebResources\www\js\locale.js" />
+    <Content Include="Html\WebResources\www\js\testcases\analytics.js" />
+    <Content Include="Html\WebResources\www\js\testcases\apploader.js" />
+    <Content Include="Html\WebResources\www\js\testcases\beacon.js" />
+    <Content Include="Html\WebResources\www\js\testcases\database.js" />
+    <Content Include="Html\WebResources\www\js\testcases\filesystem.js" />
+    <Content Include="Html\WebResources\www\js\testcases\geo.js" />
+    <Content Include="Html\WebResources\www\js\testcases\i18n.js" />
+    <Content Include="Html\WebResources\www\js\testcases\ioservices.js" />
+    <Content Include="Html\WebResources\www\js\testcases\media.js" />
+    <Content Include="Html\WebResources\www\js\testcases\messaging.js" />
+    <Content Include="Html\WebResources\www\js\testcases\net.js" />
+    <Content Include="Html\WebResources\www\js\testcases\nfc.js" />
+    <Content Include="Html\WebResources\www\js\testcases\notifications.js" />
+    <Content Include="Html\WebResources\www\js\testcases\pim.js" />
+    <Content Include="Html\WebResources\www\js\testcases\security.js" />
+    <Content Include="Html\WebResources\www\js\testcases\system.js" />
+    <Content Include="Html\WebResources\www\js\testcases\telephony.js" />
+    <Content Include="Html\WebResources\www\js\utils.js" />
+    <Content Include="Html\WebResources\www\resources\css\app.css" />
+    <Content Include="Html\WebResources\www\resources\css\font-awesome.css" />
+    <Content Include="Html\WebResources\www\resources\fonts\fontawesome-webfont.svg" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Cond.svg" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Regular.svg" />
+    <Content Include="Html\WebResources\www\resources\images\activityindicator.png" />
+    <Content Include="Html\WebResources\www\resources\images\analytics_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\appverse.png" />
+    <Content Include="Html\WebResources\www\resources\images\appverse_mask.png" />
+    <Content Include="Html\WebResources\www\resources\images\appverse_white.png" />
+    <Content Include="Html\WebResources\www\resources\images\app_loader_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\beacon_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\calendar_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\contacts_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\database_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\filesystem_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\geo_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\headerBackground.png" />
+    <Content Include="Html\WebResources\www\resources\images\i18n_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\io_services_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\media_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\messaging_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\network_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\nfc_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\notification_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\pattern.png" />
+    <Content Include="Html\WebResources\www\resources\images\phone_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\rainy.png" />
+    <Content Include="Html\WebResources\www\resources\images\search.png" />
+    <Content Include="Html\WebResources\www\resources\images\security_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\startupimage.png" />
+    <Content Include="Html\WebResources\www\resources\images\sys_cpu_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\sys_display_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\sys_humaninteract_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\sys_memory_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\sys_os_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\sys_power_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\sys_processor_icon.png" />
+    <Content Include="Html\WebResources\www\resources\images\unity.png" />
+    <Content Include="Html\WebResources\www\resources\images\webtrekk_icon.png" />
+    <Content Include="Html\WebResources\www\style\appverse-gui.css" />
+    <Content Include="StoreManifest.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -119,36 +246,70 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Adaptive.Arp.Api, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Adaptive.Arp.Api, Version=1.0.42.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Adaptive.Arp.Api.1.0.31\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+      <HintPath>..\packages\Adaptive.Arp.Api.1.0.42.1\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Adaptive.Arp.Impl, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PCLCrypto, Version=0.5.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Adaptive.Arp.Impl.1.0.22\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Impl.dll</HintPath>
-    </Reference>
-    <Reference Include="Adaptive.Arp.Impl.WinPhone, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Adaptive.Arp.Impl.WinPhone.1.0.18\lib\wpa81\Adaptive.Arp.Impl.WinPhone.dll</HintPath>
-    </Reference>
-    <Reference Include="PCLCrypto">
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\wpa81\PCLCrypto.dll</HintPath>
     </Reference>
-    <Reference Include="PCLCrypto.Abstractions">
+    <Reference Include="PCLCrypto.Abstractions, Version=0.5.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PCLCrypto.0.5.1.14165\lib\wpa81\PCLCrypto.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="PCLStorage">
+    <Reference Include="PCLStorage, Version=0.9.6.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PCLStorage.0.9.6\lib\portable-win8+wpa81\PCLStorage.dll</HintPath>
     </Reference>
-    <Reference Include="PCLStorage.Abstractions">
+    <Reference Include="PCLStorage.Abstractions, Version=0.9.6.0, Culture=neutral, PublicKeyToken=286fe515a2c35b64, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\PCLStorage.0.9.6\lib\portable-win8+wpa81\PCLStorage.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Validation">
+    <Reference Include="Validation, Version=2.0.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Validation.2.0.4.14103\lib\portable-windows8+net40+sl5+wp8+wpa81+wp81+MonoAndroid+MonoTouch\Validation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Html\app\config\en-US.plist" />
+    <None Include="Html\app\config\en.plist" />
+    <None Include="Html\app\config\es-ES.plist" />
+    <None Include="Html\app\config\es.plist" />
+    <None Include="Html\app\config\hu-HU.plist" />
+    <None Include="Html\app\config\id-ID.plist" />
+    <None Include="Html\app\config\zh-CN.plist" />
+    <None Include="Html\res\Thumbs.db" />
+    <None Include="Html\WebResources\Contents\Info.json" />
+    <Content Include="Html\WebResources\www\resources\fonts\fontawesome-webfont.eot" />
+    <Content Include="Html\WebResources\www\resources\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Html\WebResources\www\resources\fonts\fontawesome-webfont.woff" />
+    <Content Include="Html\WebResources\www\resources\fonts\FontAwesome.otf" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Bold.otf" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-BoldCond.otf" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Cond.eot" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Cond.otf" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Cond.ttf" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Cond.woff" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Regular.eot" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Regular.otf" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Regular.ttf" />
+    <Content Include="Html\WebResources\www\resources\fonts\MyriadPro-Regular.woff" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\adaptive-arp-impl-win\adaptive-arp-impl-win\Adaptive.Arp.Impl.csproj">
+      <Project>{d27a8449-5314-4d4d-9c8c-55b3baa6ab78}</Project>
+      <Name>Adaptive.Arp.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\adaptive-arp-impl-win\Adaptive.Arp.Impl.WinPhone\Adaptive.Arp.Impl.WinPhone.csproj">
+      <Project>{b8a35761-83bc-4625-840a-32600b9e4fc1}</Project>
+      <Name>Adaptive.Arp.Impl.WinPhone</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Html\WebResources\Contents\en\" />
+    <Folder Include="Html\WebResources\Contents\es\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
@@ -156,14 +317,10 @@
   <PropertyGroup Condition=" '$(TargetPlatformIdentifier)' == '' ">
     <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

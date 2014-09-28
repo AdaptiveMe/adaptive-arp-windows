@@ -17,6 +17,7 @@ using Windows.Networking.Connectivity;
 using System.Reflection;
 using System.Windows.Resources;
 using Windows.Storage.Streams;
+using Windows.Storage;
 
 namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
 {
@@ -139,33 +140,36 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
 
             //create a new dictionary for headers - this could be done using a more advanced class for webResponse object - i just used a simple struct
             newResponse.httpHeaders = new Dictionary<string, string>();
-            if (request.httpUri == "/")
+            Stream responseStream = new MemoryStream();
+            StreamWriter contentWriter = new StreamWriter(responseStream);
+            contentWriter.AutoFlush = false;
+
+            Task task = new Task(async () =>
             {
-                if (existsLocalResource("/index.html"))
+            if (request.httpUri == "/" || request.httpUri.EndsWith("/"))
+            {
+                if (await existsLocalResource(request.httpUri+"index.html"))
                 {
-                    request.httpUri = "/index.html";
-                } else if (existsLocalResource("/index.htm")) {
-                    request.httpUri = "/index.htm";
+                    request.httpUri = request.httpUri+"index.html";
+                } else if (await existsLocalResource(request.httpUri+"index.htm")) {
+                    request.httpUri = request.httpUri+"index.htm";
                 }
             }
             //add httpContent type httpHeaders
 
 
-            Stream responseStream = new MemoryStream();
-            StreamWriter contentWriter = new StreamWriter(responseStream);
-            contentWriter.AutoFlush = false;
+            
 
-            if (existsLocalResource(request.httpUri))
+            if (await existsLocalResource(request.httpUri))
             {
-                StreamResourceInfo resource = loadLocalResource(request.httpUri);
+                StreamResourceInfo resource = await loadLocalResource(request.httpUri);
                 //Debug.WriteLine("Loading resource {0} with mimetype {1}.", request.httpUri, mimeLocalResource(request.httpUri));
-                newResponse.httpHeaders.Add("Content-Type", mimeLocalResource(request.httpUri));
+                newResponse.httpHeaders.Add("Content-Type", resource.ContentType);
 
                 bool readFinished = false;
                 uint readMaxBufferSize = 4096*4;
 
-                Task task = new Task(async () =>
-                {
+
                     DataReader reader = new DataReader(resource.Stream.AsInputStream());
                     while (!readFinished)
                     {
@@ -191,9 +195,7 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
                             responseStream.Flush();
                         }
                     }
-                });
-                task.Start();
-                task.Wait();
+
             }
             else
             {
@@ -256,28 +258,89 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
 
             //contentWriter.Flush();
             //assign the response
+
+                });
+                task.Start();
+                task.Wait();
             newResponse.httpContent = responseStream;
 
             //return the response
             return newResponse;
         }
 
-        private bool existsLocalResource(string relativePath)
+        private async Task<bool> existsLocalResource(string relativePath)
         {
             if (relativePath.IndexOf('?') > 0)
             {
                 relativePath = relativePath.Substring(0, relativePath.IndexOf('?'));
             }
-            return Application.GetResourceStream(new Uri(@"/" + Assembly.GetExecutingAssembly().GetName().Name + ";component/Web" + relativePath, UriKind.Relative)) != null;
+            Uri uri = new Uri("ms-appx:///Web" + relativePath);
+            
+            //return Application.GetResourceStream(new Uri(@"/" + Assembly.GetExecutingAssembly().GetName().Name + ";component/Web" + relativePath, UriKind.Relative)) != null;
+            try
+            {
+                StorageFile f = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                Debug.WriteLine("File {0}", f.Path);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
 
-        private StreamResourceInfo loadLocalResource(string relativePath)
+        private async Task<StreamResourceInfo> loadLocalResource(string relativePath)
         {
+            Debug.WriteLine("loadLocalResource");
             if (relativePath.IndexOf('?') > 0)
             {
                 relativePath = relativePath.Substring(0, relativePath.IndexOf('?'));
             }
-            return Application.GetResourceStream(new Uri(@"/" + Assembly.GetExecutingAssembly().GetName().Name + ";component/Web" + relativePath, UriKind.Relative));
+            Uri uri = new Uri("ms-appx:///Web" + relativePath);
+            //return Application.GetResourceStream(new Uri(@"/" + Assembly.GetExecutingAssembly().GetName().Name + ";component/Web" + relativePath, UriKind.Relative));
+            //return Application.GetResourceStream(new Uri("ms-appx:///Web" + relativePath, UriKind.Relative));
+            try
+            {
+                StorageFile f = await StorageFile.GetFileFromApplicationUriAsync(uri);
+                IRandomAccessStream stream = await f.OpenAsync(FileAccessMode.Read);
+
+                bool readFinished = false;
+                uint readMaxBufferSize = 4096 * 4;
+                MemoryStream responseStream = new MemoryStream();
+                DataReader reader = new DataReader(stream);
+                while (!readFinished)
+                {
+                    // await a full buffer or eof
+                    await reader.LoadAsync(readMaxBufferSize);
+
+                    if (reader.UnconsumedBufferLength > 0)
+                    {
+                        // Read buffer
+                        uint readLength = reader.UnconsumedBufferLength;
+                        byte[] readBuffer = new byte[reader.UnconsumedBufferLength];
+                        reader.ReadBytes(readBuffer);
+                        // Write buffer
+                        responseStream.Write(readBuffer, 0, readBuffer.Length);
+
+                        // Not full buffer, reached eof
+                        if (readLength < readMaxBufferSize) readFinished = true;
+                    }
+                    else
+                    {
+                        // Reached eof 
+                        readFinished = true;
+                        responseStream.Flush();
+                        responseStream.Position = 0;
+                    }
+                }
+                StreamResourceInfo sri = new StreamResourceInfo(responseStream, mimeLocalResource(relativePath));
+                return sri;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
 

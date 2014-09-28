@@ -31,16 +31,22 @@ namespace Adaptive.Arp.Rt.WindowsPhoneSilverlight
             
 
             Debug.WriteLine("Server started at base URI {0}.", App.server.GetBaseURI());
-            //webView.Navigate(new Uri("http://docs.sencha.com/touch/2.3.0/touch-build/examples/kitchensink/index.html"));
             webView.IsGeolocationEnabled = true;
+            webView.IsScriptEnabled = true;
+            webView.Navigating += webView_Navigating;
+            //UriParser.Register(new AppServerInterceptor(), "flowers", 8080);
 
-            webView.Navigate(new Uri(App.server.GetBaseURI() + "index.html"));
+            //string MainUri = "/Web/examples/kitchensink/index.html";
+            //webView.Navigate(new Uri(MainUri, UriKind.Relative));
 
-            Debug.WriteLine("Does resource exist? {0}", existsLocalResource("index.html"));
-            Debug.WriteLine("Does resource exist? {0}", loadLocalResource("index.html").ContentType);
+            //webView.Navigate(new Uri("http://docs.sencha.com/touch/2.4.0/touch-build/examples/"));
+            //webView.Navigate(new Uri(App.server.GetBaseURI() + "index.html"));
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Debug.WriteLine("Current assembly is {0}", assembly.GetName().Name);
+        }
+
+        void webView_Navigating(object sender, NavigatingEventArgs e)
+        {
+            Debug.WriteLine("Nav: {0}", e.Uri);
         }
 
         private bool existsLocalResource(string relativePath)

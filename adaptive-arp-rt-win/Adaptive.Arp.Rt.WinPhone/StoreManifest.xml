@@ -1,0 +1,11 @@
+<StoreManifest xmlns="http://schemas.microsoft.com/appx/2010/StoreManifest">
+  <ProductFeatures>
+    <HardwareRequirements>
+      <Requirement Name="ID_REQ_REARCAMERA" />
+      <Requirement Name="ID_REQ_FRONTCAMERA" />
+      <Requirement Name="ID_REQ_MAGNETOMETER" />
+      <Requirement Name="ID_REQ_GYROSCOPE" />
+    </HardwareRequirements>
+    <SDOptOut>true</SDOptOut>
+  </ProductFeatures>
+</StoreManifest>

@@ -4,10 +4,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,21 +18,61 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web;
 
 // The WebView Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
 
 namespace Adaptive.Arp.Rt.WinPhone
 {
+    public sealed class MainStreamResolver : IUriToStreamResolver
+    {
+
+        public IAsyncOperation<Windows.Storage.Streams.IInputStream> UriToStreamAsync(Uri uri)
+        {
+            if (uri == null) throw new Exception("No stream, no party.");
+            string path = uri.AbsolutePath;
+            return GetContent(path).AsAsyncOperation();
+        }
+
+        private async Task<IInputStream> GetContent(string path)
+        {
+            try
+            {
+                if (path.IndexOf('?') > 0)
+                {
+                    path = path.Substring(0, path.IndexOf('?'));
+                }
+                else if (path.IndexOf('#') > 0)
+                {
+                    path = path.Substring(0, path.IndexOf('#'));
+                }
+                else if (path.EndsWith("/"))
+                {
+                    path += "index.html";
+                }
+                Uri localUri = new Uri("ms-appx:///Html/WebResources/www" + path);
+                Debug.WriteLine("- Content {0}", localUri);
+                StorageFile f = await StorageFile.GetFileFromApplicationUriAsync(localUri);
+                IRandomAccessStream stream = await f.OpenAsync(FileAccessMode.Read);
+                return stream;
+            }
+            catch (Exception)
+            {
+                throw new Exception("Invalid path.");
+            }
+        }
+    }
+
     public sealed partial class MainPage : Page
     {
         // TODO: Replace with your URL here.
-        private static readonly Uri HomeUri = new Uri("ms-appx-web:///Html/index.html", UriKind.Absolute);
+        private static readonly Uri HomeUri = new Uri("ms-appx-web:///Html/WebResources/www/index.html", UriKind.Absolute);
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         /// <summary>
@@ -39,9 +82,13 @@ namespace Adaptive.Arp.Rt.WinPhone
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            WebViewControl.Navigate(HomeUri);
-
+            //WebViewControl.Navigate(HomeUri);     
             HardwareButtons.BackPressed += this.MainPage_BackPressed;
+
+            Uri uri = WebViewControl.BuildLocalStreamUri("MyApp", "/index.html");
+            MainStreamResolver resolver = new MainStreamResolver();
+            WebViewControl.NavigateToLocalStreamUri(uri, resolver);
+
         }
 
         /// <summary>
@@ -90,6 +137,11 @@ namespace Adaptive.Arp.Rt.WinPhone
         private void HomeAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             WebViewControl.Navigate(HomeUri);
+        }
+
+        private void WebViewControl_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            Debug.WriteLine("Navigation started: {0}", args.Uri.AbsoluteUri);
         }
     }
 }

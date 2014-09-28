@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="9f981a8a-67fd-4cb9-8d77-65706f80bb81" Publisher="CN=Carlos" Version="1.0.0.0" />
+  <Identity Name="9f981a8a-67fd-4cb9-8d77-65706f80bb81" Publisher="CN=Carlos" Version="1.0.0.1" />
   <mp:PhoneIdentity PhoneProductId="c68b6980-da91-43c0-9deb-19d3008af817" PhonePublisherId="0a6b0ae1-9801-4282-9c0f-f9eadfcf0b4b" />
   <Properties>
     <DisplayName>Adaptive.Arp.Rt.WindowsPhoneSilverlight</DisplayName>
