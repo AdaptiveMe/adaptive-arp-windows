@@ -87,13 +87,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppRegistryImpl.cs" />
     <Compile Include="Appverse\AppverseBridge.cs" />
     <Compile Include="Internals\AppServerImpl.cs">
       <SubType>
       </SubType>
     </Compile>
     <Compile Include="Internals\AppServerManagerImpl.cs" />
+    <Compile Include="Internals\StreamLocalResolver.cs" />
     <Compile Include="Internals\StreamResourceInfo.cs" />
+    <Compile Include="LifecycleImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ using Windows.Networking.Connectivity;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 
-namespace Adaptive.Impl.WindowsPhone
+namespace Adaptive.Arp.Impl.WinPhone.Internals
 {
     // Delegate method to invoke on rule match.
     public delegate AppServerRequestResponse RuleDeletage(AppServerRequestResponse response);
