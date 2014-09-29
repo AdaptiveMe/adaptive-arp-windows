@@ -71,7 +71,6 @@ namespace Adaptive.Arp.Rt.WinPhone
         public MainPage()
         {
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 

@@ -87,6 +87,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Appverse\AppverseBridge.cs" />
     <Compile Include="Internals\AppServerImpl.cs">
       <SubType>
       </SubType>
