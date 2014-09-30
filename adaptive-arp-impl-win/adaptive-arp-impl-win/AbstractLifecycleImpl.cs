@@ -27,6 +27,19 @@ namespace Adaptive.Arp.Impl
             }
         }
 
+        public void RemoveLifecycleListener(ILifecycleListener listener)
+        {
+            if (listenerList.Contains(listener))
+            {
+                listenerList.Remove(listener);
+            }
+        }
+
+        public void RemoveLifecycleListeners()
+        {
+            listenerList.Clear();
+        }
+
         public bool IsBackground()
         {
             return !IsVisible;
@@ -103,6 +116,5 @@ namespace Adaptive.Arp.Impl
                 }
             });
         }
-
     }
 }

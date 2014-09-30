@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Adaptive.Arp.Api">
-      <HintPath>..\..\adaptive-arp-rt-win\packages\Adaptive.Arp.Api.1.0.42.1\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\Adaptive.Arp.Api.1.0.45\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\..\adaptive-arp-rt-win\packages\PCLCrypto.0.5.1.14165\lib\portable-net40+sl50+win+wpa81+wp80\PCLCrypto.dll</HintPath>
