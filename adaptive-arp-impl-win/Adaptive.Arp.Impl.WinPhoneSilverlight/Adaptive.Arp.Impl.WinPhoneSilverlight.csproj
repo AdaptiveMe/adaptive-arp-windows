@@ -113,8 +113,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Adaptive.Arp.Api">
-      <HintPath>..\..\adaptive-arp-rt-win\packages\Adaptive.Arp.Api.1.0.42.1\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+    <Reference Include="Adaptive.Arp.Api, Version=1.0.42.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\Adaptive.Arp.Api.1.0.45\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\..\adaptive-arp-rt-win\packages\PCLCrypto.0.5.1.14165\lib\wp8\PCLCrypto.dll</HintPath>

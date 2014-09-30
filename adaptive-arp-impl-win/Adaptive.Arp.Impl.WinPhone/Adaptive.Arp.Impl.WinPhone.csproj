@@ -102,11 +102,14 @@
   <ItemGroup>
     <Reference Include="Adaptive.Arp.Api, Version=1.0.42.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\adaptive-arp-rt-win\packages\Adaptive.Arp.Api.1.0.42.1\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
+      <HintPath>..\..\adaptive-arp-rt-win\packages\Adaptive.Arp.Api.1.0.45\lib\portable-win81+wpa81+wp81\Adaptive.Arp.Api.dll</HintPath>
     </Reference>
     <Reference Include="Adaptive.Arp.Impl, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\adaptive-arp-impl-win\bin\Debug\Adaptive.Arp.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\adaptive-arp-rt-win\packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PCLCrypto">
       <HintPath>..\..\adaptive-arp-rt-win\packages\PCLCrypto.0.5.1.14165\lib\wpa81\PCLCrypto.dll</HintPath>

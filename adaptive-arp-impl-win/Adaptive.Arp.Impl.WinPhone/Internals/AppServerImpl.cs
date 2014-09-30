@@ -204,6 +204,10 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
                     // Assign content body (remaining stream).
                     request.httpContent = streamReader.BaseStream;
+                    if (request.httpMethod == "POST")
+                    {
+                        request.httpContent.Position = request.httpContent.Length - Convert.ToInt32(request.httpHeaders["Content-Length"]);
+                    }
 
                     // Response writer.
                     DataWriter dataWriter = new DataWriter(socket.OutputStream);
@@ -305,7 +309,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                                         try
                                         {
                                             toSend.httpContent.Flush();
-                                            Debug.WriteLine("Impl size {0}", toSend.httpContent.Length);
+                                            //Debug.WriteLine("Impl size {0}", toSend.httpContent.Length);
                                         }
                                         catch (Exception ex)
                                         {
