@@ -25,6 +25,7 @@ namespace Adaptive.Arp.Impl.WinPhone
         private AppRegistryImpl() : base()
         {
             this.ApplicationLifecycle = LifecycleImpl.Instance;
+            
         }
     }
 }

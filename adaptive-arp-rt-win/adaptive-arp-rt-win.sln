@@ -6,12 +6,22 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptive.Arp.Rt.WinPhone", "Adaptive.Arp.Rt.WinPhone\Adaptive.Arp.Rt.WinPhone.csproj", "{10E2823A-BFFD-4C54-A8DE-240B47C5AE41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptive.Arp.Rt.Windows", "Adaptive.Arp.Rt.Windows\Adaptive.Arp.Rt.Windows.csproj", "{CE06596A-912B-4372-B0F4-38D7D3367D70}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D27A8449-5314-4D4D-9C8C-55B3BAA6AB78} = {D27A8449-5314-4D4D-9C8C-55B3BAA6AB78}
+		{D0645498-72CE-4347-B28B-047B274684D3} = {D0645498-72CE-4347-B28B-047B274684D3}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptive.Arp.Impl", "..\adaptive-arp-impl-win\adaptive-arp-impl-win\Adaptive.Arp.Impl.csproj", "{D27A8449-5314-4D4D-9C8C-55B3BAA6AB78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptive.Arp.Impl.Windows", "..\adaptive-arp-impl-win\Adaptive.Arp.Impl.Windows\Adaptive.Arp.Impl.Windows.csproj", "{D0645498-72CE-4347-B28B-047B274684D3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D27A8449-5314-4D4D-9C8C-55B3BAA6AB78} = {D27A8449-5314-4D4D-9C8C-55B3BAA6AB78}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptive.Arp.Impl.WinPhone", "..\adaptive-arp-impl-win\Adaptive.Arp.Impl.WinPhone\Adaptive.Arp.Impl.WinPhone.csproj", "{B8A35761-83BC-4625-840A-32600B9E4FC1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D27A8449-5314-4D4D-9C8C-55B3BAA6AB78} = {D27A8449-5314-4D4D-9C8C-55B3BAA6AB78}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adaptive.Arp.Impl.WinPhoneSilverlight", "..\adaptive-arp-impl-win\Adaptive.Arp.Impl.WinPhoneSilverlight\Adaptive.Arp.Impl.WinPhoneSilverlight.csproj", "{2CCAD07B-5AD1-4A10-AA34-26A823E3E8AD}"
 EndProject

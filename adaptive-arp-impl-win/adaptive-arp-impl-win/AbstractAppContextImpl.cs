@@ -34,25 +34,13 @@ namespace Adaptive.Arp.Impl
     {
         private Object applicationContext;
         private IAppContext.Type applicationContextType;
-        private static IAppContext instance;
 
-        public static IAppContext Instance
+        protected AbstractAppContextImpl() : base()
         {
-            get
-            {
-                return AbstractAppContextImpl.instance;
-            }
+
         }
 
-        private AbstractAppContextImpl()
-        {
-            if (AbstractAppContextImpl.instance == null)
-            {
-                AbstractAppContextImpl.instance = this;
-            }
-        }
-
-        public AbstractAppContextImpl(object context, IAppContext.Type type) : this()
+        protected AbstractAppContextImpl(object context, IAppContext.Type type) : this()
         {
             this.applicationContext = context;
             this.applicationContextType = type;

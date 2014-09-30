@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="AbstractAccelerometerImpl.cs" />
     <Compile Include="AbstractAppContextImpl.cs" />
+    <Compile Include="AbstractAppContextWebviewImpl.cs" />
     <Compile Include="AbstractLifecycleImpl.cs" />
     <Compile Include="AppContextWebviewImpl.cs" />
     <Compile Include="AbstractAppRegistryImpl.cs" />

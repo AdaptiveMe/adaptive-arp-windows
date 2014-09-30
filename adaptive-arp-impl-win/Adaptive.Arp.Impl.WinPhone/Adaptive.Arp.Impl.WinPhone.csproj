@@ -87,8 +87,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppContextImpl.cs" />
+    <Compile Include="AppContextWebviewImpl.cs" />
     <Compile Include="AppRegistryImpl.cs" />
     <Compile Include="Appverse\AppverseBridge.cs" />
+    <Compile Include="Appverse\IOCookie.cs" />
+    <Compile Include="Appverse\IOEnumerations.cs" />
+    <Compile Include="Appverse\IOHeader.cs" />
+    <Compile Include="Appverse\IOHeaders.cs" />
+    <Compile Include="Appverse\IORequest.cs" />
+    <Compile Include="Appverse\IOResponse.cs" />
+    <Compile Include="Appverse\IOService.cs" />
+    <Compile Include="Appverse\IOServiceEndpoint.cs" />
+    <Compile Include="Appverse\IOSessionContext.cs" />
     <Compile Include="Internals\AppServerImpl.cs">
       <SubType>
       </SubType>

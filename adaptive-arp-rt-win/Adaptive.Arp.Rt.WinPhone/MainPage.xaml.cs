@@ -1,4 +1,6 @@
-﻿using Adaptive.Arp.Impl.WinPhone.Internals;
+﻿using Adaptive.Arp.Api;
+using Adaptive.Arp.Impl.WinPhone;
+using Adaptive.Arp.Impl.WinPhone.Internals;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,10 +30,12 @@ namespace Adaptive.Arp.Rt.WinPhone
     {
         // TODO: Replace with your URL here.
         private Uri HomeUri = null;
+        private IAppContextWebview webViewContext;
 
         public MainPage()
         {
             this.InitializeComponent();
+            (AppContextWebviewImpl.Instance as AppContextWebviewImpl).SetWebviewPrimary(this.WebViewControl);
             this.NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 

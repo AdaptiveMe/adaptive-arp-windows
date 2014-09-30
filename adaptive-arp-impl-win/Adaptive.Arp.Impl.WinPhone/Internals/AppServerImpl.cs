@@ -159,7 +159,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
         {
             try
             {
-                StreamReader streamReader = new StreamReader(inStream);
+                StreamReader streamReader = new StreamReader(inStream);            
                 AppServerRequestResponse request = new AppServerRequestResponse();
 
                 string readLine = streamReader.ReadLine();
@@ -202,12 +202,25 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                     } while (readLineHeader.Length > 0);
                     request.httpHeaders = headers;
 
-                    // Assign content body (remaining stream).
-                    request.httpContent = streamReader.BaseStream;
+
+                    MemoryStream bodyStream = new MemoryStream();
+                    StreamWriter bodyWriter = new StreamWriter(bodyStream);
+                    bodyWriter.Write(streamReader.ReadToEnd());
+                    bodyWriter.Flush();
+                    bodyStream.Position = 0;
+
+                    request.httpContent = bodyStream;
+                    /*
+                    string leftover = streamReader.ReadToEnd();
+
                     if (request.httpMethod == "POST")
                     {
-                        request.httpContent.Position = request.httpContent.Length - Convert.ToInt32(request.httpHeaders["Content-Length"]);
+                        if ((request.httpContent.Length - Convert.ToInt64(request.httpHeaders["Content-Length"])) >= 0)
+                        {
+                            request.httpContent.Position = request.httpContent.Length - Convert.ToInt64(request.httpHeaders["Content-Length"]);
+                        }
                     }
+                     */
 
                     // Response writer.
                     DataWriter dataWriter = new DataWriter(socket.OutputStream);
