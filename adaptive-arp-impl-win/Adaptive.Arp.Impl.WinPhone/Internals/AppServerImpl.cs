@@ -133,7 +133,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         byte[] readBuffer = new byte[dataReader.UnconsumedBufferLength];
                         dataReader.ReadBytes(readBuffer);
                         // Write buffer
-                        memoryStream.Write(readBuffer, 0, readBuffer.Length);
+                        await memoryStream.WriteAsync(readBuffer, 0, readBuffer.Length);
 
                         // Not full buffer, reached eof
                         if (readLength < readMaxBufferSize) readFinished = true;
@@ -148,7 +148,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                 if (readFinished == true)
                 {
                     // Flush stream and reset position to start.
-                    memoryStream.Flush();
+                    await memoryStream.FlushAsync();
                     memoryStream.Position = 0;
                     parseRequest(memoryStream, args.Socket);
                 }
@@ -185,6 +185,10 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         request.httpMethod = "OPTIONS";
                         request.httpUri = readLine.Substring(8);
                         request.httpUri = Regex.Replace(request.httpUri, " HTTP.*$", "");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("UNHANDLED METHOD {0}", readLine);
                     }
 
                     // Process request headers.
