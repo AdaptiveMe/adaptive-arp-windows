@@ -113,16 +113,16 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                 //StreamSocket socket = args.Socket;
                 DataReader dataReader = new DataReader(args.Socket.InputStream);
                 dataReader.InputStreamOptions = InputStreamOptions.Partial;
-
+                
                 // Temporary stream
                 MemoryStream memoryStream = new MemoryStream();
 
                 // Data dataReader flags and options
                 bool readFinished = false;
-                uint readMaxBufferSize = 4096;
+                uint readMaxBufferSize = 512;
 
                 while (!readFinished)
-                {
+                {                    
                     // await a full buffer or eof
                     await dataReader.LoadAsync(readMaxBufferSize);
 
@@ -148,7 +148,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                 if (readFinished == true)
                 {
                     // Flush stream and reset position to start.
-                    await memoryStream.FlushAsync();
+                    memoryStream.Flush();
                     memoryStream.Position = 0;
                     parseRequest(memoryStream, args.Socket);
                 }
@@ -159,7 +159,10 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
         {
             try
             {
-                StreamReader streamReader = new StreamReader(inStream);            
+                Debug.WriteLine("memoryStream Pos {0}, Len {1}", inStream.Position, inStream.Length);
+                StreamReader streamReader = new StreamReader(inStream, true);
+                
+                DataWriter dataWriter = new DataWriter(socket.OutputStream);
                 AppServerRequestResponse request = new AppServerRequestResponse();
 
                 string readLine = streamReader.ReadLine();
@@ -205,14 +208,28 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         }
                     } while (readLineHeader.Length > 0);
                     request.httpHeaders = headers;
-
+                    
+                    Debug.WriteLine("memoryStream2 Pos {0}, Len {1}", inStream.Position, inStream.Length);
 
                     MemoryStream bodyStream = new MemoryStream();
                     StreamWriter bodyWriter = new StreamWriter(bodyStream);
-                    bodyWriter.Write(streamReader.ReadToEnd());
+                    uint contentLen = Convert.ToUInt32(request.httpHeaders["Content-Length"]);
+                    while (!streamReader.EndOfStream)
+                    {
+                        bodyWriter.Write(streamReader.ReadLine());
+                    }
                     bodyWriter.Flush();
                     bodyStream.Position = 0;
-
+                    Debug.WriteLine("Header Len {0}", contentLen);
+                    Debug.WriteLine("httpContent Pos {0}, Len {1}", bodyStream.Position, bodyStream.Length);
+                    if (contentLen != bodyStream.Length)
+                    {
+                        Debug.WriteLine("     ******************************************* FUUU");
+                        Debug.WriteLine("        ******************************************* FUUU");
+                        Debug.WriteLine("           ******************************************* FUUU");
+                        Debug.WriteLine("        ******************************************* FUUU");
+                        Debug.WriteLine("     ******************************************* FUUU");
+                    }
                     request.httpContent = bodyStream;
                     /*
                     string leftover = streamReader.ReadToEnd();
@@ -225,9 +242,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         }
                     }
                      */
-
-                    // Response writer.
-                    DataWriter dataWriter = new DataWriter(socket.OutputStream);
 
                     // Process rules.
                     bool ruleFound = false;
