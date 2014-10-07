@@ -93,28 +93,27 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
         void listener_ConnectionReceived_HandleInMemory(StreamSocketListener sender, StreamSocketListenerConnectionReceivedEventArgs args)
         {
+            if (serverIsListening == false)
+            {
+                // If local server is not listening, ignore call.
+                return;
+            }
+
+            // Increment current count of processes being served.
+            lock (socketList)
+            {
+                concurrentCount++;
+                socketList.Add(args.Socket);
+            }
+
+
             Task.Run(async () =>
             {
-                if (serverIsListening == false)
-                {
-                    // If local server is not listening, ignore call.
-                    return;
-                }
-
-                // Increment current count of processes being served.
-                lock (socketList)
-                {
-                    concurrentCount++;
-                    socketList.Add(args.Socket);
-                }
-
-
-
                 // Socket reader
                 //StreamSocket socket = args.Socket;
                 DataReader dataReader = new DataReader(args.Socket.InputStream);
                 dataReader.InputStreamOptions = InputStreamOptions.Partial;
-
+                
                 // Temporary stream
                 MemoryStream memoryStream = new MemoryStream();
 
@@ -123,7 +122,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                 uint readMaxBufferSize = 512;
 
                 while (!readFinished)
-                {
+                {                    
                     // await a full buffer or eof
                     await dataReader.LoadAsync(readMaxBufferSize);
 
@@ -230,7 +229,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         Debug.WriteLine("           ******************************************* FUUU");
                         Debug.WriteLine("        ******************************************* FUUU");
                         Debug.WriteLine("     ******************************************* FUUU");
-                        Debug.WriteLine("     ******************************************* {0} {1}", request.httpMethod, request.httpUri);
                     }
                     request.httpContent = bodyStream;
                     /*
@@ -463,7 +461,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
             bool serverInitializing = false;
 
             serverListener = new StreamSocketListener();
-            serverListener.Control.QualityOfService = SocketQualityOfService.LowLatency;
             serverListener.ConnectionReceived += listener_ConnectionReceived_HandleInMemory;
 
             while (!serverIsListening)
