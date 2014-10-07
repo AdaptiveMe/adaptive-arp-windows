@@ -222,23 +222,9 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         Debug.WriteLine("Header Len {0}", contentLen);
                         Debug.WriteLine("httpContent Pos {0}, Len {1}", bodyStream.Position, bodyStream.Length);
                         Debug.WriteLine("     ******************************************* FUUU");
-                        Debug.WriteLine("        ******************************************* FUUU");
-                        Debug.WriteLine("           ******************************************* FUUU");
-                        Debug.WriteLine("        ******************************************* FUUU");
-                        Debug.WriteLine("     ******************************************* FUUU");
+
                     }
                     request.httpContent = bodyStream;
-                    /*
-                    string leftover = streamReader.ReadToEnd();
-
-                    if (request.httpMethod == "POST")
-                    {
-                        if ((request.httpContent.Length - Convert.ToInt64(request.httpHeaders["Content-Length"])) >= 0)
-                        {
-                            request.httpContent.Position = request.httpContent.Length - Convert.ToInt64(request.httpHeaders["Content-Length"]);
-                        }
-                    }
-                     */
 
                     // Process rules.
                     bool ruleFound = false;

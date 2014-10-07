@@ -391,10 +391,9 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     }
                 }
             });
-            task.RunSynchronously();
-            task.Wait();
+            task.Start();
+            task.Wait(5000);
             newResponse.httpContent = responseStream;
-
             return newResponse;
         }
 
