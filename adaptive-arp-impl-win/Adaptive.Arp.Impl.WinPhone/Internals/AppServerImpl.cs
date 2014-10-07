@@ -159,7 +159,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
         {
             try
             {
-                Debug.WriteLine("memoryStream Pos {0}, Len {1}", inStream.Position, inStream.Length);
                 StreamReader streamReader = new StreamReader(inStream, true);
                 
                 DataWriter dataWriter = new DataWriter(socket.OutputStream);
@@ -209,8 +208,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                     } while (readLineHeader.Length > 0);
                     request.httpHeaders = headers;
                     
-                    Debug.WriteLine("memoryStream2 Pos {0}, Len {1}", inStream.Position, inStream.Length);
-
                     MemoryStream bodyStream = new MemoryStream();
                     StreamWriter bodyWriter = new StreamWriter(bodyStream);
                     uint contentLen = Convert.ToUInt32(request.httpHeaders["Content-Length"]);
@@ -220,10 +217,10 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                     }
                     bodyWriter.Flush();
                     bodyStream.Position = 0;
-                    Debug.WriteLine("Header Len {0}", contentLen);
-                    Debug.WriteLine("httpContent Pos {0}, Len {1}", bodyStream.Position, bodyStream.Length);
                     if (contentLen != bodyStream.Length)
                     {
+                        Debug.WriteLine("Header Len {0}", contentLen);
+                        Debug.WriteLine("httpContent Pos {0}, Len {1}", bodyStream.Position, bodyStream.Length);
                         Debug.WriteLine("     ******************************************* FUUU");
                         Debug.WriteLine("        ******************************************* FUUU");
                         Debug.WriteLine("           ******************************************* FUUU");
