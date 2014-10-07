@@ -104,7 +104,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     string jsCallbackFunction = "try{if(" + callbackFunction + "){" + callbackFunction + "(" +  JsonConvert.SerializeObject(jsonResultObject, settings) + ", '" + callbackId + "');}}catch(e) {console.log('error executing javascript callback: ' + e)}";
                     Task.Factory.StartNew(async () =>
                     {
-                        await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
+                        await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
                         {
                             IAsyncOperation<string> result = (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).InvokeScriptAsync("eval", new string[1] { jsCallbackFunction });
                             result.Completed = new AsyncOperationCompletedHandler<string>((operation, status) =>
@@ -184,7 +184,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 string jsCallbackFunction = "try{if(" + callbackFunction + "){" + callbackFunction + "(" + jsonResultString + ", '" + callbackId + "');}}catch(e) {console.log('error executing javascript callback: ' + e)}";
                 Task.Factory.StartNew(async () =>
                 {
-                    await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
+                    await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
                     {
                         IAsyncOperation<string> result = (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).InvokeScriptAsync("eval", new string[1] { jsCallbackFunction });
                         result.Completed = new AsyncOperationCompletedHandler<string>((operation, status) =>
@@ -249,7 +249,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 string jsCallbackFunction = "try{if(" + callbackFunction + "){" + callbackFunction + "(" + jsonResultString + ", '" + callbackId + "');}}catch(e) {console.log('error executing javascript callback: ' + e)}";
                 Task.Factory.StartNew(async () =>
                 {
-                    await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Idle, () =>
+                    await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
                     {
                         IAsyncOperation<string> result = (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).InvokeScriptAsync("eval", new string[1] { jsCallbackFunction });
                         result.Completed = new AsyncOperationCompletedHandler<string>((operation, status) =>
