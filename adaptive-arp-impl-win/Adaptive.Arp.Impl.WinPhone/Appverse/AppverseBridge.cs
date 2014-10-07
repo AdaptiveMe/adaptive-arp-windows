@@ -314,21 +314,20 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 Debug.WriteLine("API Request: {0} {1}", request.httpMethod, request.httpUri);
                 if (request.httpMethod == "OPTIONS")
                 {
-                    //Debug.WriteLine("----------------------------------------------");
-                    //Debug.WriteLine("Request: {0} {1}" + request.httpMethod, request.httpUri);
+                    /*
+                    Debug.WriteLine("----------------------------------------------");
+                    Debug.WriteLine("Request: {0} {1}" + request.httpMethod, request.httpUri);
                     foreach (string key in request.httpHeaders.Keys)
                     {
                         //Debug.WriteLine("Key: {0}  Value: {1}", key, request.httpHeaders[key]);
                     }
                     Debug.WriteLine("----------------------------------------------");
-                    
+                    */
                     newResponse.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
                     newResponse.httpHeaders.Add("Access-Control-Allow-Methods", request.httpHeaders["Access-Control-Request-Method"]);
                     newResponse.httpHeaders.Add("Access-Control-Allow-Headers", request.httpHeaders["Access-Control-Request-Headers"]);
                     newResponse.httpHeaders.Add("Access-Control-Allow-Credentials", "true");
                     newResponse.httpHeaders.Add("Access-Control-Max-Age", ""+(24*60*60*1000));
-                    //newResponse.httpHeaders.Add("Access-Control-Allow-Headers", "");
-                    //newResponse.httpHeaders.Add("Access-Control-Allow-Headers", "");
                     newResponse.httpHeaders.Add("Connection", "close");
                     newResponse.httpHeaders.Add("Pragma", "no-cache");
                     await dataWriter.FlushAsync();
@@ -340,12 +339,15 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     bool mappingFound = false;
                     if (appverseFunctions != null)
                     {
-                        //newResponse.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
-                        //newResponse.httpHeaders.Add("Access-Control-Allow-Method", "POST");
-                        //newResponse.httpHeaders.Add("Access-Control-Allow-Headers", request.httpHeaders["Access-Control-Request-Headers"]);                        
-                        //newResponse.httpHeaders.Add("Content-Type", "application/json");
-                        //newResponse.httpHeaders.Add("Connection", "close");
-                        //newResponse.httpHeaders.Add("Pragma", "no-cache");
+                        newResponse.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
+                        newResponse.httpHeaders.Add("Access-Control-Allow-Method", "POST");
+                        newResponse.httpHeaders.Add("Access-Control-Allow-Headers", "content-type");//"request.httpHeaders["Access-Control-Request-Headers"]);                        
+                        newResponse.httpHeaders.Add("Access-Control-Allow-Credentials", "true");
+                        newResponse.httpHeaders.Add("Access-Control-Max-Age", "" + (24 * 60 * 60 * 1000));
+                        newResponse.httpHeaders.Add("Content-Type", "application/json; charset=utf-8");
+                        newResponse.httpHeaders.Add("Connection", "close");
+                        newResponse.httpHeaders.Add("Pragma", "no-cache");
+
                        
                         foreach (Regex function in appverseFunctions.Keys)
                         {
@@ -355,16 +357,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                                 try
                                 {
                                     request.httpContent.Position = 0;
-                                    AppServerRequestResponse toSend = await appverseFunctions[function](responseStream, newResponse, request);
-                                    toSend.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
-                                    toSend.httpHeaders.Add("Access-Control-Allow-Method", "POST");
-                                    toSend.httpHeaders.Add("Access-Control-Allow-Headers", "content-type");//"request.httpHeaders["Access-Control-Request-Headers"]);                        
-                                    toSend.httpHeaders.Add("Access-Control-Allow-Credentials", "true");
-                                    toSend.httpHeaders.Add("Access-Control-Max-Age", "" + (24 * 60 * 60 * 1000));
-                                    toSend.httpHeaders.Add("Content-Type", "application/json; charset=utf-8");
-                                    toSend.httpHeaders.Add("Connection", "close");
-                                    toSend.httpHeaders.Add("Pragma", "no-cache");
-                                    
+                                    AppServerRequestResponse toSend = await appverseFunctions[function](responseStream, newResponse, request);                                    
                                     mappingFound = true;
                                 }
                                 catch (Exception ex)
@@ -402,8 +395,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             Task.Factory.StartNew(async () =>
             {
                 string jsCallbackFunction = "try{if(" + callbackFunction + "){" + callbackFunction + "(" + jsonResultString + ", '" + callbackId + "');}}catch(e) {console.log('error executing javascript callback: ' + e)}";
-                await Task.Delay(1000);
-                await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+                //await Task.Delay(1000);
+                await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
                 {
                     IAsyncOperation<string> result = (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).InvokeScriptAsync("eval", new string[1] { jsCallbackFunction });
                     result.Completed = new AsyncOperationCompletedHandler<string>((operation, status) =>
