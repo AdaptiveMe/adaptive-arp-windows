@@ -91,6 +91,12 @@
     <Compile Include="AppContextWebviewImpl.cs" />
     <Compile Include="AppRegistryImpl.cs" />
     <Compile Include="Appverse\AppverseBridge.cs" />
+    <Compile Include="Appverse\Contact.cs" />
+    <Compile Include="Appverse\ContactAddress.cs" />
+    <Compile Include="Appverse\ContactEmail.cs" />
+    <Compile Include="Appverse\ContactLite.cs" />
+    <Compile Include="Appverse\ContactPhone.cs" />
+    <Compile Include="Appverse\HardwareInfo.cs" />
     <Compile Include="Appverse\IOCookie.cs" />
     <Compile Include="Appverse\IOEnumerations.cs" />
     <Compile Include="Appverse\IOHeader.cs" />
@@ -100,6 +106,9 @@
     <Compile Include="Appverse\IOService.cs" />
     <Compile Include="Appverse\IOServiceEndpoint.cs" />
     <Compile Include="Appverse\IOSessionContext.cs" />
+    <Compile Include="Appverse\OSInfo.cs" />
+    <Compile Include="Appverse\PimEnumerations.cs" />
+    <Compile Include="Appverse\SecurityKeyPair.cs" />
     <Compile Include="Internals\AppServerImpl.cs">
       <SubType>
       </SubType>
