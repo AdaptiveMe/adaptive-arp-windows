@@ -104,6 +104,7 @@
     <Compile Include="Appverse\IORequest.cs" />
     <Compile Include="Appverse\IOResponse.cs" />
     <Compile Include="Appverse\IOService.cs" />
+    <Compile Include="Appverse\IOServiceConfig.cs" />
     <Compile Include="Appverse\IOServiceEndpoint.cs" />
     <Compile Include="Appverse\IOSessionContext.cs" />
     <Compile Include="Appverse\OSInfo.cs" />

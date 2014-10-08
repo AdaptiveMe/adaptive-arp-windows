@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace Adaptive.Arp.Impl.WinPhone.Appverse
 {
-	[XmlRootAttribute("service", Namespace = "", IsNullable = false)]
+    [XmlRoot(ElementName = "service")]
 	public class IOService
 	{
 		[XmlAttributeAttribute(AttributeName = "name", DataType = "string")]

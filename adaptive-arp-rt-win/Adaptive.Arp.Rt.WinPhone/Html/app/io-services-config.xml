@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<io-services-config>
+    <services>      
+        <service name="mockServer" type="XMLRPC_JSON">
+            <end-point host="http://156.54.155.74:8080" path="/p2pMobileServer_mock" /> 
+        </service>
+        <service name="server_DEV" type="XMLRPC_JSON">
+            <end-point host="http://156.54.155.74:7008" path="/p2pMobileServer_1" /> 
+        </service>
+        <service name="mockServerBackup" type="XMLRPC_JSON">
+            <end-point host="http://172.20.10.53:8090" path="/p2pMobileServer_1" /> 
+        </service>
+        <service name="server_SIT" type="XMLRPC_JSON">
+            <end-point host="https://tst.vaservices.eu:1443" path="/sit-p2pMobileServer_1" /><!-- sit-p2pMobileServer_1 -->
+        </service>
+        <service name="server_UAT" type="XMLRPC_JSON">
+            <end-point host="https://tst.vaservices.eu:1443" path="/p2pMobileServer_1" />
+        </service>
+        <service name="server_PROD" type="XMLRPC_JSON">
+            <end-point host="https://web.vaservices.eu:1443" path="/p2pMobileServer_1" />
+        </service>
+
+    </services>
+    <!-- include here any other service your application might require -->
+</io-services-config>

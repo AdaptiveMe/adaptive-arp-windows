@@ -1,4 +1,5 @@
-﻿using Adaptive.Arp.Impl.WinPhone.Internals;
+﻿using Adaptive.Arp.Impl.Util;
+using Adaptive.Arp.Impl.WinPhone.Internals;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using Windows.ApplicationModel.Core;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Security.ExchangeActiveSyncProvisioning;
+using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.System.Profile;
 using Windows.UI.Core;
@@ -257,6 +262,50 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         private async Task<AppServerRequestResponse> AppverseGetService(Stream responseStream, AppServerRequestResponse response, AppServerRequestResponse request)
         {
             DataWriter dataWriter = new DataWriter(responseStream.AsOutputStream());
+            DataReader dataReader = new DataReader(request.httpContent.AsInputStream());
+            dataReader.InputStreamOptions = InputStreamOptions.Partial;
+            bool readFinished = false;
+            uint readMaxBufferSize = 1024;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while (!readFinished)
+            {
+                await dataReader.LoadAsync(readMaxBufferSize);
+                if (dataReader.UnconsumedBufferLength > 0)
+                {
+                    uint readLength = dataReader.UnconsumedBufferLength;
+                    byte[] readBuffer = new byte[dataReader.UnconsumedBufferLength];
+                    dataReader.ReadBytes(readBuffer);
+                    stringBuilder.Append(Encoding.UTF8.GetString(readBuffer, 0, readBuffer.Length));
+                    if (readLength < readMaxBufferSize) readFinished = true;
+                }
+                else
+                {
+                    readFinished = true;
+                }
+            }
+
+            WwwFormUrlDecoder decoder = new WwwFormUrlDecoder(stringBuilder.ToString());
+            string jsonRequestString = decoder.GetFirstValueByName("json");
+            var requestParams =  new { param1 = "" };
+            var requestObject = JsonConvert.DeserializeAnonymousType(jsonRequestString, requestParams);
+            Debug.WriteLine("GetService: {0}", requestObject.param1);
+            XmlAttributes atts = new XmlAttributes();
+            atts.Xmlns = false;
+
+            XmlAttributeOverrides xover = new XmlAttributeOverrides();
+            xover.Add(typeof(IOServicesConfig), "", atts);
+            XmlSerializer serializer = new XmlSerializer(typeof(IOServicesConfig), xover);
+            string servicesConfigXml = await LoadResource("app/io-services-config.xml");
+            IOServicesConfig servicesConfig = (IOServicesConfig)serializer.Deserialize(new MemoryStream(StringUtils.GetBytes(servicesConfigXml)));
+
+            
+            /*
+            XDocument xdoc = XDocument.Parse(await LoadResource("config/io-services-config.xml"));
+
+            string jsonConfig = JsonConvert.SerializeXNode(xdoc, Formatting.None, true);
+            Debug.WriteLine("GetService: {0}", jsonConfig);
+            */
             dataWriter.WriteString("{\"Name\":\"server_SIT\",\"Type\":4,\"Endpoint\":{\"Scheme\":null,\"Host\":\"https://tst.vaservices.eu:1443\",\"Port\":0,\"Path\":\"/sit-p2pMobileServer_1\",\"ProxyUrl\":null},\"RequestMethod\":0}");
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
@@ -445,6 +494,36 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     });
                 });
             });
+        }
+
+        private async static Task<string> LoadResource(string path)
+        {
+            Uri localUri = new Uri("ms-appx:///Html/"+path);
+            StorageFile f = await StorageFile.GetFileFromApplicationUriAsync(localUri);
+            IRandomAccessStream stream = await f.OpenAsync(FileAccessMode.Read);
+            DataReader dataReader = new DataReader(stream);
+            dataReader.InputStreamOptions = InputStreamOptions.Partial;
+            bool readFinished = false;
+            uint readMaxBufferSize = 1024;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while (!readFinished)
+            {
+                await dataReader.LoadAsync(readMaxBufferSize);
+                if (dataReader.UnconsumedBufferLength > 0)
+                {
+                    uint readLength = dataReader.UnconsumedBufferLength;
+                    byte[] readBuffer = new byte[dataReader.UnconsumedBufferLength];
+                    dataReader.ReadBytes(readBuffer);
+                    stringBuilder.Append(Encoding.UTF8.GetString(readBuffer, 0, readBuffer.Length));
+                    if (readLength < readMaxBufferSize) readFinished = true;
+                }
+                else
+                {
+                    readFinished = true;
+                }
+            }
+            return stringBuilder.ToString();
         }
     }
 }

@@ -116,6 +116,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityImpl.cs" />
     <Compile Include="Util\MimetypeResolver.cs" />
+    <Compile Include="Util\StringUtils.cs" />
     <Compile Include="Util\TimeUtils.cs" />
   </ItemGroup>
   <ItemGroup>
