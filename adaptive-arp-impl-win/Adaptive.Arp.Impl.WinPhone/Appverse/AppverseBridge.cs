@@ -1,4 +1,5 @@
-﻿using Adaptive.Arp.Impl.WinPhone.Internals;
+﻿using Adaptive.Arp.Impl.Util;
+using Adaptive.Arp.Impl.WinPhone.Internals;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using Windows.ApplicationModel.Core;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
+using Windows.Security.ExchangeActiveSyncProvisioning;
+using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.System.Profile;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -49,7 +58,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             DataWriter dataWriter = new DataWriter(responseStream.AsOutputStream());
             DataReader dataReader = new DataReader(request.httpContent.AsInputStream());
             dataReader.InputStreamOptions = InputStreamOptions.Partial;
-
             bool readFinished = false;
             uint readMaxBufferSize = 1024;
             StringBuilder stringBuilder = new StringBuilder();
@@ -100,23 +108,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     settings.StringEscapeHandling = StringEscapeHandling.EscapeHtml;
                     IOResponse jsonResultObject = JsonConvert.DeserializeObject<IOResponse>(jsonResultString);
                     jsonResultObject.Content = jsonContent;
-                    
-                    string jsCallbackFunction = "try{if(" + callbackFunction + "){" + callbackFunction + "(" +  JsonConvert.SerializeObject(jsonResultObject, settings) + ", '" + callbackId + "');}}catch(e) {console.log('error executing javascript callback: ' + e)}";
-                    Task.Run(async () =>
-                    {
-                        await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                        {
-                            IAsyncOperation<string> result = (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).InvokeScriptAsync("eval", new string[1] { jsCallbackFunction });
-                            result.Completed = new AsyncOperationCompletedHandler<string>((operation, status) =>
-                            { 
-                                Debug.WriteLine("Completed: '{0}'  Status: {1}  Result: {2}", callbackFunction, operation.Status, operation.ErrorCode);
-                                if (operation.Status == AsyncStatus.Completed)
-                                {
-                                    Debug.WriteLine("Result: {0}", operation.GetResults());
-                                }
-                            });
-                        });
-                    });
+                    jsonResultString = JsonConvert.SerializeObject(jsonResultObject, settings);
+                    AppverseBridge.InvokeCallback(callbackFunction, callbackId, jsonResultString);
                 }
                 else
                 {
@@ -130,38 +123,26 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
         private async Task<AppServerRequestResponse> AppverseListContacts(Stream responseStream, AppServerRequestResponse response, AppServerRequestResponse request)
         {
-            Debug.WriteLine("Stream Pos {0}, Len {1}", request.httpContent.Position, request.httpContent.Length);
             DataWriter dataWriter = new DataWriter(responseStream.AsOutputStream());
             DataReader dataReader = new DataReader(request.httpContent.AsInputStream());
             dataReader.InputStreamOptions = InputStreamOptions.Partial;
-            // Data dataReader flags and options
             bool readFinished = false;
             uint readMaxBufferSize = 1024;
             StringBuilder stringBuilder = new StringBuilder();
-            Debug.WriteLine("Waypoint {0}", 1);
+
             while (!readFinished)
             {
-                Debug.WriteLine("Waypoint {0}", 2);
-                Debug.WriteLine("Stream Pos {0}, Len {1}", request.httpContent.Position, request.httpContent.Length);
                 await dataReader.LoadAsync(readMaxBufferSize);
-                Debug.WriteLine("Waypoint {0}", 3);
-                Debug.WriteLine("Stream Pos {0}, Len {1}", request.httpContent.Position, request.httpContent.Length);
                 if (dataReader.UnconsumedBufferLength > 0)
                 {
-                    Debug.WriteLine("Waypoint {0}", 4);
                     uint readLength = dataReader.UnconsumedBufferLength;
-                    Debug.WriteLine("Waypoint {0}", 5);
                     byte[] readBuffer = new byte[dataReader.UnconsumedBufferLength];
-                    Debug.WriteLine("Waypoint {0}", 6);
                     dataReader.ReadBytes(readBuffer);
-                    Debug.WriteLine("Waypoint {0}", 7);
                     stringBuilder.Append(Encoding.UTF8.GetString(readBuffer, 0, readBuffer.Length));
-                    Debug.WriteLine("Waypoint {0}", 8);
                     if (readLength < readMaxBufferSize) readFinished = true;
                 }
                 else
                 {
-                    Debug.WriteLine("Waypoint {0}", 9);
                     readFinished = true;
                 }
             }
@@ -177,27 +158,15 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 callbackFunction = decoder.GetFirstValueByName("callback");
                 callbackId = decoder.GetFirstValueByName("callbackid");
                 jsonRequestString = decoder.GetFirstValueByName("json");
-
                 if (callbackFunction == null || callbackFunction == "NULL") callbackFunction = "Appverse.Pim.onListContactsEnd";
                 Debug.WriteLine("callback: {0}   callbackid: {1}   json: {2}", callbackFunction, callbackId, jsonRequestString);
-                string jsonResultString = "{\"0\":[{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"2\",\"Name\":\"Alberto\",\"Firstname\":null,\"Lastname\":\"Rossi\",\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"611252361\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"3\",\"Name\":\"Emanuele Seregni\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Emanuele Seregni\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"600259612\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"4\",\"Name\":\"Alessandra Neri\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Marga GFT\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3354122311\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"5\",\"Name\":\"Phillip Lahm\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Phillip Lahm\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"33215635\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"6\",\"Name\":\"Ernst Tarabh\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Ernst Tarabh\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"06 8200 4437\",\"IsPrimary\":true},{\"Type\":0,\"Number\":\"55396061\",\"IsPrimary\":false},{\"Type\":0,\"Number\":\"55396262\",\"IsPrimary\":false}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"7\",\"Name\":\"Laura Pause\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"JuanGFT\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3206655213\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"8\",\"Name\":\"Gart Newmon\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Gart Newmon\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"06 8211 4437\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"9\",\"Name\":\"Celia Varese\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Celia Varese\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"85421326\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"10\",\"Name\":\"John Decon\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"John Decon\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"555236541\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"11\",\"Name\":\"john\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"jo\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"677444521\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"12\",\"Name\":\"john\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"302444521\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"13\",\"Name\":\"john22\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"23515521\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"14\",\"Name\":\"john KD\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"30234156\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"15\",\"Name\":\"ADOOjohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"316874112\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"16\",\"Name\":\"johnJU\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"4559632417\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"17\",\"Name\":\"johnws\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3222659854\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"18\",\"Name\":\"johnY\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"4011250366\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"19\",\"Name\":\"Kiola\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3126814536\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"20\",\"Name\":\"sue\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"023541635\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"21\",\"Name\":\"tohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"112552621\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"22\",\"Name\":\"buemi\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"122263589\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"23\",\"Name\":\"sohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"1292874382\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"24\",\"Name\":\"yohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"5223949552\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"25\",\"Name\":\"zohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"1222968852\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"26\",\"Name\":\"estaGFT\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3284007991\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"27\",\"Name\":\"kohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"4712544225\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"28\",\"Name\":\"qohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"9888922385\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"29\",\"Name\":\"wohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"411125442\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"30\",\"Name\":\"Clemente\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3913287575\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"34\",\"Name\":\"Clemente2\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3913287575\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"35\",\"Name\":\"Clemente3\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3913287575\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"31\",\"Name\":\"Samuele\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3395098623\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"32\",\"Name\":\"Andrea\",\"Firstname\":null,\"Lastname\":\"Gotti\",\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3401461939\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"40\",\"Name\":\"APendingPayments\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"+393999999998\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]}]}";
-                string jsCallbackFunction = "try{if(" + callbackFunction + "){" + callbackFunction + "(" + jsonResultString + ", '" + callbackId + "');}}catch(e) {console.log('error executing javascript callback: ' + e)}";
-                Task.Run(async () => {
-                    await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        IAsyncOperation<string> result = (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).InvokeScriptAsync("eval", new string[1] { jsCallbackFunction });
-                        result.Completed = new AsyncOperationCompletedHandler<string>((operation, status) =>
-                        {
-                            Debug.WriteLine("Completed: '{0}'  Status: {1}  Result: {2}", callbackFunction, operation.Status, operation.ErrorCode);
-                            if (operation.Status == AsyncStatus.Completed)
-                            {
-                                Debug.WriteLine("Result: {0}", operation.GetResults());
-                            }
-                        });
-                    });
-                });
+                // TODO: Mock data. Populate contact list here.
+                string jsonResultString = "[{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"2\",\"Name\":\"Alberto\",\"Firstname\":null,\"Lastname\":\"Rossi\",\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"611252361\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"3\",\"Name\":\"Emanuele Seregni\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Emanuele Seregni\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"600259612\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"4\",\"Name\":\"Alessandra Neri\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Marga GFT\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3354122311\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"5\",\"Name\":\"Phillip Lahm\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Phillip Lahm\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"33215635\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"6\",\"Name\":\"Ernst Tarabh\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Ernst Tarabh\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"06 8200 4437\",\"IsPrimary\":true},{\"Type\":0,\"Number\":\"55396061\",\"IsPrimary\":false},{\"Type\":0,\"Number\":\"55396262\",\"IsPrimary\":false}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"7\",\"Name\":\"Laura Pause\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"JuanGFT\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3206655213\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"8\",\"Name\":\"Gart Newmon\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Gart Newmon\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"06 8211 4437\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"9\",\"Name\":\"Celia Varese\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"Celia Varese\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"85421326\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"10\",\"Name\":\"John Decon\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"John Decon\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"555236541\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"11\",\"Name\":\"john\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":\"jo\",\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"677444521\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"12\",\"Name\":\"john\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"302444521\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"13\",\"Name\":\"john22\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"23515521\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"14\",\"Name\":\"john KD\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"30234156\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"15\",\"Name\":\"ADOOjohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"316874112\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"16\",\"Name\":\"johnJU\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"4559632417\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"17\",\"Name\":\"johnws\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3222659854\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"18\",\"Name\":\"johnY\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"4011250366\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"19\",\"Name\":\"Kiola\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3126814536\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"20\",\"Name\":\"sue\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"023541635\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"21\",\"Name\":\"tohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"112552621\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"22\",\"Name\":\"buemi\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"122263589\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"23\",\"Name\":\"sohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"1292874382\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"24\",\"Name\":\"yohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"5223949552\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"25\",\"Name\":\"zohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"1222968852\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"26\",\"Name\":\"estaGFT\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3284007991\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"27\",\"Name\":\"kohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"4712544225\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"28\",\"Name\":\"qohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"9888922385\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"29\",\"Name\":\"wohn\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"411125442\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"30\",\"Name\":\"Clemente\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3913287575\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"34\",\"Name\":\"Clemente2\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3913287575\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"35\",\"Name\":\"Clemente3\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3913287575\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"31\",\"Name\":\"Samuele\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3395098623\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"32\",\"Name\":\"Andrea\",\"Firstname\":null,\"Lastname\":\"Gotti\",\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"3401461939\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]},{\"Company\":null,\"JobTitle\":\"director\",\"Department\":null,\"WebSites\":null,\"Notes\":null,\"Relationship\":0,\"Addresses\":[{\"Type\":2,\"Address\":\"adrddsd\",\"AddressNumber\":null,\"PostCode\":\"08389\",\"City\":\"terrassa\",\"Country\":\"esp\"}],\"Photo\":null,\"PhotoBase64Encoded\":null,\"ID\":\"40\",\"Name\":\"APendingPayments\",\"Firstname\":null,\"Lastname\":null,\"DisplayName\":null,\"Group\":null,\"Phones\":[{\"Type\":0,\"Number\":\"+393999999998\",\"IsPrimary\":true}],\"Emails\":[{\"Type\":2,\"IsPrimary\":false,\"Firstname\":null,\"Surname\":null,\"CommonName\":\"commonName\",\"Address\":\"guu@gmail.com\"}]}]";
+                List<Contact> contactList = JsonConvert.DeserializeObject<List<Contact>>(jsonResultString);
+                
+                AppverseBridge.InvokeCallback(callbackFunction, callbackId, JsonConvert.SerializeObject(contactList));
             }
-            dataWriter.WriteString("");
+            
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
             return response;
@@ -241,29 +210,14 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 callbackFunction = decoder.GetFirstValueByName("callback");
                 callbackId = decoder.GetFirstValueByName("callbackid");
                 jsonRequestString = decoder.GetFirstValueByName("json");
-
                 if (callbackFunction == null || callbackFunction == "NULL") callbackFunction = "Appverse.OnKeyValuePairsStoreCompleted";
                 Debug.WriteLine("callback: {0}   callbackid: {1}   json: {2}", callbackFunction, callbackId, jsonRequestString);
-                string jsonResultString = "{\"0\":[{\"Key\":\"UBI_USERNAME\",\"Value\":\"12020990\"},{\"Key\":\"UBI_DEVICE_UNIQUE_ID\",\"Value\":\"20755j17506dpgc8l3i4ea39sf2e4hi\"},{\"Key\":\"UBI_INSTITUTION_CODE\",\"Value\":\"05428\"},{\"Key\":\"UBI_REMEMBER_USER\",\"Value\":\"1\"},{\"Key\":\"UBI_SKIP_TUTORIAL\",\"Value\":\"0\"},{\"Key\":\"UBI_NFC_COUNTDOWN\",\"Value\":\"30\"},{\"Key\":\"UBI_FAV_CONTACTS\",\"Value\":\"[]\"},{\"Key\":\"UBI_UNFAV_CONTACTS\",\"Value\":\"[]\"},{\"Key\":\"UBI_ENABLE_WIDGET\",\"Value\":\"0\"}],\"1\":[]}";
-                string jsCallbackFunction = "try{if(" + callbackFunction + "){" + callbackFunction + "(" + jsonResultString + ", '" + callbackId + "');}}catch(e) {console.log('error executing javascript callback: ' + e)}";
-                Task.Run(async () =>
-                {
-                    (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                    {
-                        IAsyncOperation<string> result = (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).InvokeScriptAsync("eval", new string[1] { jsCallbackFunction });
-                        result.Completed = new AsyncOperationCompletedHandler<string>((operation, status) =>
-                        {
-                            Debug.WriteLine("Completed: '{0}'  Status: {1}  Result: {2}", callbackFunction, operation.Status, operation.ErrorCode);
-                            if (operation.Status == AsyncStatus.Completed)
-                            {
-                                Debug.WriteLine("Result: {0}", operation.GetResults());
-                            }
-                        });
-                    });
-                });
+                // TODO: Mock data. Implement KeyPair here.
+                string jsonResultString = "[{\"Key\":\"UBI_USERNAME\",\"Value\":\"12020990\"},{\"Key\":\"UBI_DEVICE_UNIQUE_ID\",\"Value\":\"20755j17506dpgc8l3i4ea39sf2e4hi\"},{\"Key\":\"UBI_INSTITUTION_CODE\",\"Value\":\"05428\"},{\"Key\":\"UBI_REMEMBER_USER\",\"Value\":\"1\"},{\"Key\":\"UBI_SKIP_TUTORIAL\",\"Value\":\"0\"},{\"Key\":\"UBI_NFC_COUNTDOWN\",\"Value\":\"30\"},{\"Key\":\"UBI_FAV_CONTACTS\",\"Value\":\"[]\"},{\"Key\":\"UBI_UNFAV_CONTACTS\",\"Value\":\"[]\"},{\"Key\":\"UBI_ENABLE_WIDGET\",\"Value\":\"0\"}]";
+                List<SecurityKeyPair> securityKeyPairList = JsonConvert.DeserializeObject<List<SecurityKeyPair>>(jsonResultString);
+                
+                AppverseBridge.InvokeCallback(callbackFunction, callbackId, JsonConvert.SerializeObject(securityKeyPairList));
             }
-            
-            dataWriter.WriteString("");
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
             return response;
@@ -299,7 +253,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         private async Task<AppServerRequestResponse> AppverseGetUnityContext(Stream responseStream, AppServerRequestResponse response, AppServerRequestResponse request)
         {
             DataWriter dataWriter = new DataWriter(responseStream.AsOutputStream());
-            dataWriter.WriteString("{\"Emulator\":false,\"EmulatorOrientation\":0,\"EmulatorScreen\":\"{height:1232,widht:720}\",\"Windows\":false,\"iPod\":false,\"iPad\":false,\"iPhone\":true,\"Android\":true,\"Blackberry\":false,\"TabletDevice\":false,\"Tablet\":false,\"Phone\":true,\"iOS\":false}");
+            dataWriter.WriteString("{\"Emulator\":false,\"EmulatorOrientation\":0,\"EmulatorScreen\":\"{height:1232,widht:720}\",\"Windows\":true,\"iPod\":false,\"iPad\":false,\"iPhone\":false,\"Android\":false,\"Blackberry\":false,\"TabletDevice\":false,\"Tablet\":false,\"Phone\":true,\"iOS\":false}");
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
             return response;
@@ -308,6 +262,50 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         private async Task<AppServerRequestResponse> AppverseGetService(Stream responseStream, AppServerRequestResponse response, AppServerRequestResponse request)
         {
             DataWriter dataWriter = new DataWriter(responseStream.AsOutputStream());
+            DataReader dataReader = new DataReader(request.httpContent.AsInputStream());
+            dataReader.InputStreamOptions = InputStreamOptions.Partial;
+            bool readFinished = false;
+            uint readMaxBufferSize = 1024;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while (!readFinished)
+            {
+                await dataReader.LoadAsync(readMaxBufferSize);
+                if (dataReader.UnconsumedBufferLength > 0)
+                {
+                    uint readLength = dataReader.UnconsumedBufferLength;
+                    byte[] readBuffer = new byte[dataReader.UnconsumedBufferLength];
+                    dataReader.ReadBytes(readBuffer);
+                    stringBuilder.Append(Encoding.UTF8.GetString(readBuffer, 0, readBuffer.Length));
+                    if (readLength < readMaxBufferSize) readFinished = true;
+                }
+                else
+                {
+                    readFinished = true;
+                }
+            }
+
+            WwwFormUrlDecoder decoder = new WwwFormUrlDecoder(stringBuilder.ToString());
+            string jsonRequestString = decoder.GetFirstValueByName("json");
+            var requestParams =  new { param1 = "" };
+            var requestObject = JsonConvert.DeserializeAnonymousType(jsonRequestString, requestParams);
+            Debug.WriteLine("GetService: {0}", requestObject.param1);
+            XmlAttributes atts = new XmlAttributes();
+            atts.Xmlns = false;
+
+            XmlAttributeOverrides xover = new XmlAttributeOverrides();
+            xover.Add(typeof(IOServicesConfig), "", atts);
+            XmlSerializer serializer = new XmlSerializer(typeof(IOServicesConfig), xover);
+            string servicesConfigXml = await LoadResource("app/io-services-config.xml");
+            IOServicesConfig servicesConfig = (IOServicesConfig)serializer.Deserialize(new MemoryStream(StringUtils.GetBytes(servicesConfigXml)));
+
+            
+            /*
+            XDocument xdoc = XDocument.Parse(await LoadResource("config/io-services-config.xml"));
+
+            string jsonConfig = JsonConvert.SerializeXNode(xdoc, Formatting.None, true);
+            Debug.WriteLine("GetService: {0}", jsonConfig);
+            */
             dataWriter.WriteString("{\"Name\":\"server_SIT\",\"Type\":4,\"Endpoint\":{\"Scheme\":null,\"Host\":\"https://tst.vaservices.eu:1443\",\"Port\":0,\"Path\":\"/sit-p2pMobileServer_1\",\"ProxyUrl\":null},\"RequestMethod\":0}");
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
@@ -343,8 +341,24 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
         private async Task<AppServerRequestResponse> AppverseGetOSHardwareInfo(Stream responseStream, AppServerRequestResponse response, AppServerRequestResponse request)
         {
+            EasClientDeviceInformation clientDeviceInformation = new EasClientDeviceInformation();
+
+            HardwareInfo hardwareInfo = new HardwareInfo();
+            hardwareInfo.Name = clientDeviceInformation.SystemProductName;
+            hardwareInfo.Vendor = clientDeviceInformation.SystemManufacturer;
+            hardwareInfo.Version = clientDeviceInformation.SystemHardwareVersion;
+            
+            HardwareToken token = HardwareIdentification.GetPackageSpecificToken(null);
+            IBuffer hardwareId = token.Id;
+            HashAlgorithmProvider hasher = HashAlgorithmProvider.OpenAlgorithm("MD5");
+            IBuffer hashed = hasher.HashData(hardwareId);
+            hardwareInfo.UUID = CryptographicBuffer.EncodeToHexString(hashed);
+
+            string responseStr = JsonConvert.SerializeObject(hardwareInfo);
+            Debug.WriteLine("HardwareInfo: {0}", responseStr);
             DataWriter dataWriter = new DataWriter(responseStream.AsOutputStream());
-            dataWriter.WriteString("{\"Name\":\"iPhone\",\"Vendor\":null,\"UUID\":\"623456789012345678901234567890123456789c\",\"Version\":\"6\"}");
+            dataWriter.WriteString(responseStr);
+            
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
             return response;
@@ -352,8 +366,18 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
         private async Task<AppServerRequestResponse> AppverseGetOSInfo(Stream responseStream, AppServerRequestResponse response, AppServerRequestResponse request)
         {
+            EasClientDeviceInformation clientDeviceInformation = new EasClientDeviceInformation();
+
+            OSInfo osInfo = new OSInfo();
+            osInfo.Name = clientDeviceInformation.OperatingSystem;
+            osInfo.Vendor = "Microsoft";
+            osInfo.Version = clientDeviceInformation.SystemFirmwareVersion;
+           
             DataWriter dataWriter = new DataWriter(responseStream.AsOutputStream());
-            dataWriter.WriteString("{\"Name\":\"iOS\",\"Vendor\":\"Apple\",\"Version\":\"8.0.2\"}");
+            string responseStr = JsonConvert.SerializeObject(osInfo);
+            Debug.WriteLine("OSInfo: {0}", responseStr);
+            dataWriter.WriteString(responseStr);
+
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
             return response;
@@ -375,17 +399,20 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 Debug.WriteLine("API Request: {0} {1}", request.httpMethod, request.httpUri);
                 if (request.httpMethod == "OPTIONS")
                 {
-                    //Debug.WriteLine("----------------------------------------------");
-                    //Debug.WriteLine("Request: {0} {1}" + request.httpMethod, request.httpUri);
+                    /*
+                    Debug.WriteLine("----------------------------------------------");
+                    Debug.WriteLine("Request: {0} {1}" + request.httpMethod, request.httpUri);
                     foreach (string key in request.httpHeaders.Keys)
                     {
-                        Debug.WriteLine("Key: {0}  Value: {1}", key, request.httpHeaders[key]);
+                        //Debug.WriteLine("Key: {0}  Value: {1}", key, request.httpHeaders[key]);
                     }
                     Debug.WriteLine("----------------------------------------------");
-                    
+                    */
                     newResponse.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
                     newResponse.httpHeaders.Add("Access-Control-Allow-Methods", request.httpHeaders["Access-Control-Request-Method"]);
                     newResponse.httpHeaders.Add("Access-Control-Allow-Headers", request.httpHeaders["Access-Control-Request-Headers"]);
+                    newResponse.httpHeaders.Add("Access-Control-Allow-Credentials", "true");
+                    newResponse.httpHeaders.Add("Access-Control-Max-Age", ""+(24*60*60*1000));
                     newResponse.httpHeaders.Add("Connection", "close");
                     newResponse.httpHeaders.Add("Pragma", "no-cache");
                     await dataWriter.FlushAsync();
@@ -397,12 +424,15 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     bool mappingFound = false;
                     if (appverseFunctions != null)
                     {
-                        //newResponse.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
-                        //newResponse.httpHeaders.Add("Access-Control-Allow-Method", "POST");
-                        //newResponse.httpHeaders.Add("Access-Control-Allow-Headers", request.httpHeaders["Access-Control-Request-Headers"]);                        
-                        //newResponse.httpHeaders.Add("Content-Type", "application/json");
-                        //newResponse.httpHeaders.Add("Connection", "close");
-                        //newResponse.httpHeaders.Add("Pragma", "no-cache");
+                        newResponse.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
+                        newResponse.httpHeaders.Add("Access-Control-Allow-Method", "POST");
+                        newResponse.httpHeaders.Add("Access-Control-Allow-Headers", "content-type");//"request.httpHeaders["Access-Control-Request-Headers"]);                        
+                        newResponse.httpHeaders.Add("Access-Control-Allow-Credentials", "true");
+                        newResponse.httpHeaders.Add("Access-Control-Max-Age", "" + (24 * 60 * 60 * 1000));
+                        newResponse.httpHeaders.Add("Content-Type", "application/json; charset=utf-8");
+                        newResponse.httpHeaders.Add("Connection", "close");
+                        newResponse.httpHeaders.Add("Pragma", "no-cache");
+
                        
                         foreach (Regex function in appverseFunctions.Keys)
                         {
@@ -412,14 +442,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                                 try
                                 {
                                     request.httpContent.Position = 0;
-                                    AppServerRequestResponse toSend = await appverseFunctions[function](responseStream, newResponse, request);
-                                    toSend.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
-                                    toSend.httpHeaders.Add("Access-Control-Allow-Method", "POST");
-                                    toSend.httpHeaders.Add("Access-Control-Allow-Headers", "content-type");//"request.httpHeaders["Access-Control-Request-Headers"]);                        
-                                    toSend.httpHeaders.Add("Content-Type", "application/json; charset=utf-8");
-                                    toSend.httpHeaders.Add("Connection", "close");
-                                    toSend.httpHeaders.Add("Pragma", "no-cache");
-                                    
+                                    AppServerRequestResponse toSend = await appverseFunctions[function](responseStream, newResponse, request);                                    
                                     mappingFound = true;
                                 }
                                 catch (Exception ex)
@@ -447,9 +470,60 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 }
             });
             task.Start();
-            task.Wait();
+            task.Wait(5000);
             newResponse.httpContent = responseStream;
             return newResponse;
+        }
+
+        private static void InvokeCallback(string callbackFunction, string callbackId, string jsonResultString)
+        {
+            Task.Factory.StartNew(async () =>
+            {
+                string jsCallbackFunction = "try{if(" + callbackFunction + "){" + callbackFunction + "(" + jsonResultString + ", '" + callbackId + "');}}catch(e) {console.log('error executing javascript callback: ' + e)}";
+                //await Task.Delay(1000);
+                await (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).Dispatcher.RunAsync(CoreDispatcherPriority.Low, () =>
+                {
+                    IAsyncOperation<string> result = (AppContextWebviewImpl.Instance.GetWebviewPrimary() as WebView).InvokeScriptAsync("eval", new string[1] { jsCallbackFunction });
+                    result.Completed = new AsyncOperationCompletedHandler<string>((operation, status) =>
+                    {
+                        Debug.WriteLine("Completed: '{0}'  Status: {1}  Result: {2}", callbackFunction, operation.Status, operation.ErrorCode);
+                        if (operation.Status == AsyncStatus.Completed)
+                        {
+                            Debug.WriteLine("Result: {0}", operation.GetResults());
+                        }
+                    });
+                });
+            });
+        }
+
+        private async static Task<string> LoadResource(string path)
+        {
+            Uri localUri = new Uri("ms-appx:///Html/"+path);
+            StorageFile f = await StorageFile.GetFileFromApplicationUriAsync(localUri);
+            IRandomAccessStream stream = await f.OpenAsync(FileAccessMode.Read);
+            DataReader dataReader = new DataReader(stream);
+            dataReader.InputStreamOptions = InputStreamOptions.Partial;
+            bool readFinished = false;
+            uint readMaxBufferSize = 1024;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            while (!readFinished)
+            {
+                await dataReader.LoadAsync(readMaxBufferSize);
+                if (dataReader.UnconsumedBufferLength > 0)
+                {
+                    uint readLength = dataReader.UnconsumedBufferLength;
+                    byte[] readBuffer = new byte[dataReader.UnconsumedBufferLength];
+                    dataReader.ReadBytes(readBuffer);
+                    stringBuilder.Append(Encoding.UTF8.GetString(readBuffer, 0, readBuffer.Length));
+                    if (readLength < readMaxBufferSize) readFinished = true;
+                }
+                else
+                {
+                    readFinished = true;
+                }
+            }
+            return stringBuilder.ToString();
         }
     }
 }
