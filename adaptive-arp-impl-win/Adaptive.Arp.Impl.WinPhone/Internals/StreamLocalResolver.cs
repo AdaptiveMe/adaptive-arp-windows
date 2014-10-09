@@ -36,7 +36,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                 {
                     path += "index.html";
                 }
-                Uri localUri = new Uri("ms-appx:///Html/WebResources" + path);
+                Uri localUri = new Uri("ms-appx:///Html/WebResources/www" + path);
                 //Debug.WriteLine("- Content {0}", localUri);
                 StorageFile f = await StorageFile.GetFileFromApplicationUriAsync(localUri);
                 IRandomAccessStream stream = await f.OpenAsync(FileAccessMode.Read);

@@ -109,10 +109,9 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
             Task.Run(async () =>
             {
-                ManualResetEvent finished = new ManualResetEvent(false);
                 // Socket reader
                 //StreamSocket socket = args.Socket;
-                DataReader dataReader = new DataReader(args.Socket.InputStream);
+                DataReader dataReader = new DataReader(args.Socket.InputStream.AsStreamForRead(256).AsInputStream());
                 dataReader.InputStreamOptions = InputStreamOptions.Partial;
                 
                 // Temporary stream
@@ -120,7 +119,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
                 // Data dataReader flags and options
                 bool readFinished = false;
-                uint readMaxBufferSize = 4096;
+                uint readMaxBufferSize = 128;
 
                 while (!readFinished)
                 {                    
@@ -134,21 +133,19 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         byte[] readBuffer = new byte[dataReader.UnconsumedBufferLength];
                         dataReader.ReadBytes(readBuffer);
                         // Write buffer
-                        await memoryStream.WriteAsync(readBuffer, 0, readBuffer.Length);
+                        memoryStream.Write(readBuffer, 0, readBuffer.Length);
                         // Not full buffer, reached eof
                         if (readLength < readMaxBufferSize)
                         {
                             readFinished = true;
-                            await memoryStream.FlushAsync();
-                            finished.Set();
+                            memoryStream.Flush();
                         }
                     }
                     else
                     {
                         // Reached eof 
                         readFinished = true;
-                        await memoryStream.FlushAsync();
-                        finished.Set();
+                        memoryStream.Flush();
                     }
                 }
 
@@ -156,9 +153,10 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                 {
                     // Flush stream and reset position to start.           
                     memoryStream.Position = 0;
-                    finished.WaitOne();
                     parseRequest(memoryStream, args.Socket);
                 }
+
+
             });
         }
 
@@ -225,10 +223,9 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                     bodyStream.Position = 0;
                     if (contentLen != bodyStream.Length)
                     {
-                        Debug.WriteLine("Header Len {0}", contentLen);
-                        Debug.WriteLine("httpContent Pos {0}, Len {1}", bodyStream.Position, bodyStream.Length);
-                        Debug.WriteLine("     ******************************************* FUUU");
-
+                        Debug.WriteLine("ERROR: ***** Header Len {0}", contentLen);
+                        Debug.WriteLine("ERROR: ***** httpContent Pos {0}, Len {1}", bodyStream.Position, bodyStream.Length);
+                        Debug.WriteLine("ERROR: ***** Buffer under-read! (WP8.1 bug)");
                     }
                     request.httpContent = bodyStream;
 
@@ -238,8 +235,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                     {
                         // For each rule
                         foreach (Regex rule_part in serverRules.Keys)
-                        {
-                            
+                        {  
                             //if it matches the URL
                             if (rule_part.IsMatch(request.httpUri))
                             {
@@ -281,8 +277,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
                                     // Process body.
                                     dataWriter.WriteString("\r\n");
-                                    //lock (this)
-                                    //{
+                                    lock (this)
+                                    {
                                     // Reset stream to beginning.
                                     toSend.httpContent.Seek(0, SeekOrigin.Begin);
                                     Task.Run(async () =>
@@ -326,7 +322,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                                             Debug.WriteLine("BodyBlock: " + ex.StackTrace);
                                         }
                                     });
-                                    //}
+                                    }
                                     break;
                                 }
                                 catch (Exception ex)
