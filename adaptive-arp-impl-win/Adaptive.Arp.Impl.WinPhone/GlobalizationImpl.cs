@@ -34,8 +34,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using Windows.Storage;
 
 namespace Adaptive.Arp.Impl.WinPhone
@@ -49,6 +52,39 @@ namespace Adaptive.Arp.Impl.WinPhone
         protected const String PLIST_EXTENSION = ".plist";
         protected GlobalizationConfig _I18NConfiguration = null;
         protected Dictionary<string, SortedDictionary<String, string>> languageFilesDictionary = new Dictionary<string, SortedDictionary<string, string>>();
+
+        public GlobalizationImpl()
+        {
+            //ManualResetEvent AllFinished = new ManualResetEvent(false);
+            TaskFactory taskFactory = new TaskFactory();
+            var myTask = taskFactory.StartNew<Task<bool>>(async () =>
+            {
+                try
+                {
+                    StorageFile I18NConfigFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///" + I18N_CONFIG_FILE));
+                    XmlSerializer serializer = new XmlSerializer(typeof(GlobalizationConfig));
+                    XmlReader reader = XmlReader.Create(await I18NConfigFile.OpenStreamForReadAsync());
+                    _I18NConfiguration = (GlobalizationConfig)serializer.Deserialize(reader);
+                    FillLanguagesDictionary();
+                    //AllFinished.Set();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    //AllFinished.Set();
+                    return false;
+                }
+            });
+            //AllFinished.WaitOne();
+            /*if (myTask.Result.Result)
+            {
+                //ALL OK
+            }
+            else
+            {
+                //ERROR HAPPENED
+            }*/
+        }
 
         public string[] GetLocaleSupportedDescriptors()
         {
