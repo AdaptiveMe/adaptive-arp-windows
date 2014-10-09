@@ -109,6 +109,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
             Task.Run(async () =>
             {
+                ManualResetEvent finished = new ManualResetEvent(false);
                 // Socket reader
                 //StreamSocket socket = args.Socket;
                 DataReader dataReader = new DataReader(args.Socket.InputStream);
@@ -119,7 +120,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
                 // Data dataReader flags and options
                 bool readFinished = false;
-                uint readMaxBufferSize = 512;
+                uint readMaxBufferSize = 4096;
 
                 while (!readFinished)
                 {                    
@@ -134,22 +135,28 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         dataReader.ReadBytes(readBuffer);
                         // Write buffer
                         await memoryStream.WriteAsync(readBuffer, 0, readBuffer.Length);
-
                         // Not full buffer, reached eof
-                        if (readLength < readMaxBufferSize) readFinished = true;
+                        if (readLength < readMaxBufferSize)
+                        {
+                            readFinished = true;
+                            await memoryStream.FlushAsync();
+                            finished.Set();
+                        }
                     }
                     else
                     {
                         // Reached eof 
                         readFinished = true;
+                        await memoryStream.FlushAsync();
+                        finished.Set();
                     }
                 }
 
                 if (readFinished == true)
                 {
-                    // Flush stream and reset position to start.
-                    memoryStream.Flush();
+                    // Flush stream and reset position to start.           
                     memoryStream.Position = 0;
+                    finished.WaitOne();
                     parseRequest(memoryStream, args.Socket);
                 }
             });
@@ -159,8 +166,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
         {
             try
             {
-                StreamReader streamReader = new StreamReader(inStream, true);
-                
+                StreamReader streamReader = new StreamReader(inStream);  
                 DataWriter dataWriter = new DataWriter(socket.OutputStream);
                 AppServerRequestResponse request = new AppServerRequestResponse();
 
@@ -260,9 +266,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
                                     String osPlatform = "Windows";
                                     String osVersion = "8.1";
-
 #if WINDOWS_APP || WINDOWS 
-                            osPlatform = "Windows";
+                                    osPlatform = "Windows";
 #endif
 #if WINDOWS_PHONE_APP || WINDOWS_PHONE && SILVERLIGHT
                                     osPlatform = "Windows Phone Silverlight";
@@ -270,7 +275,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 #if WINDOWS_PHONE_APP || WINDOWS_PHONE
                                     osPlatform = "Windows Phone";
 #endif
-
                                     // Internal headers.
                                     dataWriter.WriteString("X-Server: Adaptive 1.0 (" + osPlatform + " " + osVersion + "/" + Environment.ProcessorCount + " Cores)\r\n");
                                     dataWriter.WriteString("X-ServerBind: http://" + this.serverIp + ":" + this.serverPort + "/\r\n");
@@ -295,6 +299,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                                         }
                                         try
                                         {
+                                            toSend.httpContent.Flush();
 
                                             // write data to output using 1024 buffer
                                             while (toSend.httpContent.Position < toSend.httpContent.Length)
@@ -319,15 +324,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                                         catch (Exception ex)
                                         {
                                             Debug.WriteLine("BodyBlock: " + ex.StackTrace);
-                                        }
-                                        try
-                                        {
-                                            toSend.httpContent.Flush();
-                                            //Debug.WriteLine("Impl size {0}", toSend.httpContent.Length);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Debug.WriteLine("CloseBlock: " + ex.StackTrace);
                                         }
                                     });
                                     //}
