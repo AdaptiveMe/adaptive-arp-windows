@@ -44,9 +44,9 @@ namespace Adaptive.Arp.Impl.WinPhone
 {
     public class GlobalizationImpl : IGlobalization
     {
-        protected const String APP_CONFIG_PATH = @"Html\App";
+        protected const String APP_CONFIG_PATH = @"Html/app/config";
         protected const String DICT_TAG = "dict";
-        protected const String I18N_CONFIG_FILE = @"Html\App\i18n-config.xml";
+        protected const String I18N_CONFIG_FILE = @"Html/app/config/i18n-config.xml";
         protected const String KEY_TAG = "key";
         protected const String PLIST_EXTENSION = ".plist";
         protected GlobalizationConfig _I18NConfiguration = null;

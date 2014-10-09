@@ -113,6 +113,9 @@
     <Compile Include="AbstractAppServerImpl.cs" />
     <Compile Include="AbstractAppServerManagerImpl.cs" />
     <Compile Include="AbstractCapabilitiesImpl.cs" />
+    <Compile Include="Globalization\GlobalizationConfig.cs" />
+    <Compile Include="Globalization\GlobalizationDefaultLanguage.cs" />
+    <Compile Include="Globalization\GlobalizationSupportedLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityImpl.cs" />
     <Compile Include="Util\MimetypeResolver.cs" />

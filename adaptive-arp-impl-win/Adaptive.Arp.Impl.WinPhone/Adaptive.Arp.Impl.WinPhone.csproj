@@ -113,6 +113,7 @@
     <Compile Include="CapabilitiesImpl.cs" />
     <Compile Include="ContactImpl.cs" />
     <Compile Include="DeviceImpl.cs" />
+    <Compile Include="GlobalizationImpl.cs" />
     <Compile Include="Internals\AppServerImpl.cs">
       <SubType>
       </SubType>

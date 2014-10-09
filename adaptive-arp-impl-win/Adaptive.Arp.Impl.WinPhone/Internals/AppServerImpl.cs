@@ -99,19 +99,11 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                 return;
             }
 
-            // Increment current count of processes being served.
-            lock (socketList)
-            {
-                concurrentCount++;
-                socketList.Add(args.Socket);
-            }
-
-
             Task.Run(async () =>
             {
                 // Socket reader
                 //StreamSocket socket = args.Socket;
-                DataReader dataReader = new DataReader(args.Socket.InputStream.AsStreamForRead(256).AsInputStream());
+                DataReader dataReader = new DataReader(args.Socket.InputStream.AsStreamForRead(128).AsInputStream());
                 dataReader.InputStreamOptions = InputStreamOptions.Partial;
                 
                 // Temporary stream
@@ -119,13 +111,13 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
 
                 // Data dataReader flags and options
                 bool readFinished = false;
-                uint readMaxBufferSize = 128;
+                uint readMaxBufferSize = 256;
 
                 while (!readFinished)
                 {                    
                     // await a full buffer or eof
                     await dataReader.LoadAsync(readMaxBufferSize);
-
+                    await Task.Delay(10);
                     if (dataReader.UnconsumedBufferLength > 0)
                     {
                         // Read buffer
@@ -135,6 +127,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                         // Write buffer
                         memoryStream.Write(readBuffer, 0, readBuffer.Length);
                         // Not full buffer, reached eof
+                        
                         if (readLength < readMaxBufferSize)
                         {
                             readFinished = true;
@@ -350,24 +343,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                     }
 
                 }
-                // Decrement current requests being processes.
-                lock (socketList)
-                {
-                    concurrentCount--;
-                    /**
-                     * This list keeps StreamSocket alive to avoid premature disposal of the object (ObjectDisposedException of StreamSocket underlying DataWriter). 
-                     * One would expect the runtime to keep reference counts correctly BUT with async calls, it clearly falls over when under stress. So this list
-                     * is crucial and only does something useful when the local server is processing > 8 calls concurrently. If you remove it, expect ObjectDisposedExceptions.
-                     * This synthetically keeps Socket objects alive, with their reference in the list, long enough to process the request. On clear, the references are 
-                     * released and the object is disposed. We do this every 50 entries to avoid more overhead. It works. C!
-                     */
-                    if (socketList.Count > 100)
-                    {
-                        socketList.RemoveRange(0, 50);
-                    }
-                }
-
-
             }
             catch (Exception ex)
             {
