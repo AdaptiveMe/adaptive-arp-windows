@@ -8,7 +8,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using Windows.ApplicationModel.Core;
@@ -290,23 +292,29 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             var requestParams =  new { param1 = "" };
             var requestObject = JsonConvert.DeserializeAnonymousType(jsonRequestString, requestParams);
             Debug.WriteLine("GetService: {0}", requestObject.param1);
-            XmlAttributes atts = new XmlAttributes();
-            atts.Xmlns = false;
 
-            XmlAttributeOverrides xover = new XmlAttributeOverrides();
-            xover.Add(typeof(IOServicesConfig), "", atts);
-            XmlSerializer serializer = new XmlSerializer(typeof(IOServicesConfig), xover);
-            string servicesConfigXml = await LoadResource("app/io-services-config.xml");
-            IOServicesConfig servicesConfig = (IOServicesConfig)serializer.Deserialize(new MemoryStream(StringUtils.GetBytes(servicesConfigXml)));
+            IOServicesConfig servicesConfigObject = null;
 
-            
-            /*
-            XDocument xdoc = XDocument.Parse(await LoadResource("config/io-services-config.xml"));
+            var IOConfigStorageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Html/app/io-services-config.xml"));
+            XmlSerializer serializer = new XmlSerializer(typeof(IOServicesConfig));
+            XmlReader reader = XmlReader.Create(await IOConfigStorageFile.OpenStreamForReadAsync());
+            servicesConfigObject = (IOServicesConfig)serializer.Deserialize(reader);
 
-            string jsonConfig = JsonConvert.SerializeXNode(xdoc, Formatting.None, true);
-            Debug.WriteLine("GetService: {0}", jsonConfig);
-            */
-            dataWriter.WriteString("{\"Name\":\"server_SIT\",\"Type\":4,\"Endpoint\":{\"Scheme\":null,\"Host\":\"https://tst.vaservices.eu:1443\",\"Port\":0,\"Path\":\"/sit-p2pMobileServer_1\",\"ProxyUrl\":null},\"RequestMethod\":0}");
+            IOService service = null;
+            foreach (IOService ioService in servicesConfigObject.Services)
+            {
+                if (ioService.Name == requestObject.param1)
+                {
+                    service = ioService;
+                    Debug.WriteLine("Service found {0}", service);
+                    break;
+                }
+            }
+            if (service != null)
+            {
+                dataWriter.WriteString(JsonConvert.SerializeObject(service));
+                Debug.WriteLine("JSON {0}", JsonConvert.SerializeObject(service));
+            }
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
             return response;
@@ -387,8 +395,10 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         {
             AppServerRequestResponse newResponse = new AppServerRequestResponse();
             Stream responseStream = new MemoryStream();
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            ManualResetEvent finished = new ManualResetEvent(false);
 
-            Task task = new Task(async () =>
+            Task task = Task.Factory.StartNew(async () =>
             {
 
                 newResponse.httpHeaders = new Dictionary<string, string>();
@@ -399,15 +409,6 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 Debug.WriteLine("API Request: {0} {1}", request.httpMethod, request.httpUri);
                 if (request.httpMethod == "OPTIONS")
                 {
-                    /*
-                    Debug.WriteLine("----------------------------------------------");
-                    Debug.WriteLine("Request: {0} {1}" + request.httpMethod, request.httpUri);
-                    foreach (string key in request.httpHeaders.Keys)
-                    {
-                        //Debug.WriteLine("Key: {0}  Value: {1}", key, request.httpHeaders[key]);
-                    }
-                    Debug.WriteLine("----------------------------------------------");
-                    */
                     newResponse.httpHeaders.Add("Access-Control-Allow-Origin", request.httpHeaders["Origin"]);
                     newResponse.httpHeaders.Add("Access-Control-Allow-Methods", request.httpHeaders["Access-Control-Request-Method"]);
                     newResponse.httpHeaders.Add("Access-Control-Allow-Headers", request.httpHeaders["Access-Control-Request-Headers"]);
@@ -417,6 +418,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     newResponse.httpHeaders.Add("Pragma", "no-cache");
                     await dataWriter.FlushAsync();
                     await dataWriter.StoreAsync();
+                    finished.Set();
                 }
                 else
                 {
@@ -442,7 +444,10 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                                 try
                                 {
                                     request.httpContent.Position = 0;
-                                    AppServerRequestResponse toSend = await appverseFunctions[function](responseStream, newResponse, request);                                    
+                                    stopwatch.Start();
+                                    Debug.WriteLine("Time {0} {1}", 1, stopwatch.ElapsedMilliseconds);
+                                    AppServerRequestResponse toSend =  await appverseFunctions[function](responseStream, newResponse, request);
+                                    Debug.WriteLine("Time {0} {1}", 2, stopwatch.ElapsedMilliseconds);
                                     mappingFound = true;
                                 }
                                 catch (Exception ex)
@@ -467,10 +472,13 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                         await dataWriter.FlushAsync();
                         await dataWriter.StoreAsync();
                     }
+                    finished.Set();
                 }
             });
-            task.Start();
-            task.Wait(5000);
+            finished.WaitOne();
+
+            Debug.WriteLine("Time {0} {1}", 3, stopwatch.ElapsedMilliseconds);
+            Debug.WriteLine("Response Stream Pos: {0} Len: {1}", responseStream.Position, responseStream.Length);
             newResponse.httpContent = responseStream;
             return newResponse;
         }

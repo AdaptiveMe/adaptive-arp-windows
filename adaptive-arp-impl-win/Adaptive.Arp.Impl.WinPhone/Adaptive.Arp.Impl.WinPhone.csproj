@@ -110,6 +110,9 @@
     <Compile Include="Appverse\OSInfo.cs" />
     <Compile Include="Appverse\PimEnumerations.cs" />
     <Compile Include="Appverse\SecurityKeyPair.cs" />
+    <Compile Include="CapabilitiesImpl.cs" />
+    <Compile Include="ContactImpl.cs" />
+    <Compile Include="DeviceImpl.cs" />
     <Compile Include="Internals\AppServerImpl.cs">
       <SubType>
       </SubType>
@@ -118,7 +121,10 @@
     <Compile Include="Internals\StreamLocalResolver.cs" />
     <Compile Include="Internals\StreamResourceInfo.cs" />
     <Compile Include="LifecycleImpl.cs" />
+    <Compile Include="MessagingImpl.cs" />
+    <Compile Include="NetworkReachabilityImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelephonyImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Adaptive.Arp.Api, Version=1.0.42.1, Culture=neutral, processorArchitecture=MSIL">
