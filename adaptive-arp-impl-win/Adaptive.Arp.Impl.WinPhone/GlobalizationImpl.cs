@@ -75,8 +75,8 @@ namespace Adaptive.Arp.Impl.WinPhone
                     return false;
                 }
             });
-            //AllFinished.WaitOne();
-            /*if (myTask.Result.Result)
+            /*AllFinished.WaitOne();
+            if (myTask.Result.Result)
             {
                 //ALL OK
             }
@@ -105,7 +105,7 @@ namespace Adaptive.Arp.Impl.WinPhone
                 }
                 else
                 {
-                    string sNewLocalName = sLocaleName.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    string sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetLanguage())) ? locale.GetLanguage() : (!String.IsNullOrWhiteSpace(locale.GetCountry())) ? locale.GetCountry() : String.Empty;
                     if (!sNewLocalName.Equals(sLocaleName) && !String.IsNullOrWhiteSpace(sNewLocalName))
                     {
                         return GetResourceLiteral(key, new Locale(sNewLocalName, String.Empty));
@@ -124,7 +124,7 @@ namespace Adaptive.Arp.Impl.WinPhone
                 return languageFilesDictionary[sLocaleName];
             else
             {
-                string sNewLocalName = sLocaleName.Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                string sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetLanguage())) ? locale.GetLanguage() : (!String.IsNullOrWhiteSpace(locale.GetCountry())) ? locale.GetCountry() : String.Empty;
                 if (!sNewLocalName.Equals(sLocaleName) && !String.IsNullOrWhiteSpace(sNewLocalName))
                 {
                     return GetResourceLiterals(new Locale(sNewLocalName, String.Empty));
