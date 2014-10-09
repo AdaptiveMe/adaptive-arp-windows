@@ -21,10 +21,13 @@
  *
  * Contributors:
  *
- *     * 
+ *     * David Barranco Bonilla
+ *             <https://github.com/aryslan>
+ *             <mailto:ddbc@gft.com>
  *
  * =====================================================================================================================
  */
+
 using Adaptive.Arp.Api;
 using System;
 using System.Collections.Generic;
