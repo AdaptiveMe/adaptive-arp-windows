@@ -34,7 +34,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -105,10 +104,21 @@ namespace Adaptive.Arp.Impl.WinPhone
                 }
                 else
                 {
-                    string sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetLanguage())) ? locale.GetLanguage() : (!String.IsNullOrWhiteSpace(locale.GetCountry())) ? locale.GetCountry() : String.Empty;
+                    string sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetLanguage())) ? locale.GetLanguage().ToLower() : String.Empty;
                     if (!sNewLocalName.Equals(sLocaleName) && !String.IsNullOrWhiteSpace(sNewLocalName))
                     {
-                        return GetResourceLiteral(key, new Locale(sNewLocalName, String.Empty));
+                        if (languageFilesDictionary.ContainsKey(sLocaleName) && languageFilesDictionary[sLocaleName].ContainsKey(key))
+                        {
+                            return languageFilesDictionary[sLocaleName][key].ToString();
+                        }
+                    }
+                    sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetCountry())) ? locale.GetCountry().ToLower() : String.Empty;
+                    if (!sNewLocalName.Equals(sLocaleName) && !String.IsNullOrWhiteSpace(sNewLocalName))
+                    {
+                        if (languageFilesDictionary.ContainsKey(sLocaleName) && languageFilesDictionary[sLocaleName].ContainsKey(key))
+                        {
+                            return languageFilesDictionary[sLocaleName][key].ToString();
+                        }
                     }
                 }
             }
@@ -124,10 +134,21 @@ namespace Adaptive.Arp.Impl.WinPhone
                 return languageFilesDictionary[sLocaleName];
             else
             {
-                string sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetLanguage())) ? locale.GetLanguage() : (!String.IsNullOrWhiteSpace(locale.GetCountry())) ? locale.GetCountry() : String.Empty;
+                string sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetLanguage())) ? locale.GetLanguage().ToLower() : String.Empty;
                 if (!sNewLocalName.Equals(sLocaleName) && !String.IsNullOrWhiteSpace(sNewLocalName))
                 {
-                    return GetResourceLiterals(new Locale(sNewLocalName, String.Empty));
+                    if (languageFilesDictionary.ContainsKey(sLocaleName))
+                    {
+                        return languageFilesDictionary[sLocaleName];
+                    }
+                }
+                sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetCountry())) ? locale.GetCountry().ToLower() : String.Empty;
+                if (!sNewLocalName.Equals(sLocaleName) && !String.IsNullOrWhiteSpace(sNewLocalName))
+                {
+                    if (languageFilesDictionary.ContainsKey(sLocaleName))
+                    {
+                        return languageFilesDictionary[sLocaleName];
+                    }
                 }
             }
             return null;
