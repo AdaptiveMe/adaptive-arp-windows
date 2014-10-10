@@ -1,4 +1,5 @@
 ﻿using Adaptive.Arp.Impl;
+using Adaptive.Arp.Impl.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -252,20 +253,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Internals
                                         dataWriter.WriteString(key + ": " + toSend.httpHeaders[key] + "\r\n");
                                     }
                                     dataWriter.WriteString("Connection: close\r\n");
-
-                                    String osPlatform = "Windows";
-                                    String osVersion = "8.1";
-#if WINDOWS_APP || WINDOWS 
-                                    osPlatform = "Windows";
-#endif
-#if WINDOWS_PHONE_APP || WINDOWS_PHONE && SILVERLIGHT
-                                    osPlatform = "Windows Phone Silverlight";
-#endif
-#if WINDOWS_PHONE_APP || WINDOWS_PHONE
-                                    osPlatform = "Windows Phone";
-#endif
                                     // Internal headers.
-                                    dataWriter.WriteString("X-Server: Adaptive 1.0 (" + osPlatform + " " + osVersion + "/" + Environment.ProcessorCount + " Cores)\r\n");
+                                    dataWriter.WriteString(UserAgentUtils.GetUserAgent()+"\r\n");
                                     dataWriter.WriteString("X-ServerBind: http://" + this.serverIp + ":" + this.serverPort + "/\r\n");
 
                                     // Process body.

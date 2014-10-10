@@ -97,12 +97,15 @@
     <Compile Include="Appverse\ContactLite.cs" />
     <Compile Include="Appverse\ContactPhone.cs" />
     <Compile Include="Appverse\HardwareInfo.cs" />
+    <Compile Include="Appverse\IIo.cs" />
     <Compile Include="Appverse\IOCookie.cs" />
     <Compile Include="Appverse\IOEnumerations.cs" />
     <Compile Include="Appverse\IOHeader.cs" />
     <Compile Include="Appverse\IOHeaders.cs" />
+    <Compile Include="Appverse\IORensponseHandler.cs" />
     <Compile Include="Appverse\IORequest.cs" />
     <Compile Include="Appverse\IOResponse.cs" />
+    <Compile Include="Appverse\IOResponseHandle.cs" />
     <Compile Include="Appverse\IOService.cs" />
     <Compile Include="Appverse\IOServiceConfig.cs" />
     <Compile Include="Appverse\IOServiceEndpoint.cs" />

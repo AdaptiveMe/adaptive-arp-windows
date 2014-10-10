@@ -121,6 +121,7 @@
     <Compile Include="Util\MimetypeResolver.cs" />
     <Compile Include="Util\StringUtils.cs" />
     <Compile Include="Util\TimeUtils.cs" />
+    <Compile Include="Util\UserAgentUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="Windows Phone, Version=8.1" />
