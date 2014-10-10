@@ -32,7 +32,7 @@ using System.Xml.Serialization;
 
 namespace Adaptive.Arp.Impl.Globalization
 {
-    [XmlRootAttribute("default", Namespace = "", IsNullable = false)]
+    [XmlRoot("default", Namespace = "", IsNullable = false)]
     public class GlobalizationDefaultLanguage
     {
         [XmlAttributeAttribute(AttributeName = "id", DataType = "string")]

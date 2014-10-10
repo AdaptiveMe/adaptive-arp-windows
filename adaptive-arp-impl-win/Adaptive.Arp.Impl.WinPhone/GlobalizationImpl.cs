@@ -44,12 +44,14 @@ namespace Adaptive.Arp.Impl.WinPhone
 {
     public class GlobalizationImpl : IGlobalization
     {
-        protected const String APP_CONFIG_PATH = @"Html/app/config";
+        protected const String APP_CONFIG_PATH = @"Html\app\config";
         protected const String DICT_TAG = "dict";
-        protected const String I18N_CONFIG_FILE = @"Html/app/config/i18n-config.xml";
+        protected const String I18N_CONFIG_FILE = @"Html\app\config\i18n-config.xml";
         protected const String KEY_TAG = "key";
         protected const String PLIST_EXTENSION = ".plist";
         protected GlobalizationConfig _I18NConfiguration = null;
+        private static object _lockObj = new object();
+
         protected Dictionary<string, SortedDictionary<String, string>> languageFilesDictionary = new Dictionary<string, SortedDictionary<string, string>>();
 
         public GlobalizationImpl()
@@ -137,17 +139,17 @@ namespace Adaptive.Arp.Impl.WinPhone
                 string sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetLanguage())) ? locale.GetLanguage().ToLower() : String.Empty;
                 if (!sNewLocalName.Equals(sLocaleName) && !String.IsNullOrWhiteSpace(sNewLocalName))
                 {
-                    if (languageFilesDictionary.ContainsKey(sLocaleName))
+                    if (languageFilesDictionary.ContainsKey(sNewLocalName))
                     {
-                        return languageFilesDictionary[sLocaleName];
+                        return languageFilesDictionary[sNewLocalName];
                     }
                 }
                 sNewLocalName = (!String.IsNullOrWhiteSpace(locale.GetCountry())) ? locale.GetCountry().ToLower() : String.Empty;
                 if (!sNewLocalName.Equals(sLocaleName) && !String.IsNullOrWhiteSpace(sNewLocalName))
                 {
-                    if (languageFilesDictionary.ContainsKey(sLocaleName))
+                    if (languageFilesDictionary.ContainsKey(sNewLocalName))
                     {
-                        return languageFilesDictionary[sLocaleName];
+                        return languageFilesDictionary[sNewLocalName];
                     }
                 }
             }
@@ -192,7 +194,10 @@ namespace Adaptive.Arp.Impl.WinPhone
                         }
                     }
                 }
-                languageFilesDictionary.Add(languageFile.DisplayName.ToLower(), languageFileContentDictionary);
+                lock (_lockObj)
+                {
+                    languageFilesDictionary.Add(languageFile.DisplayName.ToLower(), languageFileContentDictionary);
+                }
             });
         }
 

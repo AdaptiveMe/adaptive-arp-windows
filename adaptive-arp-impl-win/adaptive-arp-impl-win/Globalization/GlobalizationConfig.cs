@@ -43,7 +43,7 @@ namespace Adaptive.Arp.Impl.Globalization
         [XmlElement("default")]
         public GlobalizationDefaultLanguage DefaultLanguage = new GlobalizationDefaultLanguage();
 
-        [XmlArray("supportedLanguages", IsNullable = false), XmlArrayItem("supportedLanguage", typeof(GlobalizationDefaultLanguage))]
+        [XmlArray("supportedLanguages", IsNullable = false), XmlArrayItem("supportedLanguage", typeof(GlobalizationSupportedLanguage))]
         public List<GlobalizationSupportedLanguage>
             SupportedLanguages = new List<GlobalizationSupportedLanguage>();
     }
