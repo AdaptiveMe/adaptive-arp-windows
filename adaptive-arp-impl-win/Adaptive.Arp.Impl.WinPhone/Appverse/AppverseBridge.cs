@@ -56,7 +56,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             appverseFunctions.Add(new Regex("^/service/net/IsNetworkReachable"), AppverseIsNetworkReachable);
             appverseFunctions.Add(new Regex("^/service/security/GetStoredKeyValuePairs"), AppverseGetStoredKeyValuePairs);
             appverseFunctions.Add(new Regex("^/service-async/security/GetStoredKeyValuePairs"), AppverseGetStoredKeyValuePairs);
-            appverseFunctions.Add(new Regex("^/service-async/security/StoreKeyValuePair"), AppverseStoreKeyValuePair);      
+            appverseFunctions.Add(new Regex("^/service-async/security/StoreKeyValuePair"), AppverseStoreKeyValuePair);
+            appverseFunctions.Add(new Regex("^/service-async/security/RemoveKeyValuePair"), AppverseRemoveKeyValuePair);
             appverseFunctions.Add(new Regex("^/service/pim/ListContacts"), AppverseListContacts);
             appverseFunctions.Add(new Regex("^/service-async/pim/ListContacts"), AppverseListContacts);
             appverseFunctions.Add(new Regex("^/service/io/InvokeService"), AppverseInvokeService);
@@ -73,6 +74,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 await GetGlobalization();
             });
         }
+
+        
 
         private async Task<AppServerRequestResponse> AppverseCall(Stream responseStream, AppServerRequestResponse response, AppServerRequestResponse request)
         {
@@ -151,6 +154,61 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             await dataWriter.StoreAsync();
             return response;
 
+        }
+
+        private async Task<AppServerRequestResponse> AppverseRemoveKeyValuePair(Stream responseStream, AppServerRequestResponse response, AppServerRequestResponse request)
+        {
+            DataWriter dataWriter = new DataWriter(responseStream.AsOutputStream());
+            DataReader dataReader = new DataReader(request.httpContent.AsInputStream());
+
+            string callbackFunction = null;
+            string callbackId = null;
+            string jsonRequestString = null;
+
+            WwwFormUrlDecoder decoder = new WwwFormUrlDecoder(await GetUriParameters(dataReader));
+            callbackFunction = decoder.GetFirstValueByName("callback");
+            callbackId = decoder.GetFirstValueByName("callbackid");
+            jsonRequestString = decoder.GetFirstValueByName("json");
+            if (callbackFunction == null || callbackFunction == "NULL") callbackFunction = "Appverse.OnKeyValuePairsRemoveCompleted";
+            Debug.WriteLine("RemoveKeyValuePair: {0}", jsonRequestString);
+            var requestParams = new { param1 = new String[0] };
+            var requestObject = JsonConvert.DeserializeAnonymousType(jsonRequestString, requestParams);
+            Debug.WriteLine("RemoveKeyValuePair: {0}", requestObject.param1.Length);
+            var keychain = (ApplicationData.Current.LocalSettings.Containers.ContainsKey("General")) ? ApplicationData.Current.LocalSettings.Containers["General"] : ApplicationData.Current.LocalSettings.CreateContainer("General", ApplicationDataCreateDisposition.Always);
+            List<SecurityKeyPair> successfullKeyPairs = new List<SecurityKeyPair>();
+            List<SecurityKeyPair> overridenKeyPairs = new List<SecurityKeyPair>();
+            List<SecurityKeyPair> failedKeyPairs = new List<SecurityKeyPair>();
+            if (keychain != null)
+            {
+                foreach (string key in requestObject.param1)
+                {
+                    try
+                    {
+                        if (keychain.Contains(key))
+                        {
+                            keychain.Remove(key);
+                            successfullKeyPairs.Add(key);
+                        }
+                        else
+                            failedKeyPairs.Add(key);
+                    }
+                    catch (Exception)
+                    {
+                        failedKeyPairs.Add(key);
+                    }
+                }
+            }
+            string jsonResultString = JsonConvert.SerializeObject(new object[] { successfullKeyPairs, failedKeyPairs });
+            Debug.WriteLine("RemoveKeyValuePair: {0}", jsonResultString);
+            // TODO: Mock data. Implement KeyPair here.
+            //string jsonResultString = "[{\"Key\":\"UBI_USERNAME\",\"Value\":\"12020990\"},{\"Key\":\"UBI_DEVICE_UNIQUE_ID\",\"Value\":\"20755j17506dpgc8l3i4ea39sf2e4hi\"},{\"Key\":\"UBI_INSTITUTION_CODE\",\"Value\":\"05428\"},{\"Key\":\"UBI_REMEMBER_USER\",\"Value\":\"1\"},{\"Key\":\"UBI_SKIP_TUTORIAL\",\"Value\":\"0\"},{\"Key\":\"UBI_NFC_COUNTDOWN\",\"Value\":\"30\"},{\"Key\":\"UBI_FAV_CONTACTS\",\"Value\":\"[]\"},{\"Key\":\"UBI_UNFAV_CONTACTS\",\"Value\":\"[]\"},{\"Key\":\"UBI_ENABLE_WIDGET\",\"Value\":\"0\"}]";
+            //List<SecurityKeyPair> securityKeyPairList = JsonConvert.DeserializeObject<List<SecurityKeyPair>>(jsonResultString);
+            //AppverseBridge.InvokeCallback(callbackFunction, callbackId, JsonConvert.SerializeObject(securityKeyPairList));
+            AppverseBridge.InvokeCallback(callbackFunction, callbackId, jsonResultString);
+
+            await dataWriter.FlushAsync();
+            await dataWriter.StoreAsync();
+            return response;
         }
 
         #region InvokeService
