@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Adaptive.Arp.Impl.WinPhone.Appverse
@@ -19,6 +24,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         private IOServicesConfig servicesConfig = new IOServicesConfig();  // empty list
         private static IDictionary<ServiceType, string> contentTypes = new Dictionary<ServiceType, string>();
         private CookieContainer cookieContainer = null;
+        private HttpClient client = null;
 
         static AbstractIO()
         {
@@ -69,6 +75,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         {
             LoadServicesConfig();
             this.cookieContainer = new CookieContainer();
+            this.client = new HttpClient(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip, CookieContainer = this.cookieContainer });
         }
 
         /// <summary>
@@ -88,7 +95,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         /// </summary>
         protected void LoadServicesConfig()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
 
@@ -144,11 +151,13 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         /// <param name='sslPolicyErrors'>
         /// Ssl policy errors.
         /// </param>
+        /*
         public virtual bool ValidateWebCertificates(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             Debug.WriteLine("*************** On ServerCertificateValidationCallback: accept all certificates");
             return true;
         }
+        */
 
         /// <summary>
         /// Checks the invoke timeout.
@@ -191,37 +200,55 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             return requestUriString;
         }
 
-        private HttpWebRequest BuildWebRequest(IORequest request, IOService service, string requestUriString, string reqMethod)
+        private HttpRequestMessage BuildWebRequest(IORequest request, IOService service, string requestUriString, string reqMethod)
         {
-
-            HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(requestUriString);
-            webReq.Method = reqMethod; // default is POST
-            webReq.ContentType = contentTypes[service.Type];
-
+            client.BaseAddress = new Uri(requestUriString); 
+            HttpRequestMessage webRequest = new HttpRequestMessage(HttpMethod.Post, requestUriString);
+            
+            //HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(requestUriString);
+            //webReq.Method = reqMethod; // default is POST
+            webRequest.Method = HttpMethod.Post;
+            //webReq.ContentType = contentTypes[service.Type];
             // check specific request ContentType defined, and override service type in that case
             if (request.ContentType != null && request.ContentType.Length > 0)
             {
-                webReq.ContentType = request.ContentType;
+                //webReq.ContentType = request.ContentType;
+                webRequest.Headers.Add("Content-Type", request.ContentType);
+            }
+            else
+            {
+                webRequest.Headers.Add("Content-Type", contentTypes[service.Type]);
+
             }
 
-            Debug.WriteLine("Request content type: " + webReq.ContentType);
-            Debug.WriteLine("Request method: " + webReq.Method);
+            //Debug.WriteLine("Request content type: " + webReq.ContentType);
+            //Debug.WriteLine("Request method: " + webReq.Method);
+            Debug.WriteLine("Request method: " + webRequest.Method);
 
-            webReq.Accept = webReq.ContentType; // setting "Accept" header with the same value as "Content Type" header, it is needed to be defined for some services.
-            webReq.ContentLength = request.GetContentLength();
-            Debug.WriteLine("Request content length: " + webReq.ContentLength);
-            webReq.ContinueTimeout = DEFAULT_RESPONSE_TIMEOUT; // in millisecods (default is 100 seconds)
-            webReq.ContinueTimeout = DEFAULT_READWRITE_TIMEOUT; // in milliseconds
-            webReq. KeepAlive = false;
-            webReq.ProtocolVersion = HttpVersion.Version10;
-            if (request.ProtocolVersion == HTTPProtocolVersion.HTTP11) webReq.ProtocolVersion = HttpVersion.Version11;
+            //webReq.Accept = webReq.ContentType; // setting "Accept" header with the same value as "Content Type" header, it is needed to be defined for some services.
+            webRequest.Headers.Add("Accept", request.ContentType);
+            
+            //webReq.ContentLength = request.GetContentLength();
+            webRequest.Content.Headers.ContentLength = request.GetContentLength();
+            Debug.WriteLine("Request content length: " + request.ContentType);
+            webRequest.Content.Headers.ContentType = new MediaTypeHeaderValue(request.ContentType); 
+            //webReq.ContinueTimeout = DEFAULT_RESPONSE_TIMEOUT; // in millisecods (default is 100 seconds)
+            //webReq.ContinueTimeout = DEFAULT_READWRITE_TIMEOUT; // in milliseconds
+            client.Timeout = new TimeSpan(DEFAULT_READWRITE_TIMEOUT * 100);
+            //webReq.KeepAlive = false;
+            webRequest.Headers.Add("Keep-Alive", "false");
+            
+            //webReq.ProtocolVersion = HttpVersion.Version10;
+            webRequest.Version = Version.Parse("1.0");
+            //if (request.ProtocolVersion == HTTPProtocolVersion.HTTP11) webReq.ProtocolVersion = HttpVersion.Version11;
 
 
-            webReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            //webReq.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
             // user agent needs to be informed - some servers check this parameter and send 500 errors when not informed.
-            webReq.UserAgent = this.IOUserAgent;
-            Debug.WriteLine("Request UserAgent : " + webReq.UserAgent);
+            //webReq.UserAgent = this.IOUserAgent;
+            webRequest.Content.Headers.Add("User-Agent", this.IOUserAgent);
+            Debug.WriteLine("Request UserAgent : " + this.IOUserAgent);
 
             /*************
              * HEADERS HANDLING
@@ -232,8 +259,9 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             {
                 foreach (IOHeader header in request.Headers)
                 {
-                    webReq.Headers.Add(header.Name, header.Value);
-                    Debug.WriteLine("Added request header: " + header.Name + "=" + webReq.Headers.Get(header.Name));
+                    //webReq.Headers.Add(header.Name, header.Value);
+                    webRequest.Headers.Add(header.Name, header.Value);
+                    //Debug.WriteLine("Added request header: " + header.Name + "=" + webRequest.Headers.[header.Name]);
                 }
             }
 
@@ -243,7 +271,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
             // Assign the cookie container on the request to hold cookie objects that are sent on the response.
             // Required even though you no cookies are send.
-            webReq.CookieContainer = this.cookieContainer;
+            //webReq.CookieContainer = this.cookieContainer;
+            //webRequest.Properties.
 
             // add cookies to the request cookie container
             if (request.Session != null && request.Session.Cookies != null && request.Session.Cookies.Length > 0)
@@ -252,17 +281,18 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 {
                     if (cookie != null && cookie.Name != null)
                     {
-                        webReq.CookieContainer.Add(webReq.RequestUri, new Cookie(cookie.Name, cookie.Value));
+                        //webReq.CookieContainer.Add(webReq.RequestUri, new Cookie(cookie.Name, cookie.Value));
+                        this.cookieContainer.Add(client.BaseAddress, new Cookie(cookie.Name, cookie.Value));
                         Debug.WriteLine("Added cookie [" + cookie.Name + "] to request.");
                     }
                 }
             }
-            Debug.WriteLine("HTTP Request cookies: " + webReq.CookieContainer.GetCookieHeader(webReq.RequestUri));
+            Debug.WriteLine("HTTP Request cookies: " + this.cookieContainer.GetCookieHeader(client.BaseAddress));
 
             /*************
              * SETTING A PROXY (ENTERPRISE ENVIRONMENTS)
              *************/
-
+            /*
             if (service.Endpoint.ProxyUrl != null)
             {
                 WebProxy myProxy = new WebProxy();
@@ -270,11 +300,11 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 myProxy.Address = proxyUri;
                 webReq.Proxy = myProxy;
             }
-
-            return webReq;
+            */
+            return webRequest;
         }
 
-        private IOResponse ReadWebResponse(HttpWebRequest webRequest, HttpWebResponse webResponse, IOService service)
+        private async Task<IOResponse> ReadWebResponse(HttpRequestMessage webRequest, HttpResponseMessage webResponse, IOService service)
         {
             IOResponse response = new IOResponse();
 
@@ -282,19 +312,15 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             byte[] resultBinary = null;
             string result = null;
 
-            string responseMimeTypeOverride = webResponse.GetResponseHeader("Content-Type");
+            string responseMimeTypeOverride = webResponse.Content.Headers.ContentType.MediaType;
 
-            using (Stream stream = webResponse.GetResponseStream())
+            using (Stream stream = await webResponse.Content.ReadAsStreamAsync())
             {
                 Debug.WriteLine("getting response stream...");
                 if (ServiceType.OCTET_BINARY.Equals(service.Type))
                 {
 
-                    int lengthContent = -1;
-                    if (webResponse.GetResponseHeader("Content-Length") != null && webResponse.GetResponseHeader("Content-Length") != "")
-                    {
-                        lengthContent = Int32.Parse(webResponse.GetResponseHeader("Content-Length"));
-                    }
+                    int lengthContent = (int) webResponse.Content.Headers.ContentLength;
                     // testing log line
                     // SystemLogger.Log (SystemLogger.Module.CORE, "content-length header: " + lengthContent +", max file size: " + MAX_BINARY_SIZE);
                     int bufferReadSize = DEFAULT_BUFFER_READ_SIZE;
@@ -305,8 +331,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
                     if (lengthContent > MAX_BINARY_SIZE)
                     {
-                        SystemLogger.Log(SystemLogger.Module.CORE,
-                                          "WARNING! - file exceeds the maximum size defined in platform (" + MAX_BINARY_SIZE + " bytes)");
+                        Debug.WriteLine("WARNING! - file exceeds the maximum size defined in platform (" + MAX_BINARY_SIZE + " bytes)");
                     }
                     else
                     {
@@ -322,7 +347,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                         } while (readLen > 0);
 
                         resultBinary = memBuffer.ToArray();
-                        memBuffer.Close();
+                        memBuffer.Flush();
                         memBuffer = null;
                     }
                 }
@@ -341,7 +366,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
              *************/
 
             // preserve cache-control header from remote server, if any
-            string cacheControlHeader = webResponse.GetResponseHeader("Cache-Control");
+            string cacheControlHeader = webResponse.Headers.CacheControl.ToString();
             if (cacheControlHeader != null && cacheControlHeader != "")
             {
                 Debug.WriteLine("Found Cache-Control header on response: " + cacheControlHeader + ", using it on internal response...");
@@ -402,18 +427,15 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
         }
 
-        private string ReadWebResponseAndStore(HttpWebRequest webRequest, HttpWebResponse webResponse, IOService service, string storePath)
+        /*
+        private async string ReadWebResponseAndStore(HttpRequestMessage webRequest, HttpResponseMessage webResponse, IOService service, string storePath)
         {
 
-            using (Stream stream = webResponse.GetResponseStream())
+            using (Stream stream = await webResponse.Content.ReadAsStreamAsync())
             {
                 Debug.WriteLine("getting response stream...");
 
-                int lengthContent = -1;
-                if (webResponse.GetResponseHeader("Content-Length") != null && webResponse.GetResponseHeader("Content-Length") != "")
-                {
-                    lengthContent = Int32.Parse(webResponse.GetResponseHeader("Content-Length"));
-                }
+                int lengthContent = (int)webResponse.Content.Headers.ContentLength;
                 // testing log line
                 // SystemLogger.Log (SystemLogger.Module.CORE, "content-length header: " + lengthContent +", max file size: " + MAX_BINARY_SIZE);
                 int bufferReadSize = DEFAULT_BUFFER_READ_SIZE;
@@ -424,7 +446,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 Debug.WriteLine("buffer read: " + bufferReadSize + " bytes");
                 string fullStorePath = Path.Combine(this.GetDirectoryRoot(), storePath);
                 Debug.WriteLine("storing file at: " + fullStorePath);
-                FileStream streamWriter = new FileStream(fullStorePath, FileMode.Create);
+                //FileStream streamWriter = new FileStream(fullStorePath, FileMode.Create);
 
                 byte[] readBuffer = new byte[bufferReadSize];
                 int readLen = 0;
@@ -444,6 +466,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 return storePath;
             }
         }
+         * */
 
         /// <summary>
         /// 
@@ -454,85 +477,82 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         public virtual IOResponse InvokeService(IORequest request, IOService service)
         {
             IOResponse response = new IOResponse();
+            ManualResetEvent resetEvent = new ManualResetEvent(false);
+            Task.Run( async () => {
 
-            if (service != null)
-            {
-
-                if (service.Endpoint == null)
-                {
-                    Debug.WriteLine("No endpoint configured for this service name: " + service.Name);
-                    return response;
-                }
-
-                Debug.WriteLine("Request content: " + request.Content);
-                byte[] requestData = request.GetRawContent();
-
-                String reqMethod = service.RequestMethod.ToString(); // default is POST
-                if (request.Method != null && request.Method != String.Empty) reqMethod = request.Method.ToUpper();
-
-                String requestUriString = this.FormatRequestUriString(request, service, reqMethod);
-                Thread timeoutThread = null;
-
-                try
+                if (service != null)
                 {
 
-                    // Security - VALIDATIONS
-                    ServicePointManager.ServerCertificateValidationCallback = ValidateWebCertificates;
-
-                    // Building Web Request to send
-                    HttpWebRequest webReq = this.BuildWebRequest(request, service, requestUriString, reqMethod);
-
-                    // Throw a new Thread to check absolute timeout
-                    timeoutThread = new Thread(CheckInvokeTimeout);
-                    timeoutThread.Start(webReq);
-
-                    // POSTING DATA using timeout
-                    if (!reqMethod.Equals(RequestMethod.GET.ToString()) && requestData != null)
+                    if (service.Endpoint == null)
                     {
-                        // send data only for POST method.
-                        Debug.WriteLine("Sending data on the request stream... (POST)");
-                        Debug.WriteLine("request data length: " + requestData.Length);
-                        using (Stream requestStream = webReq.GetRequestStream())
+                        Debug.WriteLine("No endpoint configured for this service name: " + service.Name);
+                        //return response;
+                    }
+
+                    Debug.WriteLine("Request content: " + request.Content);
+                    byte[] requestData = request.GetRawContent();
+
+                    String reqMethod = service.RequestMethod.ToString(); // default is POST
+                    if (request.Method != null && request.Method != String.Empty) reqMethod = request.Method.ToUpper();
+
+                    String requestUriString = this.FormatRequestUriString(request, service, reqMethod);
+
+                    try
+                    {
+
+                        // Security - VALIDATIONS
+                        //ServicePointManager.ServerCertificateValidationCallback = ValidateWebCertificates;
+
+                        // Building Web Request to send
+                        HttpRequestMessage webReq = this.BuildWebRequest(request, service, requestUriString, reqMethod);
+
+                        // Throw a new Thread to check absolute timeout
+                        //timeoutThread = new Thread(CheckInvokeTimeout);
+                        //timeoutThread.Start(webReq);
+
+                        // POSTING DATA using timeout
+                        if (!reqMethod.Equals(RequestMethod.GET.ToString()) && requestData != null)
                         {
-                            Debug.WriteLine("request stream: " + requestStream);
-                            requestStream.Write(requestData, 0, requestData.Length);
+                            // send data only for POST method.
+                            Debug.WriteLine("Sending data on the request stream... (POST)");
+                            Debug.WriteLine("request data length: " + requestData.Length);
+                            using (Stream requestStream = await webReq.Content.ReadAsStreamAsync())
+                            {
+                                Debug.WriteLine("request stream: " + requestStream);
+                                requestStream.Write(requestData, 0, requestData.Length);
+                            }
                         }
-                    }
-
-                    using (HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse())
-                    {
-
+                    
+                        HttpResponseMessage webResp = await client.SendAsync(webReq);
                         Debug.WriteLine("getting response...");
-                        response = this.ReadWebResponse(webReq, webResp, service);
-                    }
+                        response = await this.ReadWebResponse(webReq, webResp, service);
+                    
 
-                }
-                catch (WebException ex)
-                {
-                    Debug.WriteLine("WebException requesting service: " + requestUriString + ".", ex);
-                    response.ContentType = contentTypes[ServiceType.REST_JSON];
-                    response.Content = "WebException Requesting Service: " + requestUriString + ". Message: " + ex.Message;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Unnandled Exception requesting service: " + requestUriString + ".", ex);
-                    response.ContentType = contentTypes[ServiceType.REST_JSON];
-                    response.Content = "Unhandled Exception Requesting Service: " + requestUriString + ". Message: " + ex.Message;
-                }
-                finally
-                {
-                    // abort any previous timeout checking thread
-                    if (timeoutThread != null && timeoutThread.IsAlive)
+                    }
+                    catch (WebException ex)
                     {
-                        timeoutThread.Abort();
+                        Debug.WriteLine("WebException requesting service: " + requestUriString + ".", ex);
+                        response.ContentType = contentTypes[ServiceType.REST_JSON];
+                        response.Content = "WebException Requesting Service: " + requestUriString + ". Message: " + ex.Message;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("Unnandled Exception requesting service: " + requestUriString + ".", ex);
+                        response.ContentType = contentTypes[ServiceType.REST_JSON];
+                        response.Content = "Unhandled Exception Requesting Service: " + requestUriString + ". Message: " + ex.Message;
+                    }
+                    finally
+                    {
+
                     }
                 }
-            }
-            else
-            {
-                Debug.WriteLine("Null service received for invoking.");
-            }
-
+                else
+                {
+                    Debug.WriteLine("Null service received for invoking.");
+                }
+                resetEvent.Set();
+            });
+            resetEvent.WaitOne();
             return response;
         }
 
@@ -544,6 +564,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         /// <param name="request">Request.</param>
         /// <param name="service">Service.</param>
         /// <param name="storePath">Store path.</param>
+        /*
         public virtual string InvokeServiceForBinary(IORequest request, IOService service, string storePath)
         {
 
@@ -569,20 +590,20 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 if (request.Method != null && request.Method != String.Empty) reqMethod = request.Method.ToUpper();
 
                 String requestUriString = this.FormatRequestUriString(request, service, reqMethod);
-                Thread timeoutThread = null;
+                //Thread timeoutThread = null;
 
                 try
                 {
 
                     // Security - VALIDATIONS
-                    ServicePointManager.ServerCertificateValidationCallback = ValidateWebCertificates;
+                    //ServicePointManager.ServerCertificateValidationCallback = ValidateWebCertificates;
 
                     // Building Web Request to send
-                    HttpWebRequest webReq = this.BuildWebRequest(request, service, requestUriString, reqMethod);
+                    HttpRequestMessage webReq = this.BuildWebRequest(request, service, requestUriString, reqMethod);
 
                     // Throw a new Thread to check absolute timeout
-                    timeoutThread = new Thread(CheckInvokeTimeout);
-                    timeoutThread.Start(webReq);
+                    //timeoutThread = new Thread(CheckInvokeTimeout);
+                    //timeoutThread.Start(webReq);
 
                     // POSTING DATA using timeout
                     if (!reqMethod.Equals(RequestMethod.GET.ToString()) && requestData != null)
@@ -590,14 +611,14 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                         // send data only for POST method.
                         Debug.WriteLine("Sending data on the request stream... (POST)");
                         Debug.WriteLine("request data length: " + requestData.Length);
-                        using (Stream requestStream = webReq.GetRequestStream())
-                        {
-                            Debug.WriteLine("request stream: " + requestStream);
-                            requestStream.Write(requestData, 0, requestData.Length);
-                        }
+                        Stream requestStream = await webReq.Content.ReadAsStreamAsync();
+
+                        Debug.WriteLine("request stream: " + requestStream);
+                        requestStream.Write(requestData, 0, requestData.Length);
+
                     }
 
-                    using (HttpWebResponse webResp = (HttpWebResponse)webReq.GetResponse())
+                    HttpResponseMessage webResp = await client.SendAsync(webReq);
                     {
 
                         Debug.WriteLine("getting response...");
@@ -629,6 +650,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
             return null;
         }
+         * */
 
         /// <summary>
         /// Invokes service, given its name, using the provided request.

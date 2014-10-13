@@ -40,6 +40,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         private Dictionary<Regex, MappingDeletage> appverseFunctions = null;
         private IGlobalization globalization = null;
         private IOServicesConfig servicesConfigObject = null;
+        private IPhoneIO invokeService = new IPhoneIO();
 
         public AppverseBridge()
         {
@@ -175,18 +176,17 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             var requestObject = JsonConvert.DeserializeAnonymousType(jsonRequestString, requestParams);
             Debug.WriteLine("RemoveKeyValuePair: {0}", requestObject.param1.Length);
             var keychain = (ApplicationData.Current.LocalSettings.Containers.ContainsKey("General")) ? ApplicationData.Current.LocalSettings.Containers["General"] : ApplicationData.Current.LocalSettings.CreateContainer("General", ApplicationDataCreateDisposition.Always);
-            List<SecurityKeyPair> successfullKeyPairs = new List<SecurityKeyPair>();
-            List<SecurityKeyPair> overridenKeyPairs = new List<SecurityKeyPair>();
-            List<SecurityKeyPair> failedKeyPairs = new List<SecurityKeyPair>();
+            List<string> successfullKeyPairs = new List<string>();
+            List<string> failedKeyPairs = new List<string>();
             if (keychain != null)
             {
                 foreach (string key in requestObject.param1)
                 {
                     try
                     {
-                        if (keychain.Contains(key))
+                        if (keychain.Values.ContainsKey(key))
                         {
-                            keychain.Remove(key);
+                            keychain.Values.Remove(key);
                             successfullKeyPairs.Add(key);
                         }
                         else
@@ -233,6 +233,12 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             ioRequest = appverseParams.param1;
             ioService = appverseParams.param2;
 
+            IOResponse ioResponse = invokeService.InvokeService(ioRequest, ioService);
+
+            string jsonResultString = JsonConvert.SerializeObject(ioResponse);
+            AppverseBridge.InvokeCallback(callbackFunction, callbackId, jsonResultString);
+
+            /*
             if (ioService != null)
             {
                 if (ioService.Endpoint.Path.EndsWith("/rest/sec/login"))
@@ -307,6 +313,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     Debug.WriteLine("Not implemented service: {0}", ioService.Endpoint.Path);
                 }
             }
+            */
             await dataWriter.FlushAsync();
             await dataWriter.StoreAsync();
             return response;

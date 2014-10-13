@@ -1,7 +1,15 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Asn1.X509;
+using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Ocsp;
+using Org.BouncyCastle.Security;
+using Org.BouncyCastle.Security.Certificates;
+using Org.BouncyCastle.X509;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +41,9 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         /// <param name='Errors'>
         /// Policy errors found during the chain build process.
         /// </param>
-        public static bool ValidateWebCertificates(Object sender, System.Security.Cryptography.X509Certificates.X509Certificate endCert, System.Security.Cryptography.X509Certificates.X509Chain chain, SslPolicyErrors Errors)
+        /// 
+        /*
+        public static bool ValidateWebCertificates(Object sender, X509Certificate endCert, System.Security.Cryptography.X509Certificates.X509Chain chain, SslPolicyErrors Errors)
         {
 
 
@@ -143,6 +153,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 return false;
             }
         }
+         * */
 
         /// <summary>
         /// Verifies the certificate chain via OCSP
@@ -153,6 +164,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         /// <param name='chain'>
         /// The certificate chain.
         /// </param>
+        /*
         private static bool VerifyCertificateOCSP(System.Security.Cryptography.X509Certificates.X509Chain chain)
         {
             List<X509Certificate> certsList = new List<X509Certificate>();
@@ -241,6 +253,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                 Debug.WriteLine("*************** Certificate Validation. Certificate is revoked");
             return bCertificateIsRevoked;
         }
+         * */
 
         /// <summary>
         /// Checks the certificate is already in cache. Cache is valid for 10 minutes after first certificate successful verification.

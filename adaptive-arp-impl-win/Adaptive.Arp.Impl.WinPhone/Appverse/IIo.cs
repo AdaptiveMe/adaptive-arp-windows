@@ -35,7 +35,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         /// <param name="request">Request.</param>
         /// <param name="service">Service.</param>
         /// <param name="storePath">Store path (realtive path under application Documents folder).</param>
-        string InvokeServiceForBinary(IORequest request, IOService service, string storePath);
+        //string InvokeServiceForBinary(IORequest request, IOService service, string storePath);
 
     }//end IIo
 

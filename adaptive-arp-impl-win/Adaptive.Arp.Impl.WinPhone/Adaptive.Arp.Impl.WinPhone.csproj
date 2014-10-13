@@ -90,6 +90,7 @@
     <Compile Include="AppContextImpl.cs" />
     <Compile Include="AppContextWebviewImpl.cs" />
     <Compile Include="AppRegistryImpl.cs" />
+    <Compile Include="Appverse\AbstractIO.cs" />
     <Compile Include="Appverse\AppverseBridge.cs" />
     <Compile Include="Appverse\Contact.cs" />
     <Compile Include="Appverse\ContactAddress.cs" />
@@ -110,9 +111,11 @@
     <Compile Include="Appverse\IOServiceConfig.cs" />
     <Compile Include="Appverse\IOServiceEndpoint.cs" />
     <Compile Include="Appverse\IOSessionContext.cs" />
+    <Compile Include="Appverse\IPhoneIO.cs" />
     <Compile Include="Appverse\OSInfo.cs" />
     <Compile Include="Appverse\PimEnumerations.cs" />
     <Compile Include="Appverse\SecurityKeyPair.cs" />
+    <Compile Include="Appverse\SecurityUtils.cs" />
     <Compile Include="CapabilitiesImpl.cs" />
     <Compile Include="ContactImpl.cs" />
     <Compile Include="DeviceImpl.cs" />
@@ -138,6 +141,9 @@
     <Reference Include="Adaptive.Arp.Impl, Version=1.0.18.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\adaptive-arp-impl-win\bin\Debug\Adaptive.Arp.Impl.dll</HintPath>
+    </Reference>
+    <Reference Include="crypto">
+      <HintPath>..\..\adaptive-arp-rt-win\packages\Portable.BouncyCastle.1.7.0.1\lib\portable-net4+sl5+wp8+win8+wpa81\crypto.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\adaptive-arp-rt-win\packages\Newtonsoft.Json.6.0.5\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>

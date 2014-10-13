@@ -48,6 +48,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             throw new NotImplementedException();
         }
 
+        /*
         public override bool ValidateWebCertificates(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certificate, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
         {
             if (this.ValidateCertificates)
@@ -57,7 +58,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             }
             else return base.ValidateWebCertificates(sender, certificate, chain, sslPolicyErrors);
         }
-
+        */
         /// <summary>
         /// Method overrided, to start activity notification while invoking external service. 
         /// </summary>
