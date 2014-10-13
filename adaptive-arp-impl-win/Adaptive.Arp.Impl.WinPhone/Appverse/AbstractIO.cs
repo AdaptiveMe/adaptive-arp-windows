@@ -25,6 +25,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         private static IDictionary<ServiceType, string> contentTypes = new Dictionary<ServiceType, string>();
         private CookieContainer cookieContainer = null;
         private HttpClient client = null;
+        
 
         static AbstractIO()
         {
@@ -50,6 +51,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             {
                 return this._IOUserAgent;
             }
+
             set
             {
                 this._IOUserAgent = value;
@@ -74,8 +76,16 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
         public AbstractIO()
         {
             LoadServicesConfig();
+            CreateNewHttpClient();
+        }
+
+        private void CreateNewHttpClient()
+        {
             this.cookieContainer = new CookieContainer();
             this.client = new HttpClient(new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip, CookieContainer = this.cookieContainer });
+            //ONLY DEFINE PROPERTIES ONCE, IF A REQUEST HAS BEEN SENT, HTTPCLIENT CANNOT MODIFY PROPERTIES
+            this.client.Timeout = new TimeSpan(0, 0, DEFAULT_RESPONSE_TIMEOUT * 5);
+            client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", this.IOUserAgent);
         }
 
         /// <summary>
@@ -202,7 +212,9 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
         private HttpRequestMessage BuildWebRequest(IORequest request, IOService service, string requestUriString, string reqMethod)
         {
-            client.BaseAddress = new Uri(requestUriString); 
+            //Not needed
+            //client.BaseAddress = new Uri(requestUriString);
+            
             HttpRequestMessage webRequest = new HttpRequestMessage(HttpMethod.Post, requestUriString);
             
             //HttpWebRequest webReq = (HttpWebRequest)WebRequest.Create(requestUriString);
@@ -210,15 +222,12 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             webRequest.Method = HttpMethod.Post;
             //webReq.ContentType = contentTypes[service.Type];
             // check specific request ContentType defined, and override service type in that case
-            if (request.ContentType != null && request.ContentType.Length > 0)
-            {
-                //webReq.ContentType = request.ContentType;
-                webRequest.Headers.Add("Content-Type", request.ContentType);
-            }
-            else
-            {
-                webRequest.Headers.Add("Content-Type", contentTypes[service.Type]);
+            if (webRequest.Content == null) webRequest.Content = new ByteArrayContent(request.GetRawContent());
+            String sContentType = request.ContentType;
 
+            if (String.IsNullOrWhiteSpace(sContentType))
+            {
+                sContentType = contentTypes[service.Type];
             }
 
             //Debug.WriteLine("Request content type: " + webReq.ContentType);
@@ -226,20 +235,22 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             Debug.WriteLine("Request method: " + webRequest.Method);
 
             //webReq.Accept = webReq.ContentType; // setting "Accept" header with the same value as "Content Type" header, it is needed to be defined for some services.
-            webRequest.Headers.Add("Accept", request.ContentType);
+            webRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(sContentType));
             
             //webReq.ContentLength = request.GetContentLength();
             webRequest.Content.Headers.ContentLength = request.GetContentLength();
-            Debug.WriteLine("Request content length: " + request.ContentType);
-            webRequest.Content.Headers.ContentType = new MediaTypeHeaderValue(request.ContentType); 
+            Debug.WriteLine("Request content length: " + request.GetContentLength());
+            webRequest.Content.Headers.ContentType = new MediaTypeHeaderValue(sContentType);
             //webReq.ContinueTimeout = DEFAULT_RESPONSE_TIMEOUT; // in millisecods (default is 100 seconds)
             //webReq.ContinueTimeout = DEFAULT_READWRITE_TIMEOUT; // in milliseconds
-            client.Timeout = new TimeSpan(DEFAULT_READWRITE_TIMEOUT * 100);
+            //client.Timeout = new TimeSpan(DEFAULT_READWRITE_TIMEOUT);
+            
             //webReq.KeepAlive = false;
-            webRequest.Headers.Add("Keep-Alive", "false");
+            
+            webRequest.Headers.Add("Keep-Alive", "true");
             
             //webReq.ProtocolVersion = HttpVersion.Version10;
-            webRequest.Version = Version.Parse("1.0");
+            //webRequest.Version = Version.Parse("1.0"); NOT NEEDED
             //if (request.ProtocolVersion == HTTPProtocolVersion.HTTP11) webReq.ProtocolVersion = HttpVersion.Version11;
 
 
@@ -247,9 +258,12 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
 
             // user agent needs to be informed - some servers check this parameter and send 500 errors when not informed.
             //webReq.UserAgent = this.IOUserAgent;
-            webRequest.Content.Headers.Add("User-Agent", this.IOUserAgent);
+            
+            //webRequest.Headers.UserAgent.ParseAdd(this.IOUserAgent);
+            //webRequest.Content.Headers.Add("User-Agent", this.IOUserAgent);
+            
             Debug.WriteLine("Request UserAgent : " + this.IOUserAgent);
-
+            
             /*************
              * HEADERS HANDLING
              *************/
@@ -273,7 +287,7 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
             // Required even though you no cookies are send.
             //webReq.CookieContainer = this.cookieContainer;
             //webRequest.Properties.
-
+            
             // add cookies to the request cookie container
             if (request.Session != null && request.Session.Cookies != null && request.Session.Cookies.Length > 0)
             {
@@ -282,12 +296,13 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                     if (cookie != null && cookie.Name != null)
                     {
                         //webReq.CookieContainer.Add(webReq.RequestUri, new Cookie(cookie.Name, cookie.Value));
-                        this.cookieContainer.Add(client.BaseAddress, new Cookie(cookie.Name, cookie.Value));
+                        //this.cookieContainer.Add(new Uri(requestUriString), new Cookie(cookie.Name, cookie.Value));
+                        this.cookieContainer.Add(webRequest.RequestUri, new Cookie(cookie.Name, cookie.Value));
                         Debug.WriteLine("Added cookie [" + cookie.Name + "] to request.");
                     }
                 }
             }
-            Debug.WriteLine("HTTP Request cookies: " + this.cookieContainer.GetCookieHeader(client.BaseAddress));
+            Debug.WriteLine("HTTP Request cookies: " + this.cookieContainer.GetCookieHeader(new Uri(requestUriString)));
 
             /*************
              * SETTING A PROXY (ENTERPRISE ENVIRONMENTS)
@@ -366,8 +381,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
              *************/
 
             // preserve cache-control header from remote server, if any
-            string cacheControlHeader = webResponse.Headers.CacheControl.ToString();
-            if (cacheControlHeader != null && cacheControlHeader != "")
+            string cacheControlHeader = (webResponse.Headers.CacheControl!=null)? webResponse.Headers.CacheControl.ToString():String.Empty;
+            if (!String.IsNullOrWhiteSpace(cacheControlHeader))
             {
                 Debug.WriteLine("Found Cache-Control header on response: " + cacheControlHeader + ", using it on internal response...");
                 if (response.Headers == null)
@@ -511,7 +526,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                         //timeoutThread.Start(webReq);
 
                         // POSTING DATA using timeout
-                        if (!reqMethod.Equals(RequestMethod.GET.ToString()) && requestData != null)
+                        //DONE IN BuildWebRequest METHOD
+                       /* if (!reqMethod.Equals(RequestMethod.GET.ToString()) && requestData != null)
                         {
                             // send data only for POST method.
                             Debug.WriteLine("Sending data on the request stream... (POST)");
@@ -521,8 +537,8 @@ namespace Adaptive.Arp.Impl.WinPhone.Appverse
                                 Debug.WriteLine("request stream: " + requestStream);
                                 requestStream.Write(requestData, 0, requestData.Length);
                             }
-                        }
-                    
+                        }*/
+
                         HttpResponseMessage webResp = await client.SendAsync(webReq);
                         Debug.WriteLine("getting response...");
                         response = await this.ReadWebResponse(webReq, webResp, service);
