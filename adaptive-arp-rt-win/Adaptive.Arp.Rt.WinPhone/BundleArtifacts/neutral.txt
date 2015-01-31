@@ -1,2 +1,0 @@
-MainPackage=C:\Users\Carlos\Documents\GitHub\adaptive-arp-windows\adaptive-arp-rt-win\Adaptive.Arp.Rt.WinPhone\bin\Debug\Adaptive.Arp.Rt.WinPhone_1.0.0.5_Bundle\Adaptive.Arp.Rt.WinPhone_1.0.0.5_AnyCPU_Debug.appx
-SymbolPackage=C:\Users\Carlos\Documents\GitHub\adaptive-arp-windows\adaptive-arp-rt-win\Adaptive.Arp.Rt.WinPhone\AppPackages\Adaptive.Arp.Rt.WinPhone_1.0.0.5_Debug_Test\Adaptive.Arp.Rt.WinPhone_1.0.0.5_AnyCPU_Debug.appxsym
