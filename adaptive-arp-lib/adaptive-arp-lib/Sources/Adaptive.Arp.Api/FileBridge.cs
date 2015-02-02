@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.2
+    * @version v2.1.3
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -706,7 +706,7 @@ new destination file.
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "FileBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.2.";
+                         responseMessage = "FileBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.3.";
                          break;
                }
                response.SetResponse(responseJSON);

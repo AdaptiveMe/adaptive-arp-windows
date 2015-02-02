@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.2
+    * @version v2.1.3
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -79,7 +79,7 @@ namespace Adaptive.Arp.Api
           */
           public String GetAPIVersion()
           {
-               return "v2.1.2";
+               return "v2.1.3";
           }
 
           /**
