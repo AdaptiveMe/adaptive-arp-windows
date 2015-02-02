@@ -67,15 +67,6 @@ namespace Adaptive.Arp.Api
           }
 
           /**
-             Get the listener id.
-             @return long with the identifier of the listener.
-          */
-          public long GetId()
-          {
-               return this.id;
-          }
-
-          /**
              Return the API group for the given interface.
           */
           public IAdaptiveRPGroup GetAPIGroup()
@@ -108,7 +99,7 @@ in every platform. This id is populated by the Javascript platform
           */
           public long GetId()
           {
-               AppRegistryBridge.GetInstance().GetPlatformContextWeb().ExecuteJavaScript("Adaptive.handleBaseListenertId( '"+GetId()+"',  )");
+               return this.id;
           }
 
      }
