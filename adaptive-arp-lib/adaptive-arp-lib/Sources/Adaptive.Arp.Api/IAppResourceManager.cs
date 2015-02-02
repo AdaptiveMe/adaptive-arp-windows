@@ -58,7 +58,7 @@ the ResourceData and formats returned must be coherent between platforms.
              @return ResourceData with the configuration resource payload.
              @since v2.1.3
           */
-          ResourceData RetrieveConfigResource(string id);
+          AppResourceData RetrieveConfigResource(string id);
 
           /**
              Retrieve a web resource from the secure application data container.
@@ -67,7 +67,7 @@ the ResourceData and formats returned must be coherent between platforms.
              @return ResourceData with the web resource payload.
              @since v2.1.3
           */
-          ResourceData RetrieveWebResource(string id);
+          AppResourceData RetrieveWebResource(string id);
 
      }
 }

@@ -43,7 +43,7 @@ namespace Adaptive.Arp.Api
         @since v2.1.3
         @version 1.0
      */
-     public class ResourceData
+     public class AppResourceData
      {
 
           /**
@@ -84,7 +84,7 @@ after uncompressing and unencrypting.
 
              @since V2.1.3
           */
-          public ResourceData()  {
+          public AppResourceData()  {
           }
 
           /**
@@ -99,7 +99,7 @@ after uncompressing and unencrypting.
              @param CookedLength The cooked length in bytes of the resource.
              @since V2.1.3
           */
-          public ResourceData(string id, byte[] data, string rawType, long rawLength, bool cooked, string cookedType, long cookedLength) : base () {
+          public AppResourceData(string id, byte[] data, string rawType, long rawLength, bool cooked, string cookedType, long cookedLength) : base () {
                this.Id = Id;
                this.Data = Data;
                this.RawType = RawType;
