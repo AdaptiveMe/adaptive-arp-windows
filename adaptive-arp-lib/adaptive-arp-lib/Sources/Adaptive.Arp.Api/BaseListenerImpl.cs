@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.1
+    * @version v2.1.2
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -88,7 +88,7 @@ namespace Adaptive.Arp.Api
           */
           public String GetAPIVersion()
           {
-               return "v2.1.1";
+               return "v2.1.2";
           }
 
           /**
@@ -98,6 +98,17 @@ namespace Adaptive.Arp.Api
           public JSONProcessor GetJSONProcessor()
           {
                return AppRegistryBridge.GetJSONProcessor();
+          }
+
+          /**
+             Return the unique listener identifier. This is used to check if two listeners are the same
+in every platform. This id is populated by the Javascript platform
+
+             @return Unique Listener identifier
+          */
+          public long GetId()
+          {
+               AppRegistryBridge.GetInstance().GetPlatformContextWeb().ExecuteJavaScript("Adaptive.handleBaseListenertId( '"+GetId()+"',  )");
           }
 
      }

@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.1
+    * @version v2.1.2
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -46,6 +46,14 @@ namespace Adaptive.Arp.Api
      */
      public interface IBaseListener : IAdaptiveRP
      {
+
+          /**
+             Return the unique listener identifier. This is used to check if two listeners are the same
+in every platform. This id is populated by the Javascript platform
+
+             @return Unique Listener identifier
+          */
+          long GetId();
 
      }
 }

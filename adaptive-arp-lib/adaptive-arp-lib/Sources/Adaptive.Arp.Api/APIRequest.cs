@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.1
+    * @version v2.1.2
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -46,6 +46,10 @@ namespace Adaptive.Arp.Api
      public class APIRequest
      {
 
+          /**
+             Identifier of API version of this request.
+          */
+          public string ApiVersion { get; set; }
           /**
              Identifier of callback or listener for async operations.
           */
@@ -97,6 +101,26 @@ namespace Adaptive.Arp.Api
                this.MethodName = MethodName;
                this.Parameters = Parameters;
                this.AsyncId = AsyncId;
+          }
+
+          /**
+             Returns the request's API version. This should be the same or higher than the platform managing the
+request.
+
+             @return String with the API version of the request.
+          */
+          public string GetApiVersion() {
+               return this.ApiVersion;
+          }
+
+          /**
+             Sets the request's API version. This should be the same or higher than the platform managing the
+request.
+
+             @param ApiVersion String with the API version of the request.
+          */
+          public void SetApiVersion(string ApiVersion) {
+               this.ApiVersion = ApiVersion;
           }
 
           /**
