@@ -60,6 +60,18 @@ manipulated as needed by the application before submitting the ServiceRequest vi
           ServiceRequest GetServiceRequest(ServiceToken serviceToken);
 
           /**
+             Obtains a Service token by a concrete uri (http://domain.com/path). This method would be useful when
+a service response is a redirect (3XX) and it is necessary to make a request to another host and we
+don't know by advance the name of the service.
+
+             @param uri Unique Resource Identifier for a Service-Endpoint-Path-Method
+             @return ServiceToken to create a service request or null if the given parameter is not
+configured in the platform's XML service definition file.
+             @since v2.1.4
+          */
+          ServiceToken GetServiceTokenByUri(string uri);
+
+          /**
              Obtains a ServiceToken for the given parameters to be used for the creation of requests.
 
              @param serviceName  Service name.

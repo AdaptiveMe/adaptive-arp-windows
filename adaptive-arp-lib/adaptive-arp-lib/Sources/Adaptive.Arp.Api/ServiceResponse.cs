@@ -71,6 +71,10 @@ should be encoded in base64.
              Information about the session.
           */
           public ServiceSession ServiceSession { get; set; }
+          /**
+             HTTP Status code of the response. With this status code it is possible to perform some actions, redirects, authentication, etc.
+          */
+          public int StatusCode { get; set; }
 
           /**
              Default constructor.
@@ -89,15 +93,17 @@ should be encoded in base64.
              @param ContentLength   The length in bytes for the Content field.
              @param ServiceHeaders  The serviceHeaders array (name,value pairs) to be included on the I/O service request.
              @param ServiceSession  Information about the session
+             @param StatusCode      HTTP Status code of the response.
              @since V2.0
           */
-          public ServiceResponse(string content, string contentType, string contentEncoding, int contentLength, ServiceHeader[] serviceHeaders, ServiceSession serviceSession) : base () {
+          public ServiceResponse(string content, string contentType, string contentEncoding, int contentLength, ServiceHeader[] serviceHeaders, ServiceSession serviceSession, int statusCode) : base () {
                this.Content = Content;
                this.ContentType = ContentType;
                this.ContentEncoding = ContentEncoding;
                this.ContentLength = ContentLength;
                this.ServiceHeaders = ServiceHeaders;
                this.ServiceSession = ServiceSession;
+               this.StatusCode = StatusCode;
           }
 
           /**
@@ -151,7 +157,7 @@ should be encoded in base64.
           }
 
           /**
-             Set the content length
+             Set the content length.
 
              @param ContentLength The length in bytes for the Content field.
              @since V2.0
@@ -218,6 +224,26 @@ should be encoded in base64.
           */
           public void SetServiceSession(ServiceSession ServiceSession) {
                this.ServiceSession = ServiceSession;
+          }
+
+          /**
+             Returns the status code of the response.
+
+             @return HTTP status code
+             @since V2.1.4
+          */
+          public int GetStatusCode() {
+               return this.StatusCode;
+          }
+
+          /**
+             Sets the status code of the response
+
+             @param StatusCode HTTP status code
+             @since V2.1.4
+          */
+          public void SetStatusCode(int StatusCode) {
+               this.StatusCode = StatusCode;
           }
 
 

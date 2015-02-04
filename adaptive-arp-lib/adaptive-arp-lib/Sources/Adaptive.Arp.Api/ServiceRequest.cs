@@ -78,6 +78,10 @@ during GET/POST operations. No query parameters are appended if this array is nu
           */
           public ServiceRequestParameter[] QueryParameters { get; set; }
           /**
+             This host indicates the origin host of the request. This, could be useful in case of redirected requests.
+          */
+          public string RefererHost { get; set; }
+          /**
              The serviceHeaders array (name,value pairs) to be included in the request. This may be populated by the
 application, the platform populates this field with defaults for the service and the previous headers.
 In specific, the platform maintains request and response state automatically.
@@ -237,6 +241,26 @@ identifiers. This should not be manipulated by the application directly.
           */
           public void SetQueryParameters(ServiceRequestParameter[] QueryParameters) {
                this.QueryParameters = QueryParameters;
+          }
+
+          /**
+             Returns the referer host (origin) of the request.
+
+             @return Referer host of the request
+             @since V2.1.4
+          */
+          public string GetRefererHost() {
+               return this.RefererHost;
+          }
+
+          /**
+             Sets the value for the referer host of the request.
+
+             @param RefererHost Referer host of the request
+             @since V2.1.4
+          */
+          public void SetRefererHost(string RefererHost) {
+               this.RefererHost = RefererHost;
           }
 
           /**

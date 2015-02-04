@@ -155,6 +155,44 @@ configured in the platform's XML service definition file.
                }
 
           /**
+             Obtains a Service token by a concrete uri (http://domain.com/path). This method would be useful when
+a service response is a redirect (3XX) and it is necessary to make a request to another host and we
+don't know by advance the name of the service.
+
+             @param uri Unique Resource Identifier for a Service-Endpoint-Path-Method
+             @return ServiceToken to create a service request or null if the given parameter is not
+configured in the platform's XML service definition file.
+             @since v2.1.4
+          */
+          public ServiceToken GetServiceTokenByUri(string uri)
+          {
+               // Start logging elapsed time.
+               long tIn = TimerUtil.CurrentTimeMillis();
+               ILogging logger = AppRegistryBridge.GetInstance().GetLoggingBridge();
+
+               if (logger!=null)
+               {
+                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executing getServiceTokenByUri({"+uri+"}).");
+               }
+
+               ServiceToken result = null;
+               if (this._delegate != null)
+               {
+                    result = this._delegate.GetServiceTokenByUri(uri);
+                    if (logger!=null)
+                    {
+                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executed 'getServiceTokenByUri' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                    }
+               } else {
+                    if (logger!=null)
+                    {
+                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServiceTokenByUri'.");
+                    }
+                    }
+                    return result;                    
+               }
+
+          /**
              Returns all the possible service tokens configured in the platform's XML service definition file.
 
              @return Array of service tokens configured.
@@ -294,25 +332,33 @@ XML service definition file.
                               responseJSON = GetJSONProcessor().SerializeObject(response1);
                          }
                          break;
-                    case "getServicesRegistered":
-                         ServiceToken[] response2 = this.GetServicesRegistered();
+                    case "getServiceTokenByUri":
+                         string uri2 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[0]);
+                         ServiceToken response2 = this.GetServiceTokenByUri(uri2);
                          if (response2 != null)
                          {
                               responseJSON = GetJSONProcessor().SerializeObject(response2);
                          }
                          break;
+                    case "getServicesRegistered":
+                         ServiceToken[] response3 = this.GetServicesRegistered();
+                         if (response3 != null)
+                         {
+                              responseJSON = GetJSONProcessor().SerializeObject(response3);
+                         }
+                         break;
                     case "invokeService":
-                         ServiceRequest serviceRequest3 = GetJSONProcessor().DeserializeObject<ServiceRequest>(request.GetParameters()[0]);
-                         IServiceResultCallback callback3 = new ServiceResultCallbackImpl(request.GetAsyncId());
-                         this.InvokeService(serviceRequest3, callback3);
+                         ServiceRequest serviceRequest4 = GetJSONProcessor().DeserializeObject<ServiceRequest>(request.GetParameters()[0]);
+                         IServiceResultCallback callback4 = new ServiceResultCallbackImpl(request.GetAsyncId());
+                         this.InvokeService(serviceRequest4, callback4);
                          break;
                     case "isServiceRegistered":
-                         string serviceName4 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[0]);
-                         string endpointName4 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[1]);
-                         string functionName4 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[2]);
-                         IServiceMethod method4 = GetJSONProcessor().DeserializeObject<IServiceMethod>(request.GetParameters()[3]);
-                         bool response4 = this.IsServiceRegistered(serviceName4, endpointName4, functionName4, method4);
-                         responseJSON = GetJSONProcessor().SerializeObject(response4);
+                         string serviceName5 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[0]);
+                         string endpointName5 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[1]);
+                         string functionName5 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[2]);
+                         IServiceMethod method5 = GetJSONProcessor().DeserializeObject<IServiceMethod>(request.GetParameters()[3]);
+                         bool response5 = this.IsServiceRegistered(serviceName5, endpointName5, functionName5, method5);
+                         responseJSON = GetJSONProcessor().SerializeObject(response5);
                          break;
                     default:
                          // 404 - response null.
