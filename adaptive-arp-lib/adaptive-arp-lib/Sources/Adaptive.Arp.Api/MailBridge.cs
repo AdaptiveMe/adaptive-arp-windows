@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.3
+    * @version v2.1.4
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -133,7 +133,7 @@ public class MailBridge : BasePIMBridge, IMail, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "MailBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.3.";
+                         responseMessage = "MailBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.4.";
                          break;
                }
                response.SetResponse(responseJSON);

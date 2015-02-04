@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.3
+    * @version v2.1.4
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -71,7 +71,7 @@ namespace Adaptive.Arp.Api
           */
           public String GetAPIVersion()
           {
-               return "v2.1.3";
+               return "v2.1.4";
           }
 
           /**
@@ -100,7 +100,7 @@ namespace Adaptive.Arp.Api
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "BaseUtilBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.3.";
+                         responseMessage = "BaseUtilBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.4.";
                          break;
                }
                response.SetResponse(responseJSON);

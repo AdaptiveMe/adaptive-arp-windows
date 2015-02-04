@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.3
+    * @version v2.1.4
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -424,7 +424,7 @@ should be passed as a parameter
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "DatabaseBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.3.";
+                         responseMessage = "DatabaseBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.4.";
                          break;
                }
                response.SetResponse(responseJSON);
