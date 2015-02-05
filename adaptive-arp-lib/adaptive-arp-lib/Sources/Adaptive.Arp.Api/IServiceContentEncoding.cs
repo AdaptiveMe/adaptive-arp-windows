@@ -37,13 +37,14 @@ using System;
 namespace Adaptive.Arp.Api
 {
      /**
-        Enumeration RotationEventState
+        Enumeration IServiceContentEncoding
      */
-     public enum RotationEventState {
+     public enum IServiceContentEncoding {
 
-          WillStartRotation,
-          IsRotating,
-          DidFinishRotation,
+          ASCII,
+          UTF8,
+          ISOLatin1,
+          Unicode,
           Unknown
 
      }

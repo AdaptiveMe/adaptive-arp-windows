@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.4
+    * @version v2.1.5
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -47,6 +47,11 @@ namespace Adaptive.Arp.Api
      {
 
           /**
+             Encoding of the content - by default assumed to be UTF8. This may be populated by the application, the platform
+populates this field with defaults for the service.
+          */
+          public IServiceContentEncoding ContentEncoding { get; set; }
+          /**
              Body parameters to be included in the body of the request to a service. These may be applied
 during GET/POST operations. No body parameters are included if this array is null or length zero.
           */
@@ -57,11 +62,6 @@ in some well-known web format - in specific, binaries submitted should be encode
 type should be set respectively by the application.
           */
           public string Content { get; set; }
-          /**
-             Encoding of the content - by default assumed to be UTF8. This may be populated by the application, the platform
-populates this field with defaults for the service.
-          */
-          public string ContentEncoding { get; set; }
           /**
              The length in bytes of the content. This may be populated by the application, the platform
 calculates this length automatically if a specific contentLength is not specified.
@@ -124,6 +124,26 @@ identifiers. This should not be manipulated by the application directly.
           }
 
           /**
+             Returns the content encoding
+
+             @return ContentEncoding
+             @since V2.0
+          */
+          public IServiceContentEncoding GetContentEncoding() {
+               return this.ContentEncoding;
+          }
+
+          /**
+             Set the content encoding
+
+             @param ContentEncoding Encoding of the binary payload - by default assumed to be UTF8.
+             @since V2.0
+          */
+          public void SetContentEncoding(IServiceContentEncoding ContentEncoding) {
+               this.ContentEncoding = ContentEncoding;
+          }
+
+          /**
              Gets the body parameters of the request.
 
              @return ServiceRequestParameter array or null if none are specified.
@@ -161,26 +181,6 @@ identifiers. This should not be manipulated by the application directly.
           */
           public void SetContent(string Content) {
                this.Content = Content;
-          }
-
-          /**
-             Returns the content encoding
-
-             @return ContentEncoding
-             @since V2.0
-          */
-          public string GetContentEncoding() {
-               return this.ContentEncoding;
-          }
-
-          /**
-             Set the content encoding
-
-             @param ContentEncoding Encoding of the binary payload - by default assumed to be UTF8.
-             @since V2.0
-          */
-          public void SetContentEncoding(string ContentEncoding) {
-               this.ContentEncoding = ContentEncoding;
           }
 
           /**

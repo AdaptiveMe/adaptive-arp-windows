@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.4
+    * @version v2.1.5
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -433,7 +433,7 @@ This path may or may not be writable by the current application.
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "FileSystemBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.4.";
+                         responseMessage = "FileSystemBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.5.";
                          break;
                }
                response.SetResponse(responseJSON);

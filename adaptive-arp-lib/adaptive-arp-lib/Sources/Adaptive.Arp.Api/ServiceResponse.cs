@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.4
+    * @version v2.1.5
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -47,14 +47,14 @@ namespace Adaptive.Arp.Api
      {
 
           /**
+             Encoding of the binary payload - by default assumed to be UTF8.
+          */
+          public IServiceContentEncoding ContentEncoding { get; set; }
+          /**
              Response data content. The content should be in some well-known web format - in specific, binaries returned
 should be encoded in base64.
           */
           public string Content { get; set; }
-          /**
-             Encoding of the binary payload - by default assumed to be UTF8.
-          */
-          public string ContentEncoding { get; set; }
           /**
              The length in bytes for the Content field.
           */
@@ -96,7 +96,7 @@ should be encoded in base64.
              @param StatusCode      HTTP Status code of the response.
              @since V2.0
           */
-          public ServiceResponse(string content, string contentType, string contentEncoding, int contentLength, ServiceHeader[] serviceHeaders, ServiceSession serviceSession, int statusCode) : base () {
+          public ServiceResponse(string content, string contentType, IServiceContentEncoding contentEncoding, int contentLength, ServiceHeader[] serviceHeaders, ServiceSession serviceSession, int statusCode) : base () {
                this.Content = Content;
                this.ContentType = ContentType;
                this.ContentEncoding = ContentEncoding;
@@ -104,6 +104,26 @@ should be encoded in base64.
                this.ServiceHeaders = ServiceHeaders;
                this.ServiceSession = ServiceSession;
                this.StatusCode = StatusCode;
+          }
+
+          /**
+             Returns the content encoding
+
+             @return ContentEncoding
+             @since V2.0
+          */
+          public IServiceContentEncoding GetContentEncoding() {
+               return this.ContentEncoding;
+          }
+
+          /**
+             Set the content encoding
+
+             @param ContentEncoding Encoding of the binary payload - by default assumed to be UTF8.
+             @since V2.0
+          */
+          public void SetContentEncoding(IServiceContentEncoding ContentEncoding) {
+               this.ContentEncoding = ContentEncoding;
           }
 
           /**
@@ -124,26 +144,6 @@ should be encoded in base64.
           */
           public void SetContent(string Content) {
                this.Content = Content;
-          }
-
-          /**
-             Returns the content encoding
-
-             @return ContentEncoding
-             @since V2.0
-          */
-          public string GetContentEncoding() {
-               return this.ContentEncoding;
-          }
-
-          /**
-             Set the content encoding
-
-             @param ContentEncoding Encoding of the binary payload - by default assumed to be UTF8.
-             @since V2.0
-          */
-          public void SetContentEncoding(string ContentEncoding) {
-               this.ContentEncoding = ContentEncoding;
           }
 
           /**
