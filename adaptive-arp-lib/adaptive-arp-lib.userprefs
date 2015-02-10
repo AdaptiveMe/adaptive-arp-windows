@@ -1,6 +1,23 @@
 ﻿<Properties StartupItem="adaptive-arp-lib/adaptive-arp-lib.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="adaptive-arp-lib/Sources/Adaptive.Arp.Api/AccelerationListenerImpl.cs">
+    <Files>
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/Acceleration.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/BaseListenerImpl.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/IBaseListener.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/ContactWebsite.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/FileDataLoadResultCallbackImpl.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Util/JSONProcessor.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Util/TimerUtil.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Impl/AccelerationDelegate.cs" Line="96" Column="96" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Impl/VideoDelegate.cs" Line="76" Column="76" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Impl/ServiceDelegate.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/AccelerationBridge.cs" Line="11" Column="11" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/AppRegistryBridge.cs" Line="1" Column="1" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/AppRegistryDelegate.cs" Line="54" Column="54" />
+      <File FileName="adaptive-arp-lib/Sources/Adaptive.Arp.Api/AccelerationListenerImpl.cs" Line="209" Column="209" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
