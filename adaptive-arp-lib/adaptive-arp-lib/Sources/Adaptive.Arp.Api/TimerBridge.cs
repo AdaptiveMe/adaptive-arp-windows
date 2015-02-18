@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.5
+    * @version v2.1.6
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -94,7 +94,7 @@ public class TimerBridge : BaseUtilBridge, ITimer, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "TimerBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.5.";
+                         responseMessage = "TimerBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.6.";
                          break;
                }
                response.SetResponse(responseJSON);

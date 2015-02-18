@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.5
+    * @version v2.1.6
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -94,31 +94,6 @@ namespace Adaptive.Arp.Api
              @since V2.0
           */
           public Contact(string contactId) : base(contactId) {
-          }
-
-          /**
-             Constructor with all the fields
-
-             @param ContactId        Identifier of the contact
-             @param PersonalInfo     Personal Information
-             @param ProfessionalInfo Professional Information
-             @param ContactAddresses Addresses of the contact
-             @param ContactPhones    Phones of the contact
-             @param ContactEmails    Emails of the contact
-             @param ContactWebsites  Websites of the contact
-             @param ContactSocials   Social Networks of the contact
-             @param ContactTags      Tags of the contact
-             @since V2.0
-          */
-          public Contact(string contactId, ContactPersonalInfo personalInfo, ContactProfessionalInfo professionalInfo, ContactAddress[] contactAddresses, ContactPhone[] contactPhones, ContactEmail[] contactEmails, ContactWebsite[] contactWebsites, ContactSocial[] contactSocials, ContactTag[] contactTags) : base(contactId) {
-               this.PersonalInfo = PersonalInfo;
-               this.ProfessionalInfo = ProfessionalInfo;
-               this.ContactAddresses = ContactAddresses;
-               this.ContactPhones = ContactPhones;
-               this.ContactEmails = ContactEmails;
-               this.ContactWebsites = ContactWebsites;
-               this.ContactSocials = ContactSocials;
-               this.ContactTags = ContactTags;
           }
 
           /**

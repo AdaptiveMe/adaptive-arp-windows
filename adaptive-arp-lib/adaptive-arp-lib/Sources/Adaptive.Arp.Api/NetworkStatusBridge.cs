@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.5
+    * @version v2.1.6
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -203,7 +203,7 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "NetworkStatusBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.5.";
+                         responseMessage = "NetworkStatusBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.6.";
                          break;
                }
                response.SetResponse(responseJSON);

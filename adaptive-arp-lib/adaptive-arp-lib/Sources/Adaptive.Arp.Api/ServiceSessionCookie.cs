@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.5
+    * @version v2.1.6
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -97,30 +97,6 @@ namespace Adaptive.Arp.Api
           public ServiceSessionCookie(string cookieName, string cookieValue) : base () {
                this.CookieName = CookieName;
                this.CookieValue = CookieValue;
-          }
-
-          /**
-             Contructor with fields
-
-             @param CookieName  Name of the cookie
-             @param CookieValue Value of the cookie
-             @param Domain      Domain of the cookie
-             @param Path        Path of the cookie
-             @param Scheme      Scheme of the cookie
-             @param Secure      Privacy of the cookie
-             @param Expiry      Expiration date of the cookie
-             @param Creation    Creation date of the cookie
-             @since V2.0
-          */
-          public ServiceSessionCookie(string cookieName, string cookieValue, string domain, string path, string scheme, bool secure, long expiry, long creation) : base () {
-               this.CookieName = CookieName;
-               this.CookieValue = CookieValue;
-               this.Domain = Domain;
-               this.Path = Path;
-               this.Scheme = Scheme;
-               this.Secure = Secure;
-               this.Expiry = Expiry;
-               this.Creation = Creation;
           }
 
           /**
