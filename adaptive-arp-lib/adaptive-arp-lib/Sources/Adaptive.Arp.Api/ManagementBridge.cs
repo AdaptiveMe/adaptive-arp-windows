@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.8
+    * @version v2.1.9
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -94,7 +94,7 @@ public class ManagementBridge : BaseApplicationBridge, IManagement, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "ManagementBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.8.";
+                         responseMessage = "ManagementBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
                          break;
                }
                response.SetResponse(responseJSON);
