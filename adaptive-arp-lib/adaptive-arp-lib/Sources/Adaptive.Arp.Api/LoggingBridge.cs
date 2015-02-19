@@ -124,12 +124,12 @@ public class LoggingBridge : BaseUtilBridge, ILogging, APIBridge
                String responseJSON = "null";
                switch (request.GetMethodName())
                {
-                    case "log_level_message":
+                    case "logLevelMessage":
                          ILoggingLogLevel level0 = GetJSONProcessor().DeserializeObject<ILoggingLogLevel>(request.GetParameters()[0]);
                          string message0 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[1]);
                          this.Log(level0, message0);
                          break;
-                    case "log_level_category_message":
+                    case "logLevelCategoryMessage":
                          ILoggingLogLevel level1 = GetJSONProcessor().DeserializeObject<ILoggingLogLevel>(request.GetParameters()[0]);
                          string category1 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[1]);
                          string message1 = GetJSONProcessor().DeserializeObject<string>(request.GetParameters()[2]);
