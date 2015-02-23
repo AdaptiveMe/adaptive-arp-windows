@@ -92,7 +92,7 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing createDatabase({"+database+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing createDatabase...");
                }
 
                if (this._delegate != null)
@@ -127,7 +127,7 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing createTable({"+database+"},{"+databaseTable+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing createTable...");
                }
 
                if (this._delegate != null)
@@ -161,7 +161,7 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing deleteDatabase({"+database+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing deleteDatabase...");
                }
 
                if (this._delegate != null)
@@ -196,7 +196,7 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing deleteTable({"+database+"},{"+databaseTable+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing deleteTable...");
                }
 
                if (this._delegate != null)
@@ -233,7 +233,7 @@ should be passed as a parameter
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing executeSqlStatement({"+database+"},{"+statement+"},{"+replacements+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing executeSqlStatement...");
                }
 
                if (this._delegate != null)
@@ -270,7 +270,7 @@ should be passed as a parameter
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing executeSqlTransactions({"+database+"},{"+statements+"},{"+rollbackFlag+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing executeSqlTransactions...");
                }
 
                if (this._delegate != null)
@@ -304,7 +304,7 @@ should be passed as a parameter
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing existsDatabase({"+database+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing existsDatabase...");
                }
 
                bool result = false;
@@ -340,7 +340,7 @@ should be passed as a parameter
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing existsTable({"+database+"},{"+databaseTable+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing existsTable...");
                }
 
                bool result = false;

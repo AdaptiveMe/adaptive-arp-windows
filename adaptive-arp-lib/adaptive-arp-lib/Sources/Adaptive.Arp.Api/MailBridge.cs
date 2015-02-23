@@ -92,7 +92,7 @@ public class MailBridge : BasePIMBridge, IMail, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"MailBridge executing sendEmail({"+data+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"MailBridge executing sendEmail...");
                }
 
                if (this._delegate != null)

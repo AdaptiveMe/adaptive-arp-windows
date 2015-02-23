@@ -91,7 +91,7 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing addNetworkStatusListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing addNetworkStatusListener...");
                }
 
                if (this._delegate != null)
@@ -124,7 +124,7 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing removeNetworkStatusListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing removeNetworkStatusListener...");
                }
 
                if (this._delegate != null)
@@ -156,7 +156,7 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing removeNetworkStatusListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing removeNetworkStatusListeners...");
                }
 
                if (this._delegate != null)

@@ -92,7 +92,7 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openExtenalBrowser({"+url+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openExtenalBrowser...");
                }
 
                bool result = false;
@@ -129,7 +129,7 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openInternalBrowser({"+url+"},{"+title+"},{"+backButtonText+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openInternalBrowser...");
                }
 
                bool result = false;
@@ -166,7 +166,7 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openInternalBrowserModal({"+url+"},{"+title+"},{"+backButtonText+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openInternalBrowserModal...");
                }
 
                bool result = false;

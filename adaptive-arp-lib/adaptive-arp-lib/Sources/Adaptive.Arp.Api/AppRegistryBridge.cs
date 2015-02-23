@@ -2596,7 +2596,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getAPIVersion.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getAPIVersion...");
                }
 
                string result = null;
@@ -2630,7 +2630,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getPlatformContext.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getPlatformContext...");
                }
 
                AppContextBridge result = null;
@@ -2664,7 +2664,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getPlatformContextWeb.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getPlatformContextWeb...");
                }
 
                AppContextWebviewBridge result = null;

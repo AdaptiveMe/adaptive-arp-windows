@@ -91,7 +91,7 @@ public class OSBridge : BaseSystemBridge, IOS, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"OSBridge executing getOSInfo.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"OSBridge executing getOSInfo...");
                }
 
                OSInfo result = null;

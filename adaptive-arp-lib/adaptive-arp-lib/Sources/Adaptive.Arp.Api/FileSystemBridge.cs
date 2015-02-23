@@ -94,7 +94,7 @@ This method does not create the actual file in the specified folder.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing createFileDescriptor({"+parent+"},{"+name+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing createFileDescriptor...");
                }
 
                FileDescriptor result = null;
@@ -130,7 +130,7 @@ This path is volatile and may be cleaned by the OS periodically.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationCacheFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationCacheFolder...");
                }
 
                FileDescriptor result = null;
@@ -165,7 +165,7 @@ This path must always be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationCloudFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationCloudFolder...");
                }
 
                FileDescriptor result = null;
@@ -200,7 +200,7 @@ This path must always be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationDocumentsFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationDocumentsFolder...");
                }
 
                FileDescriptor result = null;
@@ -235,7 +235,7 @@ This path may or may not be directly readable or writable - it usually contains 
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationFolder...");
                }
 
                FileDescriptor result = null;
@@ -270,7 +270,7 @@ This path must always be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationProtectedFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationProtectedFolder...");
                }
 
                FileDescriptor result = null;
@@ -304,7 +304,7 @@ This path must always be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getSeparator.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getSeparator...");
                }
 
                char result = ' ';
@@ -341,7 +341,7 @@ This path may or may not be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getSystemExternalFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getSystemExternalFolder...");
                }
 
                FileDescriptor result = null;

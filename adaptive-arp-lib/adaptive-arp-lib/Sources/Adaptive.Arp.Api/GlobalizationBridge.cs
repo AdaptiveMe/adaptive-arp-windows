@@ -91,7 +91,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getDefaultLocale.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getDefaultLocale...");
                }
 
                Locale result = null;
@@ -125,7 +125,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getLocaleSupportedDescriptors.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getLocaleSupportedDescriptors...");
                }
 
                Locale[] result = null;
@@ -161,7 +161,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getResourceLiteral({"+key+"},{"+locale+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getResourceLiteral...");
                }
 
                string result = null;
@@ -196,7 +196,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getResourceLiterals({"+locale+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getResourceLiterals...");
                }
 
                KeyPair[] result = null;

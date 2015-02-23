@@ -99,7 +99,7 @@ not be added using this method.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing addWebview({"+webView+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing addWebview...");
                }
 
                if (this._delegate != null)
@@ -131,7 +131,7 @@ not be added using this method.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing executeJavaScript({"+javaScriptText+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing executeJavaScript...");
                }
 
                if (this._delegate != null)
@@ -164,7 +164,7 @@ not be added using this method.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing executeJavaScript({"+javaScriptText+"},{"+webViewReference+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing executeJavaScript...");
                }
 
                if (this._delegate != null)
@@ -199,7 +199,7 @@ WebView, WKWebView, etc.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing getWebviewPrimary.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing getWebviewPrimary...");
                }
 
                Object result = null;
@@ -234,7 +234,7 @@ This method will always return at least one element; the primary webview.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing getWebviews.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing getWebviews...");
                }
 
                Object[] result = null;
@@ -269,7 +269,7 @@ ARP functions and release resources. The primary webview can not be removed.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing removeWebview({"+webView+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing removeWebview...");
                }
 
                if (this._delegate != null)

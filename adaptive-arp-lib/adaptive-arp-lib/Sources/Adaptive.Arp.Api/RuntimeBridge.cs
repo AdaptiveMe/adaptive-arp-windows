@@ -90,7 +90,7 @@ public class RuntimeBridge : BaseSystemBridge, IRuntime, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"RuntimeBridge executing dismissApplication.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"RuntimeBridge executing dismissApplication...");
                }
 
                if (this._delegate != null)
@@ -123,7 +123,7 @@ public class RuntimeBridge : BaseSystemBridge, IRuntime, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"RuntimeBridge executing dismissSplashScreen.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"RuntimeBridge executing dismissSplashScreen...");
                }
 
                bool result = false;

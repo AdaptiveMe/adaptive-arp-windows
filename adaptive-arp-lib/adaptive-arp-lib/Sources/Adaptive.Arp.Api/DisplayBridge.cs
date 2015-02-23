@@ -91,7 +91,7 @@ public class DisplayBridge : BaseSystemBridge, IDisplay, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DisplayBridge executing addDisplayOrientationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DisplayBridge executing addDisplayOrientationListener...");
                }
 
                if (this._delegate != null)
@@ -125,7 +125,7 @@ of the device. For device orientation, use the IDevice APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DisplayBridge executing getOrientationCurrent.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DisplayBridge executing getOrientationCurrent...");
                }
 
                ICapabilitiesOrientation result = ICapabilitiesOrientation.Unknown;
@@ -159,7 +159,7 @@ of the device. For device orientation, use the IDevice APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DisplayBridge executing removeDisplayOrientationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DisplayBridge executing removeDisplayOrientationListener...");
                }
 
                if (this._delegate != null)
@@ -191,7 +191,7 @@ of the device. For device orientation, use the IDevice APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DisplayBridge executing removeDisplayOrientationListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DisplayBridge executing removeDisplayOrientationListeners...");
                }
 
                if (this._delegate != null)

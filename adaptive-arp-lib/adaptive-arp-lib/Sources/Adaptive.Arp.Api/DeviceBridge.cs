@@ -91,7 +91,7 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing addButtonListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing addButtonListener...");
                }
 
                if (this._delegate != null)
@@ -124,7 +124,7 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing addDeviceOrientationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing addDeviceOrientationListener...");
                }
 
                if (this._delegate != null)
@@ -157,7 +157,7 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getDeviceInfo.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getDeviceInfo...");
                }
 
                DeviceInfo result = null;
@@ -191,7 +191,7 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getLocaleCurrent.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getLocaleCurrent...");
                }
 
                Locale result = null;
@@ -226,7 +226,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getOrientationCurrent.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getOrientationCurrent...");
                }
 
                ICapabilitiesOrientation result = ICapabilitiesOrientation.Unknown;
@@ -260,7 +260,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeButtonListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeButtonListener...");
                }
 
                if (this._delegate != null)
@@ -292,7 +292,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeButtonListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeButtonListeners...");
                }
 
                if (this._delegate != null)
@@ -325,7 +325,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeDeviceOrientationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeDeviceOrientationListener...");
                }
 
                if (this._delegate != null)
@@ -357,7 +357,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeDeviceOrientationListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeDeviceOrientationListeners...");
                }
 
                if (this._delegate != null)

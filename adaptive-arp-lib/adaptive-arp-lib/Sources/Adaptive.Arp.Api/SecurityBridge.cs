@@ -93,7 +93,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing deleteSecureKeyValuePairs({"+keys+"},{"+publicAccessName+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing deleteSecureKeyValuePairs...");
                }
 
                if (this._delegate != null)
@@ -128,7 +128,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing getSecureKeyValuePairs({"+keys+"},{"+publicAccessName+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing getSecureKeyValuePairs...");
                }
 
                if (this._delegate != null)
@@ -161,7 +161,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing isDeviceModified.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing isDeviceModified...");
                }
 
                bool result = false;
@@ -197,7 +197,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing setSecureKeyValuePairs({"+keyValues+"},{"+publicAccessName+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing setSecureKeyValuePairs...");
                }
 
                if (this._delegate != null)

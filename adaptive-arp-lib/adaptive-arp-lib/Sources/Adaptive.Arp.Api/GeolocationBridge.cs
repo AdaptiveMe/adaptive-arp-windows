@@ -91,7 +91,7 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing addGeolocationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing addGeolocationListener...");
                }
 
                if (this._delegate != null)
@@ -124,7 +124,7 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing removeGeolocationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing removeGeolocationListener...");
                }
 
                if (this._delegate != null)
@@ -156,7 +156,7 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing removeGeolocationListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing removeGeolocationListeners...");
                }
 
                if (this._delegate != null)

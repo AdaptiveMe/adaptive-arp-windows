@@ -91,7 +91,7 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing addAccelerationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing addAccelerationListener...");
                }
 
                if (this._delegate != null)
@@ -124,7 +124,7 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing removeAccelerationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing removeAccelerationListener...");
                }
 
                if (this._delegate != null)
@@ -156,7 +156,7 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing removeAccelerationListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing removeAccelerationListeners...");
                }
 
                if (this._delegate != null)

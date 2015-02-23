@@ -92,7 +92,7 @@ public class NetworkReachabilityBridge : BaseCommunicationBridge, INetworkReacha
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkReachabilityBridge executing isNetworkReachable({"+host+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkReachabilityBridge executing isNetworkReachable...");
                }
 
                if (this._delegate != null)
@@ -126,7 +126,7 @@ public class NetworkReachabilityBridge : BaseCommunicationBridge, INetworkReacha
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkReachabilityBridge executing isNetworkServiceReachable({"+url+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkReachabilityBridge executing isNetworkServiceReachable...");
                }
 
                if (this._delegate != null)

@@ -96,7 +96,7 @@ public class AppContextBridge : IAppContext
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextBridge executing getContext.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextBridge executing getContext...");
                }
 
                Object result = null;
@@ -130,7 +130,7 @@ public class AppContextBridge : IAppContext
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextBridge executing getContextType.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextBridge executing getContextType...");
                }
 
                IOSType result = IOSType.Unknown;

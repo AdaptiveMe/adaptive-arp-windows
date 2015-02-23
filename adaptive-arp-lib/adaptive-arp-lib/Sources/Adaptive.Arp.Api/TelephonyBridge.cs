@@ -92,7 +92,7 @@ public class TelephonyBridge : BaseCommunicationBridge, ITelephony, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"TelephonyBridge executing call({"+number+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"TelephonyBridge executing call...");
                }
 
                ITelephonyStatus result = ITelephonyStatus.Unknown;

@@ -95,7 +95,7 @@ manipulated as needed by the application before submitting the ServiceRequest vi
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceRequest({"+serviceToken+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceRequest...");
                }
 
                ServiceRequest result = null;
@@ -134,7 +134,7 @@ configured in the platform's XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceToken({"+serviceName+"},{"+endpointName+"},{"+functionName+"},{"+method+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceToken...");
                }
 
                ServiceToken result = null;
@@ -172,7 +172,7 @@ configured in the platform's XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceTokenByUri({"+uri+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceTokenByUri...");
                }
 
                ServiceToken result = null;
@@ -206,7 +206,7 @@ configured in the platform's XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServicesRegistered.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServicesRegistered...");
                }
 
                ServiceToken[] result = null;
@@ -241,7 +241,7 @@ configured in the platform's XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing invokeService({"+serviceRequest+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing invokeService...");
                }
 
                if (this._delegate != null)
@@ -279,7 +279,7 @@ XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing isServiceRegistered({"+serviceName+"},{"+endpointName+"},{"+functionName+"},{"+method+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing isServiceRegistered...");
                }
 
                bool result = false;

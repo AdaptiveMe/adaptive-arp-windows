@@ -91,7 +91,7 @@ public class VideoBridge : BaseMediaBridge, IVideo, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"VideoBridge executing playStream({"+url+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"VideoBridge executing playStream...");
                }
 
                if (this._delegate != null)

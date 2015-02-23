@@ -93,7 +93,7 @@ changes please use the IDevice and IDisplay functions and listeners API respecti
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing getOrientationDefault.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing getOrientationDefault...");
                }
 
                ICapabilitiesOrientation result = ICapabilitiesOrientation.Unknown;
@@ -128,7 +128,7 @@ support at least one orientation. This is usually PortaitUp.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing getOrientationsSupported.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing getOrientationsSupported...");
                }
 
                ICapabilitiesOrientation[] result = null;
@@ -163,7 +163,7 @@ support at least one orientation. This is usually PortaitUp.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasButtonSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasButtonSupport...");
                }
 
                bool result = false;
@@ -199,7 +199,7 @@ the device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasCommunicationSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasCommunicationSupport...");
                }
 
                bool result = false;
@@ -234,7 +234,7 @@ the device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasDataSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasDataSupport...");
                }
 
                bool result = false;
@@ -270,7 +270,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasMediaSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasMediaSupport...");
                }
 
                bool result = false;
@@ -305,7 +305,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasNetSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasNetSupport...");
                }
 
                bool result = false;
@@ -341,7 +341,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasNotificationSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasNotificationSupport...");
                }
 
                bool result = false;
@@ -376,7 +376,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasOrientationSupport({"+orientation+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasOrientationSupport...");
                }
 
                bool result = false;
@@ -412,7 +412,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasSensorSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasSensorSupport...");
                }
 
                bool result = false;

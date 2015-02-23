@@ -91,7 +91,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing addLifecycleListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing addLifecycleListener...");
                }
 
                if (this._delegate != null)
@@ -124,7 +124,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing isBackground.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing isBackground...");
                }
 
                bool result = false;
@@ -158,7 +158,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing removeLifecycleListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing removeLifecycleListener...");
                }
 
                if (this._delegate != null)
@@ -190,7 +190,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing removeLifecycleListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing removeLifecycleListeners...");
                }
 
                if (this._delegate != null)

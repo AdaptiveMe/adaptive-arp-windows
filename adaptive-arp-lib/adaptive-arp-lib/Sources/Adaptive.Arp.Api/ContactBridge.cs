@@ -92,7 +92,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContact({"+contact+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContact...");
                }
 
                if (this._delegate != null)
@@ -126,7 +126,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactPhoto({"+contact+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactPhoto...");
                }
 
                if (this._delegate != null)
@@ -159,7 +159,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContacts({"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContacts...");
                }
 
                if (this._delegate != null)
@@ -193,7 +193,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactsForFields({"+callback+"},{"+fields+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactsForFields...");
                }
 
                if (this._delegate != null)
@@ -228,7 +228,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactsWithFilter({"+callback+"},{"+fields+"},{"+filter+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactsWithFilter...");
                }
 
                if (this._delegate != null)
@@ -262,7 +262,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing searchContacts({"+term+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing searchContacts...");
                }
 
                if (this._delegate != null)
@@ -297,7 +297,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing searchContactsWithFilter({"+term+"},{"+callback+"},{"+filter+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing searchContactsWithFilter...");
                }
 
                if (this._delegate != null)
@@ -332,7 +332,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing setContactPhoto({"+contact+"},{"+pngImage+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing setContactPhoto...");
                }
 
                bool result = false;

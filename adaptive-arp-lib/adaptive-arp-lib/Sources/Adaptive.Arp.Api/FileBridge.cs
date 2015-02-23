@@ -92,7 +92,7 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing canRead({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing canRead...");
                }
 
                bool result = false;
@@ -127,7 +127,7 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing canWrite({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing canWrite...");
                }
 
                bool result = false;
@@ -162,7 +162,7 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing create({"+descriptor+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing create...");
                }
 
                if (this._delegate != null)
@@ -198,7 +198,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing delete({"+descriptor+"},{"+cascade+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing delete...");
                }
 
                bool result = false;
@@ -233,7 +233,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing exists({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing exists...");
                }
 
                bool result = false;
@@ -268,7 +268,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getContent({"+descriptor+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getContent...");
                }
 
                if (this._delegate != null)
@@ -302,7 +302,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getFileStorageType({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getFileStorageType...");
                }
 
                IFileSystemStorageType result = IFileSystemStorageType.Unknown;
@@ -337,7 +337,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getFileType({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getFileType...");
                }
 
                IFileSystemType result = IFileSystemType.Unknown;
@@ -372,7 +372,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getSecurityType({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getSecurityType...");
                }
 
                IFileSystemSecurity result = IFileSystemSecurity.Unknown;
@@ -407,7 +407,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing isDirectory({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing isDirectory...");
                }
 
                bool result = false;
@@ -443,7 +443,7 @@ any results.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing listFiles({"+descriptor+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing listFiles...");
                }
 
                if (this._delegate != null)
@@ -479,7 +479,7 @@ is a file, it will not yield any results.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing listFilesForRegex({"+descriptor+"},{"+regex+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing listFilesForRegex...");
                }
 
                if (this._delegate != null)
@@ -514,7 +514,7 @@ is a file, it will not yield any results.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing mkDir({"+descriptor+"},{"+recursive+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing mkDir...");
                }
 
                bool result = false;
@@ -553,7 +553,7 @@ new destination file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing move({"+source+"},{"+destination+"},{"+createPath+"},{"+overwrite+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing move...");
                }
 
                if (this._delegate != null)
@@ -588,7 +588,7 @@ new destination file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing setContent({"+descriptor+"},{"+content+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing setContent...");
                }
 
                if (this._delegate != null)

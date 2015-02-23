@@ -93,7 +93,7 @@ public class MessagingBridge : BasePIMBridge, IMessaging, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"MessagingBridge executing sendSMS({"+number+"},{"+text+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"MessagingBridge executing sendSMS...");
                }
 
                if (this._delegate != null)
