@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -91,7 +91,7 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GeolocationBridge executing addGeolocationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing addGeolocationListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -99,12 +99,12 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
                     this._delegate.AddGeolocationListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GeolocationBridge executed 'addGeolocationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executed 'addGeolocationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"GeolocationBridge no delegate for 'addGeolocationListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"GeolocationBridge no delegate for 'addGeolocationListener'.");
                     }
                     }
                     
@@ -124,7 +124,7 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GeolocationBridge executing removeGeolocationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing removeGeolocationListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -132,12 +132,12 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
                     this._delegate.RemoveGeolocationListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GeolocationBridge executed 'removeGeolocationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executed 'removeGeolocationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"GeolocationBridge no delegate for 'removeGeolocationListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"GeolocationBridge no delegate for 'removeGeolocationListener'.");
                     }
                     }
                     
@@ -156,7 +156,7 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GeolocationBridge executing removeGeolocationListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executing removeGeolocationListeners.");
                }
 
                if (this._delegate != null)
@@ -164,12 +164,12 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
                     this._delegate.RemoveGeolocationListeners();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GeolocationBridge executed 'removeGeolocationListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GeolocationBridge executed 'removeGeolocationListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"GeolocationBridge no delegate for 'removeGeolocationListeners'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"GeolocationBridge no delegate for 'removeGeolocationListeners'.");
                     }
                     }
                     
@@ -203,7 +203,7 @@ public class GeolocationBridge : BaseSensorBridge, IGeolocation, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "GeolocationBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "GeolocationBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

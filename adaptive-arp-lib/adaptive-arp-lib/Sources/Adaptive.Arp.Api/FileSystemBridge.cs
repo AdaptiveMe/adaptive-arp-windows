@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -94,7 +94,7 @@ This method does not create the actual file in the specified folder.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executing createFileDescriptor({"+parent+"},{"+name+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing createFileDescriptor({"+parent+"},{"+name+"}).");
                }
 
                FileDescriptor result = null;
@@ -103,12 +103,12 @@ This method does not create the actual file in the specified folder.
                     result = this._delegate.CreateFileDescriptor(parent, name);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executed 'createFileDescriptor' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executed 'createFileDescriptor' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'createFileDescriptor'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'createFileDescriptor'.");
                     }
                     }
                     return result;                    
@@ -130,7 +130,7 @@ This path is volatile and may be cleaned by the OS periodically.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationCacheFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationCacheFolder.");
                }
 
                FileDescriptor result = null;
@@ -139,12 +139,12 @@ This path is volatile and may be cleaned by the OS periodically.
                     result = this._delegate.GetApplicationCacheFolder();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationCacheFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationCacheFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationCacheFolder'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationCacheFolder'.");
                     }
                     }
                     return result;                    
@@ -165,7 +165,7 @@ This path must always be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationCloudFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationCloudFolder.");
                }
 
                FileDescriptor result = null;
@@ -174,12 +174,12 @@ This path must always be writable by the current application.
                     result = this._delegate.GetApplicationCloudFolder();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationCloudFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationCloudFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationCloudFolder'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationCloudFolder'.");
                     }
                     }
                     return result;                    
@@ -200,7 +200,7 @@ This path must always be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationDocumentsFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationDocumentsFolder.");
                }
 
                FileDescriptor result = null;
@@ -209,12 +209,12 @@ This path must always be writable by the current application.
                     result = this._delegate.GetApplicationDocumentsFolder();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationDocumentsFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationDocumentsFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationDocumentsFolder'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationDocumentsFolder'.");
                     }
                     }
                     return result;                    
@@ -235,7 +235,7 @@ This path may or may not be directly readable or writable - it usually contains 
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationFolder.");
                }
 
                FileDescriptor result = null;
@@ -244,12 +244,12 @@ This path may or may not be directly readable or writable - it usually contains 
                     result = this._delegate.GetApplicationFolder();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationFolder'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationFolder'.");
                     }
                     }
                     return result;                    
@@ -270,7 +270,7 @@ This path must always be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationProtectedFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getApplicationProtectedFolder.");
                }
 
                FileDescriptor result = null;
@@ -279,12 +279,12 @@ This path must always be writable by the current application.
                     result = this._delegate.GetApplicationProtectedFolder();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationProtectedFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executed 'getApplicationProtectedFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationProtectedFolder'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getApplicationProtectedFolder'.");
                     }
                     }
                     return result;                    
@@ -304,7 +304,7 @@ This path must always be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executing getSeparator.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getSeparator.");
                }
 
                char result = ' ';
@@ -313,12 +313,12 @@ This path must always be writable by the current application.
                     result = this._delegate.GetSeparator();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executed 'getSeparator' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executed 'getSeparator' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getSeparator'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getSeparator'.");
                     }
                     }
                     return result;                    
@@ -341,7 +341,7 @@ This path may or may not be writable by the current application.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executing getSystemExternalFolder.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executing getSystemExternalFolder.");
                }
 
                FileDescriptor result = null;
@@ -350,12 +350,12 @@ This path may or may not be writable by the current application.
                     result = this._delegate.GetSystemExternalFolder();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileSystemBridge executed 'getSystemExternalFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileSystemBridge executed 'getSystemExternalFolder' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getSystemExternalFolder'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileSystemBridge no delegate for 'getSystemExternalFolder'.");
                     }
                     }
                     return result;                    
@@ -433,7 +433,7 @@ This path may or may not be writable by the current application.
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "FileSystemBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "FileSystemBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

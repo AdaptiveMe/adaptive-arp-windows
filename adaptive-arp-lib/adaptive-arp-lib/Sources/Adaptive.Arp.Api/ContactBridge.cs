@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -92,7 +92,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executing getContact({"+contact+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContact({"+contact+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -100,12 +100,12 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     this._delegate.GetContact(contact, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executed 'getContact' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executed 'getContact' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContact'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContact'.");
                     }
                     }
                     
@@ -126,7 +126,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executing getContactPhoto({"+contact+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactPhoto({"+contact+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -134,12 +134,12 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     this._delegate.GetContactPhoto(contact, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executed 'getContactPhoto' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executed 'getContactPhoto' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContactPhoto'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContactPhoto'.");
                     }
                     }
                     
@@ -159,7 +159,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executing getContacts({"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContacts({"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -167,12 +167,12 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     this._delegate.GetContacts(callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executed 'getContacts' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executed 'getContacts' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContacts'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContacts'.");
                     }
                     }
                     
@@ -193,7 +193,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executing getContactsForFields({"+callback+"},{"+fields+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactsForFields({"+callback+"},{"+fields+"}).");
                }
 
                if (this._delegate != null)
@@ -201,12 +201,12 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     this._delegate.GetContactsForFields(callback, fields);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executed 'getContactsForFields' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executed 'getContactsForFields' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContactsForFields'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContactsForFields'.");
                     }
                     }
                     
@@ -228,7 +228,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executing getContactsWithFilter({"+callback+"},{"+fields+"},{"+filter+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing getContactsWithFilter({"+callback+"},{"+fields+"},{"+filter+"}).");
                }
 
                if (this._delegate != null)
@@ -236,12 +236,12 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     this._delegate.GetContactsWithFilter(callback, fields, filter);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executed 'getContactsWithFilter' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executed 'getContactsWithFilter' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContactsWithFilter'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ContactBridge no delegate for 'getContactsWithFilter'.");
                     }
                     }
                     
@@ -262,7 +262,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executing searchContacts({"+term+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing searchContacts({"+term+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -270,12 +270,12 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     this._delegate.SearchContacts(term, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executed 'searchContacts' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executed 'searchContacts' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ContactBridge no delegate for 'searchContacts'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ContactBridge no delegate for 'searchContacts'.");
                     }
                     }
                     
@@ -297,7 +297,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executing searchContactsWithFilter({"+term+"},{"+callback+"},{"+filter+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing searchContactsWithFilter({"+term+"},{"+callback+"},{"+filter+"}).");
                }
 
                if (this._delegate != null)
@@ -305,12 +305,12 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     this._delegate.SearchContactsWithFilter(term, callback, filter);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executed 'searchContactsWithFilter' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executed 'searchContactsWithFilter' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ContactBridge no delegate for 'searchContactsWithFilter'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ContactBridge no delegate for 'searchContactsWithFilter'.");
                     }
                     }
                     
@@ -332,7 +332,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executing setContactPhoto({"+contact+"},{"+pngImage+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executing setContactPhoto({"+contact+"},{"+pngImage+"}).");
                }
 
                bool result = false;
@@ -341,12 +341,12 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     result = this._delegate.SetContactPhoto(contact, pngImage);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ContactBridge executed 'setContactPhoto' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ContactBridge executed 'setContactPhoto' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ContactBridge no delegate for 'setContactPhoto'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ContactBridge no delegate for 'setContactPhoto'.");
                     }
                     }
                     return result;                    
@@ -411,7 +411,7 @@ public class ContactBridge : BasePIMBridge, IContact, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "ContactBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "ContactBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

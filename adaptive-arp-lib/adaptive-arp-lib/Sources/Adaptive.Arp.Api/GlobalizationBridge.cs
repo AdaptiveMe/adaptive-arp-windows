@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -91,7 +91,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GlobalizationBridge executing getDefaultLocale.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getDefaultLocale.");
                }
 
                Locale result = null;
@@ -100,12 +100,12 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
                     result = this._delegate.GetDefaultLocale();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GlobalizationBridge executed 'getDefaultLocale' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executed 'getDefaultLocale' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"GlobalizationBridge no delegate for 'getDefaultLocale'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"GlobalizationBridge no delegate for 'getDefaultLocale'.");
                     }
                     }
                     return result;                    
@@ -125,7 +125,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GlobalizationBridge executing getLocaleSupportedDescriptors.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getLocaleSupportedDescriptors.");
                }
 
                Locale[] result = null;
@@ -134,12 +134,12 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
                     result = this._delegate.GetLocaleSupportedDescriptors();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GlobalizationBridge executed 'getLocaleSupportedDescriptors' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executed 'getLocaleSupportedDescriptors' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"GlobalizationBridge no delegate for 'getLocaleSupportedDescriptors'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"GlobalizationBridge no delegate for 'getLocaleSupportedDescriptors'.");
                     }
                     }
                     return result;                    
@@ -161,7 +161,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GlobalizationBridge executing getResourceLiteral({"+key+"},{"+locale+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getResourceLiteral({"+key+"},{"+locale+"}).");
                }
 
                string result = null;
@@ -170,12 +170,12 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
                     result = this._delegate.GetResourceLiteral(key, locale);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GlobalizationBridge executed 'getResourceLiteral' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executed 'getResourceLiteral' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"GlobalizationBridge no delegate for 'getResourceLiteral'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"GlobalizationBridge no delegate for 'getResourceLiteral'.");
                     }
                     }
                     return result;                    
@@ -196,7 +196,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GlobalizationBridge executing getResourceLiterals({"+locale+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executing getResourceLiterals({"+locale+"}).");
                }
 
                KeyPair[] result = null;
@@ -205,12 +205,12 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
                     result = this._delegate.GetResourceLiterals(locale);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"GlobalizationBridge executed 'getResourceLiterals' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"GlobalizationBridge executed 'getResourceLiterals' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"GlobalizationBridge no delegate for 'getResourceLiterals'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"GlobalizationBridge no delegate for 'getResourceLiterals'.");
                     }
                     }
                     return result;                    
@@ -264,7 +264,7 @@ public class GlobalizationBridge : BaseApplicationBridge, IGlobalization, APIBri
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "GlobalizationBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "GlobalizationBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

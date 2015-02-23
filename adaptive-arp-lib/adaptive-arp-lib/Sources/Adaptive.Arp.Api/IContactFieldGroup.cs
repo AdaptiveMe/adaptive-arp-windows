@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -41,14 +41,14 @@ namespace Adaptive.Arp.Api
      */
      public enum IContactFieldGroup {
 
-          PERSONAL_INFO,
-          PROFESSIONAL_INFO,
-          ADDRESSES,
-          PHONES,
-          EMAILS,
-          WEBSITES,
-          SOCIALS,
-          TAGS,
+          PersonalInfo,
+          ProfessionalInfo,
+          Addresses,
+          Phones,
+          Emails,
+          Websites,
+          Socials,
+          Tags,
           Unknown
 
      }

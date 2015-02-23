@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -91,7 +91,7 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing addButtonListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing addButtonListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -99,12 +99,12 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
                     this._delegate.AddButtonListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'addButtonListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'addButtonListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'addButtonListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'addButtonListener'.");
                     }
                     }
                     
@@ -124,7 +124,7 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing addDeviceOrientationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing addDeviceOrientationListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -132,12 +132,12 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
                     this._delegate.AddDeviceOrientationListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'addDeviceOrientationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'addDeviceOrientationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'addDeviceOrientationListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'addDeviceOrientationListener'.");
                     }
                     }
                     
@@ -157,7 +157,7 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing getDeviceInfo.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getDeviceInfo.");
                }
 
                DeviceInfo result = null;
@@ -166,12 +166,12 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
                     result = this._delegate.GetDeviceInfo();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'getDeviceInfo' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'getDeviceInfo' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'getDeviceInfo'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'getDeviceInfo'.");
                     }
                     }
                     return result;                    
@@ -191,7 +191,7 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing getLocaleCurrent.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getLocaleCurrent.");
                }
 
                Locale result = null;
@@ -200,12 +200,12 @@ public class DeviceBridge : BaseSystemBridge, IDevice, APIBridge
                     result = this._delegate.GetLocaleCurrent();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'getLocaleCurrent' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'getLocaleCurrent' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'getLocaleCurrent'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'getLocaleCurrent'.");
                     }
                     }
                     return result;                    
@@ -226,7 +226,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing getOrientationCurrent.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing getOrientationCurrent.");
                }
 
                ICapabilitiesOrientation result = ICapabilitiesOrientation.Unknown;
@@ -235,12 +235,12 @@ of the display. For display orientation, use the IDisplay APIs.
                     result = this._delegate.GetOrientationCurrent();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'getOrientationCurrent' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'getOrientationCurrent' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'getOrientationCurrent'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'getOrientationCurrent'.");
                     }
                     }
                     return result;                    
@@ -260,7 +260,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing removeButtonListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeButtonListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -268,12 +268,12 @@ of the display. For display orientation, use the IDisplay APIs.
                     this._delegate.RemoveButtonListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'removeButtonListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'removeButtonListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'removeButtonListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'removeButtonListener'.");
                     }
                     }
                     
@@ -292,7 +292,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing removeButtonListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeButtonListeners.");
                }
 
                if (this._delegate != null)
@@ -300,12 +300,12 @@ of the display. For display orientation, use the IDisplay APIs.
                     this._delegate.RemoveButtonListeners();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'removeButtonListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'removeButtonListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'removeButtonListeners'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'removeButtonListeners'.");
                     }
                     }
                     
@@ -325,7 +325,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing removeDeviceOrientationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeDeviceOrientationListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -333,12 +333,12 @@ of the display. For display orientation, use the IDisplay APIs.
                     this._delegate.RemoveDeviceOrientationListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'removeDeviceOrientationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'removeDeviceOrientationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'removeDeviceOrientationListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'removeDeviceOrientationListener'.");
                     }
                     }
                     
@@ -357,7 +357,7 @@ of the display. For display orientation, use the IDisplay APIs.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executing removeDeviceOrientationListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executing removeDeviceOrientationListeners.");
                }
 
                if (this._delegate != null)
@@ -365,12 +365,12 @@ of the display. For display orientation, use the IDisplay APIs.
                     this._delegate.RemoveDeviceOrientationListeners();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DeviceBridge executed 'removeDeviceOrientationListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DeviceBridge executed 'removeDeviceOrientationListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DeviceBridge no delegate for 'removeDeviceOrientationListeners'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DeviceBridge no delegate for 'removeDeviceOrientationListeners'.");
                     }
                     }
                     
@@ -433,7 +433,7 @@ of the display. For display orientation, use the IDisplay APIs.
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "DeviceBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "DeviceBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

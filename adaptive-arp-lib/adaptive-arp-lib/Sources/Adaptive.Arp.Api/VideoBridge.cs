@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -91,7 +91,7 @@ public class VideoBridge : BaseMediaBridge, IVideo, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"VideoBridge executing playStream({"+url+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"VideoBridge executing playStream({"+url+"}).");
                }
 
                if (this._delegate != null)
@@ -99,12 +99,12 @@ public class VideoBridge : BaseMediaBridge, IVideo, APIBridge
                     this._delegate.PlayStream(url);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"VideoBridge executed 'playStream' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"VideoBridge executed 'playStream' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"VideoBridge no delegate for 'playStream'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"VideoBridge no delegate for 'playStream'.");
                     }
                     }
                     
@@ -131,7 +131,7 @@ public class VideoBridge : BaseMediaBridge, IVideo, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "VideoBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "VideoBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

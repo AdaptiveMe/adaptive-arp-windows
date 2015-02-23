@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -91,7 +91,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"LifecycleBridge executing addLifecycleListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing addLifecycleListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -99,12 +99,12 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
                     this._delegate.AddLifecycleListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"LifecycleBridge executed 'addLifecycleListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executed 'addLifecycleListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"LifecycleBridge no delegate for 'addLifecycleListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"LifecycleBridge no delegate for 'addLifecycleListener'.");
                     }
                     }
                     
@@ -124,7 +124,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"LifecycleBridge executing isBackground.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing isBackground.");
                }
 
                bool result = false;
@@ -133,12 +133,12 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
                     result = this._delegate.IsBackground();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"LifecycleBridge executed 'isBackground' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executed 'isBackground' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"LifecycleBridge no delegate for 'isBackground'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"LifecycleBridge no delegate for 'isBackground'.");
                     }
                     }
                     return result;                    
@@ -158,7 +158,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"LifecycleBridge executing removeLifecycleListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing removeLifecycleListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -166,12 +166,12 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
                     this._delegate.RemoveLifecycleListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"LifecycleBridge executed 'removeLifecycleListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executed 'removeLifecycleListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"LifecycleBridge no delegate for 'removeLifecycleListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"LifecycleBridge no delegate for 'removeLifecycleListener'.");
                     }
                     }
                     
@@ -190,7 +190,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"LifecycleBridge executing removeLifecycleListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executing removeLifecycleListeners.");
                }
 
                if (this._delegate != null)
@@ -198,12 +198,12 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
                     this._delegate.RemoveLifecycleListeners();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"LifecycleBridge executed 'removeLifecycleListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"LifecycleBridge executed 'removeLifecycleListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"LifecycleBridge no delegate for 'removeLifecycleListeners'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"LifecycleBridge no delegate for 'removeLifecycleListeners'.");
                     }
                     }
                     
@@ -241,7 +241,7 @@ public class LifecycleBridge : BaseApplicationBridge, ILifecycle, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "LifecycleBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "LifecycleBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

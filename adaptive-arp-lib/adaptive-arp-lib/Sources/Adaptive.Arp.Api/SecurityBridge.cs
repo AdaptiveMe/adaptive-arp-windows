@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -93,7 +93,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"SecurityBridge executing deleteSecureKeyValuePairs({"+keys+"},{"+publicAccessName+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing deleteSecureKeyValuePairs({"+keys+"},{"+publicAccessName+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -101,12 +101,12 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
                     this._delegate.DeleteSecureKeyValuePairs(keys, publicAccessName, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"SecurityBridge executed 'deleteSecureKeyValuePairs' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executed 'deleteSecureKeyValuePairs' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"SecurityBridge no delegate for 'deleteSecureKeyValuePairs'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"SecurityBridge no delegate for 'deleteSecureKeyValuePairs'.");
                     }
                     }
                     
@@ -128,7 +128,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"SecurityBridge executing getSecureKeyValuePairs({"+keys+"},{"+publicAccessName+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing getSecureKeyValuePairs({"+keys+"},{"+publicAccessName+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -136,12 +136,12 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
                     this._delegate.GetSecureKeyValuePairs(keys, publicAccessName, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"SecurityBridge executed 'getSecureKeyValuePairs' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executed 'getSecureKeyValuePairs' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"SecurityBridge no delegate for 'getSecureKeyValuePairs'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"SecurityBridge no delegate for 'getSecureKeyValuePairs'.");
                     }
                     }
                     
@@ -161,7 +161,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"SecurityBridge executing isDeviceModified.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing isDeviceModified.");
                }
 
                bool result = false;
@@ -170,12 +170,12 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
                     result = this._delegate.IsDeviceModified();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"SecurityBridge executed 'isDeviceModified' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executed 'isDeviceModified' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"SecurityBridge no delegate for 'isDeviceModified'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"SecurityBridge no delegate for 'isDeviceModified'.");
                     }
                     }
                     return result;                    
@@ -197,7 +197,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"SecurityBridge executing setSecureKeyValuePairs({"+keyValues+"},{"+publicAccessName+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executing setSecureKeyValuePairs({"+keyValues+"},{"+publicAccessName+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -205,12 +205,12 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
                     this._delegate.SetSecureKeyValuePairs(keyValues, publicAccessName, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"SecurityBridge executed 'setSecureKeyValuePairs' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"SecurityBridge executed 'setSecureKeyValuePairs' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"SecurityBridge no delegate for 'setSecureKeyValuePairs'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"SecurityBridge no delegate for 'setSecureKeyValuePairs'.");
                     }
                     }
                     
@@ -255,7 +255,7 @@ public class SecurityBridge : BaseSecurityBridge, ISecurity, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "SecurityBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "SecurityBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

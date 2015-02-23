@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -99,7 +99,7 @@ not be added using this method.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executing addWebview({"+webView+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing addWebview({"+webView+"}).");
                }
 
                if (this._delegate != null)
@@ -107,12 +107,12 @@ not be added using this method.
                     this._delegate.AddWebview(webView);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'addWebview' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'addWebview' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'addWebview'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'addWebview'.");
                     }
                     }
                     
@@ -131,7 +131,7 @@ not be added using this method.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executing executeJavaScript({"+javaScriptText+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing executeJavaScript({"+javaScriptText+"}).");
                }
 
                if (this._delegate != null)
@@ -139,12 +139,12 @@ not be added using this method.
                     this._delegate.ExecuteJavaScript(javaScriptText);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'executeJavaScript' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'executeJavaScript' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'executeJavaScript'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'executeJavaScript'.");
                     }
                     }
                     
@@ -164,7 +164,7 @@ not be added using this method.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executing executeJavaScript({"+javaScriptText+"},{"+webViewReference+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing executeJavaScript({"+javaScriptText+"},{"+webViewReference+"}).");
                }
 
                if (this._delegate != null)
@@ -172,12 +172,12 @@ not be added using this method.
                     this._delegate.ExecuteJavaScript(javaScriptText, webViewReference);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'executeJavaScript' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'executeJavaScript' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'executeJavaScript'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'executeJavaScript'.");
                     }
                     }
                     
@@ -199,7 +199,7 @@ WebView, WKWebView, etc.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executing getWebviewPrimary.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing getWebviewPrimary.");
                }
 
                Object result = null;
@@ -208,12 +208,12 @@ WebView, WKWebView, etc.
                     result = this._delegate.GetWebviewPrimary();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'getWebviewPrimary' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'getWebviewPrimary' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'getWebviewPrimary'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'getWebviewPrimary'.");
                     }
                     }
                     return result;                    
@@ -234,7 +234,7 @@ This method will always return at least one element; the primary webview.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executing getWebviews.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing getWebviews.");
                }
 
                Object[] result = null;
@@ -243,12 +243,12 @@ This method will always return at least one element; the primary webview.
                     result = this._delegate.GetWebviews();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'getWebviews' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'getWebviews' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'getWebviews'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'getWebviews'.");
                     }
                     }
                     return result;                    
@@ -269,7 +269,7 @@ ARP functions and release resources. The primary webview can not be removed.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executing removeWebview({"+webView+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executing removeWebview({"+webView+"}).");
                }
 
                if (this._delegate != null)
@@ -277,12 +277,12 @@ ARP functions and release resources. The primary webview can not be removed.
                     this._delegate.RemoveWebview(webView);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'removeWebview' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextWebviewBridge executed 'removeWebview' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'removeWebview'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppContextWebviewBridge no delegate for 'removeWebview'.");
                     }
                     }
                     

@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -132,7 +132,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetAccelerationBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetAccelerationBridge().");
                }
 
                if (this._delegate != null)
@@ -140,14 +140,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetAccelerationBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAccelerationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAccelerationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAccelerationBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAccelerationBridge'.");
                     }
                }
                return result;
@@ -167,7 +167,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetAdsBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetAdsBridge().");
                }
 
                if (this._delegate != null)
@@ -175,14 +175,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetAdsBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAdsBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAdsBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAdsBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAdsBridge'.");
                     }
                }
                return result;
@@ -202,7 +202,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetAlarmBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetAlarmBridge().");
                }
 
                if (this._delegate != null)
@@ -210,14 +210,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetAlarmBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAlarmBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAlarmBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAlarmBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAlarmBridge'.");
                     }
                }
                return result;
@@ -237,7 +237,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetAmbientLightBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetAmbientLightBridge().");
                }
 
                if (this._delegate != null)
@@ -245,14 +245,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetAmbientLightBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAmbientLightBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAmbientLightBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAmbientLightBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAmbientLightBridge'.");
                     }
                }
                return result;
@@ -272,7 +272,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetAnalyticsBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetAnalyticsBridge().");
                }
 
                if (this._delegate != null)
@@ -280,14 +280,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetAnalyticsBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAnalyticsBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAnalyticsBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAnalyticsBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAnalyticsBridge'.");
                     }
                }
                return result;
@@ -307,7 +307,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetAudioBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetAudioBridge().");
                }
 
                if (this._delegate != null)
@@ -315,14 +315,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetAudioBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAudioBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetAudioBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAudioBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetAudioBridge'.");
                     }
                }
                return result;
@@ -342,7 +342,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetBarcodeBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetBarcodeBridge().");
                }
 
                if (this._delegate != null)
@@ -350,14 +350,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetBarcodeBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetBarcodeBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetBarcodeBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetBarcodeBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetBarcodeBridge'.");
                     }
                }
                return result;
@@ -377,7 +377,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetBarometerBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetBarometerBridge().");
                }
 
                if (this._delegate != null)
@@ -385,14 +385,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetBarometerBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetBarometerBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetBarometerBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetBarometerBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetBarometerBridge'.");
                     }
                }
                return result;
@@ -412,7 +412,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetBluetoothBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetBluetoothBridge().");
                }
 
                if (this._delegate != null)
@@ -420,14 +420,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetBluetoothBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetBluetoothBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetBluetoothBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetBluetoothBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetBluetoothBridge'.");
                     }
                }
                return result;
@@ -447,7 +447,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetBrowserBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetBrowserBridge().");
                }
 
                if (this._delegate != null)
@@ -455,14 +455,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetBrowserBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetBrowserBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetBrowserBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetBrowserBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetBrowserBridge'.");
                     }
                }
                return result;
@@ -482,7 +482,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetCalendarBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetCalendarBridge().");
                }
 
                if (this._delegate != null)
@@ -490,14 +490,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetCalendarBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCalendarBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCalendarBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCalendarBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCalendarBridge'.");
                     }
                }
                return result;
@@ -517,7 +517,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetCameraBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetCameraBridge().");
                }
 
                if (this._delegate != null)
@@ -525,14 +525,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetCameraBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCameraBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCameraBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCameraBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCameraBridge'.");
                     }
                }
                return result;
@@ -552,7 +552,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetCapabilitiesBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetCapabilitiesBridge().");
                }
 
                if (this._delegate != null)
@@ -560,14 +560,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetCapabilitiesBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCapabilitiesBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCapabilitiesBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCapabilitiesBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCapabilitiesBridge'.");
                     }
                }
                return result;
@@ -587,7 +587,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetCloudBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetCloudBridge().");
                }
 
                if (this._delegate != null)
@@ -595,14 +595,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetCloudBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCloudBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCloudBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCloudBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCloudBridge'.");
                     }
                }
                return result;
@@ -622,7 +622,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetCompressionBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetCompressionBridge().");
                }
 
                if (this._delegate != null)
@@ -630,14 +630,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetCompressionBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCompressionBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCompressionBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCompressionBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCompressionBridge'.");
                     }
                }
                return result;
@@ -657,7 +657,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetConcurrentBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetConcurrentBridge().");
                }
 
                if (this._delegate != null)
@@ -665,14 +665,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetConcurrentBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetConcurrentBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetConcurrentBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetConcurrentBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetConcurrentBridge'.");
                     }
                }
                return result;
@@ -692,7 +692,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetContactBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetContactBridge().");
                }
 
                if (this._delegate != null)
@@ -700,14 +700,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetContactBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetContactBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetContactBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetContactBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetContactBridge'.");
                     }
                }
                return result;
@@ -727,7 +727,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetCryptoBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetCryptoBridge().");
                }
 
                if (this._delegate != null)
@@ -735,14 +735,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetCryptoBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCryptoBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetCryptoBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCryptoBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetCryptoBridge'.");
                     }
                }
                return result;
@@ -762,7 +762,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetDataStreamBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetDataStreamBridge().");
                }
 
                if (this._delegate != null)
@@ -770,14 +770,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetDataStreamBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDataStreamBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDataStreamBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDataStreamBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDataStreamBridge'.");
                     }
                }
                return result;
@@ -797,7 +797,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetDatabaseBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetDatabaseBridge().");
                }
 
                if (this._delegate != null)
@@ -805,14 +805,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetDatabaseBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDatabaseBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDatabaseBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDatabaseBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDatabaseBridge'.");
                     }
                }
                return result;
@@ -832,7 +832,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetDesktopBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetDesktopBridge().");
                }
 
                if (this._delegate != null)
@@ -840,14 +840,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetDesktopBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDesktopBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDesktopBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDesktopBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDesktopBridge'.");
                     }
                }
                return result;
@@ -867,7 +867,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetDeviceBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetDeviceBridge().");
                }
 
                if (this._delegate != null)
@@ -875,14 +875,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetDeviceBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDeviceBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDeviceBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDeviceBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDeviceBridge'.");
                     }
                }
                return result;
@@ -902,7 +902,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetDisplayBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetDisplayBridge().");
                }
 
                if (this._delegate != null)
@@ -910,14 +910,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetDisplayBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDisplayBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetDisplayBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDisplayBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetDisplayBridge'.");
                     }
                }
                return result;
@@ -937,7 +937,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetFacebookBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetFacebookBridge().");
                }
 
                if (this._delegate != null)
@@ -945,14 +945,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetFacebookBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetFacebookBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetFacebookBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetFacebookBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetFacebookBridge'.");
                     }
                }
                return result;
@@ -972,7 +972,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetFileBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetFileBridge().");
                }
 
                if (this._delegate != null)
@@ -980,14 +980,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetFileBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetFileBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetFileBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetFileBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetFileBridge'.");
                     }
                }
                return result;
@@ -1007,7 +1007,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetFileSystemBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetFileSystemBridge().");
                }
 
                if (this._delegate != null)
@@ -1015,14 +1015,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetFileSystemBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetFileSystemBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetFileSystemBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetFileSystemBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetFileSystemBridge'.");
                     }
                }
                return result;
@@ -1042,7 +1042,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetGeolocationBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetGeolocationBridge().");
                }
 
                if (this._delegate != null)
@@ -1050,14 +1050,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetGeolocationBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetGeolocationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetGeolocationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetGeolocationBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetGeolocationBridge'.");
                     }
                }
                return result;
@@ -1077,7 +1077,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetGlobalizationBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetGlobalizationBridge().");
                }
 
                if (this._delegate != null)
@@ -1085,14 +1085,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetGlobalizationBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetGlobalizationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetGlobalizationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetGlobalizationBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetGlobalizationBridge'.");
                     }
                }
                return result;
@@ -1112,7 +1112,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetGooglePlusBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetGooglePlusBridge().");
                }
 
                if (this._delegate != null)
@@ -1120,14 +1120,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetGooglePlusBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetGooglePlusBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetGooglePlusBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetGooglePlusBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetGooglePlusBridge'.");
                     }
                }
                return result;
@@ -1147,7 +1147,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetGyroscopeBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetGyroscopeBridge().");
                }
 
                if (this._delegate != null)
@@ -1155,14 +1155,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetGyroscopeBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetGyroscopeBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetGyroscopeBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetGyroscopeBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetGyroscopeBridge'.");
                     }
                }
                return result;
@@ -1182,7 +1182,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetImagingBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetImagingBridge().");
                }
 
                if (this._delegate != null)
@@ -1190,14 +1190,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetImagingBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetImagingBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetImagingBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetImagingBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetImagingBridge'.");
                     }
                }
                return result;
@@ -1217,7 +1217,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetInternalStorageBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetInternalStorageBridge().");
                }
 
                if (this._delegate != null)
@@ -1225,14 +1225,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetInternalStorageBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetInternalStorageBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetInternalStorageBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetInternalStorageBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetInternalStorageBridge'.");
                     }
                }
                return result;
@@ -1252,7 +1252,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetLifecycleBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetLifecycleBridge().");
                }
 
                if (this._delegate != null)
@@ -1260,14 +1260,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetLifecycleBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetLifecycleBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetLifecycleBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetLifecycleBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetLifecycleBridge'.");
                     }
                }
                return result;
@@ -1287,7 +1287,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetLinkedInBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetLinkedInBridge().");
                }
 
                if (this._delegate != null)
@@ -1295,14 +1295,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetLinkedInBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetLinkedInBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetLinkedInBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetLinkedInBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetLinkedInBridge'.");
                     }
                }
                return result;
@@ -1338,7 +1338,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetMagnetometerBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetMagnetometerBridge().");
                }
 
                if (this._delegate != null)
@@ -1346,14 +1346,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetMagnetometerBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetMagnetometerBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetMagnetometerBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetMagnetometerBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetMagnetometerBridge'.");
                     }
                }
                return result;
@@ -1373,7 +1373,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetMailBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetMailBridge().");
                }
 
                if (this._delegate != null)
@@ -1381,14 +1381,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetMailBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetMailBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetMailBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetMailBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetMailBridge'.");
                     }
                }
                return result;
@@ -1408,7 +1408,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetManagementBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetManagementBridge().");
                }
 
                if (this._delegate != null)
@@ -1416,14 +1416,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetManagementBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetManagementBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetManagementBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetManagementBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetManagementBridge'.");
                     }
                }
                return result;
@@ -1443,7 +1443,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetMapBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetMapBridge().");
                }
 
                if (this._delegate != null)
@@ -1451,14 +1451,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetMapBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetMapBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetMapBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetMapBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetMapBridge'.");
                     }
                }
                return result;
@@ -1478,7 +1478,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetMessagingBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetMessagingBridge().");
                }
 
                if (this._delegate != null)
@@ -1486,14 +1486,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetMessagingBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetMessagingBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetMessagingBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetMessagingBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetMessagingBridge'.");
                     }
                }
                return result;
@@ -1513,7 +1513,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetNFCBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetNFCBridge().");
                }
 
                if (this._delegate != null)
@@ -1521,14 +1521,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetNFCBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNFCBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNFCBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNFCBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNFCBridge'.");
                     }
                }
                return result;
@@ -1548,7 +1548,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetNetworkInfoBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetNetworkInfoBridge().");
                }
 
                if (this._delegate != null)
@@ -1556,14 +1556,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetNetworkInfoBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNetworkInfoBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNetworkInfoBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNetworkInfoBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNetworkInfoBridge'.");
                     }
                }
                return result;
@@ -1583,7 +1583,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetNetworkNamingBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetNetworkNamingBridge().");
                }
 
                if (this._delegate != null)
@@ -1591,14 +1591,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetNetworkNamingBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNetworkNamingBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNetworkNamingBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNetworkNamingBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNetworkNamingBridge'.");
                     }
                }
                return result;
@@ -1618,7 +1618,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetNetworkReachabilityBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetNetworkReachabilityBridge().");
                }
 
                if (this._delegate != null)
@@ -1626,14 +1626,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetNetworkReachabilityBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNetworkReachabilityBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNetworkReachabilityBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNetworkReachabilityBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNetworkReachabilityBridge'.");
                     }
                }
                return result;
@@ -1653,7 +1653,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetNetworkStatusBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetNetworkStatusBridge().");
                }
 
                if (this._delegate != null)
@@ -1661,14 +1661,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetNetworkStatusBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNetworkStatusBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNetworkStatusBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNetworkStatusBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNetworkStatusBridge'.");
                     }
                }
                return result;
@@ -1688,7 +1688,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetNotificationBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetNotificationBridge().");
                }
 
                if (this._delegate != null)
@@ -1696,14 +1696,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetNotificationBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNotificationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNotificationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNotificationBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNotificationBridge'.");
                     }
                }
                return result;
@@ -1723,7 +1723,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetNotificationLocalBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetNotificationLocalBridge().");
                }
 
                if (this._delegate != null)
@@ -1731,14 +1731,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetNotificationLocalBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNotificationLocalBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetNotificationLocalBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNotificationLocalBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetNotificationLocalBridge'.");
                     }
                }
                return result;
@@ -1758,7 +1758,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetOAuthBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetOAuthBridge().");
                }
 
                if (this._delegate != null)
@@ -1766,14 +1766,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetOAuthBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetOAuthBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetOAuthBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetOAuthBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetOAuthBridge'.");
                     }
                }
                return result;
@@ -1793,7 +1793,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetOCRBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetOCRBridge().");
                }
 
                if (this._delegate != null)
@@ -1801,14 +1801,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetOCRBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetOCRBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetOCRBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetOCRBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetOCRBridge'.");
                     }
                }
                return result;
@@ -1828,7 +1828,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetOSBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetOSBridge().");
                }
 
                if (this._delegate != null)
@@ -1836,14 +1836,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetOSBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetOSBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetOSBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetOSBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetOSBridge'.");
                     }
                }
                return result;
@@ -1863,7 +1863,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetOpenIdBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetOpenIdBridge().");
                }
 
                if (this._delegate != null)
@@ -1871,14 +1871,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetOpenIdBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetOpenIdBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetOpenIdBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetOpenIdBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetOpenIdBridge'.");
                     }
                }
                return result;
@@ -1898,7 +1898,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetPrintingBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetPrintingBridge().");
                }
 
                if (this._delegate != null)
@@ -1906,14 +1906,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetPrintingBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetPrintingBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetPrintingBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetPrintingBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetPrintingBridge'.");
                     }
                }
                return result;
@@ -1933,7 +1933,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetProximityBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetProximityBridge().");
                }
 
                if (this._delegate != null)
@@ -1941,14 +1941,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetProximityBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetProximityBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetProximityBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetProximityBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetProximityBridge'.");
                     }
                }
                return result;
@@ -1968,7 +1968,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetQRCodeBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetQRCodeBridge().");
                }
 
                if (this._delegate != null)
@@ -1976,14 +1976,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetQRCodeBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetQRCodeBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetQRCodeBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetQRCodeBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetQRCodeBridge'.");
                     }
                }
                return result;
@@ -2003,7 +2003,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetRSSBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetRSSBridge().");
                }
 
                if (this._delegate != null)
@@ -2011,14 +2011,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetRSSBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetRSSBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetRSSBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetRSSBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetRSSBridge'.");
                     }
                }
                return result;
@@ -2038,7 +2038,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetRuntimeBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetRuntimeBridge().");
                }
 
                if (this._delegate != null)
@@ -2046,14 +2046,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetRuntimeBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetRuntimeBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetRuntimeBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetRuntimeBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetRuntimeBridge'.");
                     }
                }
                return result;
@@ -2073,7 +2073,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetSecurityBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetSecurityBridge().");
                }
 
                if (this._delegate != null)
@@ -2081,14 +2081,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetSecurityBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetSecurityBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetSecurityBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetSecurityBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetSecurityBridge'.");
                     }
                }
                return result;
@@ -2108,7 +2108,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetServiceBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetServiceBridge().");
                }
 
                if (this._delegate != null)
@@ -2116,14 +2116,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetServiceBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetServiceBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetServiceBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetServiceBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetServiceBridge'.");
                     }
                }
                return result;
@@ -2143,7 +2143,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetSettingsBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetSettingsBridge().");
                }
 
                if (this._delegate != null)
@@ -2151,14 +2151,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetSettingsBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetSettingsBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetSettingsBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetSettingsBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetSettingsBridge'.");
                     }
                }
                return result;
@@ -2178,7 +2178,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetSocketBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetSocketBridge().");
                }
 
                if (this._delegate != null)
@@ -2186,14 +2186,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetSocketBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetSocketBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetSocketBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetSocketBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetSocketBridge'.");
                     }
                }
                return result;
@@ -2213,7 +2213,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetStoreBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetStoreBridge().");
                }
 
                if (this._delegate != null)
@@ -2221,14 +2221,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetStoreBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetStoreBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetStoreBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetStoreBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetStoreBridge'.");
                     }
                }
                return result;
@@ -2248,7 +2248,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetTelephonyBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetTelephonyBridge().");
                }
 
                if (this._delegate != null)
@@ -2256,14 +2256,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetTelephonyBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetTelephonyBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetTelephonyBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetTelephonyBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetTelephonyBridge'.");
                     }
                }
                return result;
@@ -2283,7 +2283,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetTimerBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetTimerBridge().");
                }
 
                if (this._delegate != null)
@@ -2291,14 +2291,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetTimerBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetTimerBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetTimerBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetTimerBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetTimerBridge'.");
                     }
                }
                return result;
@@ -2318,7 +2318,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetTwitterBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetTwitterBridge().");
                }
 
                if (this._delegate != null)
@@ -2326,14 +2326,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetTwitterBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetTwitterBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetTwitterBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetTwitterBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetTwitterBridge'.");
                     }
                }
                return result;
@@ -2353,7 +2353,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetUIBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetUIBridge().");
                }
 
                if (this._delegate != null)
@@ -2361,14 +2361,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetUIBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetUIBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetUIBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetUIBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetUIBridge'.");
                     }
                }
                return result;
@@ -2388,7 +2388,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetUpdateBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetUpdateBridge().");
                }
 
                if (this._delegate != null)
@@ -2396,14 +2396,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetUpdateBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetUpdateBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetUpdateBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetUpdateBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetUpdateBridge'.");
                     }
                }
                return result;
@@ -2423,7 +2423,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetVibrationBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetVibrationBridge().");
                }
 
                if (this._delegate != null)
@@ -2431,14 +2431,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetVibrationBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetVibrationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetVibrationBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetVibrationBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetVibrationBridge'.");
                     }
                }
                return result;
@@ -2458,7 +2458,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetVideoBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetVideoBridge().");
                }
 
                if (this._delegate != null)
@@ -2466,14 +2466,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetVideoBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetVideoBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetVideoBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetVideoBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetVideoBridge'.");
                     }
                }
                return result;
@@ -2493,7 +2493,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetWalletBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetWalletBridge().");
                }
 
                if (this._delegate != null)
@@ -2501,14 +2501,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetWalletBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetWalletBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetWalletBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetWalletBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetWalletBridge'.");
                     }
                }
                return result;
@@ -2528,7 +2528,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executing GetXMLBridge().");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executing GetXMLBridge().");
                }
 
                if (this._delegate != null)
@@ -2536,14 +2536,14 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetXMLBridge();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetXMLBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(), "AppRegistryBridge executed 'GetXMLBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                }
                else
                {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetXMLBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(), "AppRegistryBridge no delegate for 'GetXMLBridge'.");
                     }
                }
                return result;
@@ -2563,7 +2563,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppRegistryBridge executing getBridge("+bridgeType+").");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getBridge("+bridgeType+").");
                }
 
                if (this._delegate != null)
@@ -2571,12 +2571,12 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetBridge(bridgeType);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppRegistryBridge executed 'getBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executed 'getBridge' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppRegistryBridge no delegate for 'getBridge'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppRegistryBridge no delegate for 'getBridge'.");
                     }
                }
                return result;
@@ -2596,7 +2596,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppRegistryBridge executing getAPIVersion.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getAPIVersion.");
                }
 
                string result = null;
@@ -2605,12 +2605,12 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetAPIVersion();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppRegistryBridge executed 'getAPIVersion' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executed 'getAPIVersion' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppRegistryBridge no delegate for 'getAPIVersion'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppRegistryBridge no delegate for 'getAPIVersion'.");
                     }
                     }
                     return result;                    
@@ -2630,7 +2630,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppRegistryBridge executing getPlatformContext.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getPlatformContext.");
                }
 
                AppContextBridge result = null;
@@ -2639,12 +2639,12 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetPlatformContext();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppRegistryBridge executed 'getPlatformContext' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executed 'getPlatformContext' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppRegistryBridge no delegate for 'getPlatformContext'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppRegistryBridge no delegate for 'getPlatformContext'.");
                     }
                     }
                     return result;                    
@@ -2664,7 +2664,7 @@ public class AppRegistryBridge : IAppRegistry
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppRegistryBridge executing getPlatformContextWeb.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executing getPlatformContextWeb.");
                }
 
                AppContextWebviewBridge result = null;
@@ -2673,12 +2673,12 @@ public class AppRegistryBridge : IAppRegistry
                     result = this._delegate.GetPlatformContextWeb();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppRegistryBridge executed 'getPlatformContextWeb' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppRegistryBridge executed 'getPlatformContextWeb' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppRegistryBridge no delegate for 'getPlatformContextWeb'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppRegistryBridge no delegate for 'getPlatformContextWeb'.");
                     }
                     }
                     return result;                    

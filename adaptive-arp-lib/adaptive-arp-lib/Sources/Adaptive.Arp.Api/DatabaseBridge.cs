@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -92,7 +92,7 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executing createDatabase({"+database+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing createDatabase({"+database+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -100,12 +100,12 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
                     this._delegate.CreateDatabase(database, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executed 'createDatabase' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executed 'createDatabase' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'createDatabase'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'createDatabase'.");
                     }
                     }
                     
@@ -127,7 +127,7 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executing createTable({"+database+"},{"+databaseTable+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing createTable({"+database+"},{"+databaseTable+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -135,12 +135,12 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
                     this._delegate.CreateTable(database, databaseTable, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executed 'createTable' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executed 'createTable' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'createTable'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'createTable'.");
                     }
                     }
                     
@@ -161,7 +161,7 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executing deleteDatabase({"+database+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing deleteDatabase({"+database+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -169,12 +169,12 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
                     this._delegate.DeleteDatabase(database, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executed 'deleteDatabase' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executed 'deleteDatabase' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'deleteDatabase'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'deleteDatabase'.");
                     }
                     }
                     
@@ -196,7 +196,7 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executing deleteTable({"+database+"},{"+databaseTable+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing deleteTable({"+database+"},{"+databaseTable+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -204,12 +204,12 @@ public class DatabaseBridge : BaseDataBridge, IDatabase, APIBridge
                     this._delegate.DeleteTable(database, databaseTable, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executed 'deleteTable' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executed 'deleteTable' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'deleteTable'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'deleteTable'.");
                     }
                     }
                     
@@ -233,7 +233,7 @@ should be passed as a parameter
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executing executeSqlStatement({"+database+"},{"+statement+"},{"+replacements+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing executeSqlStatement({"+database+"},{"+statement+"},{"+replacements+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -241,12 +241,12 @@ should be passed as a parameter
                     this._delegate.ExecuteSqlStatement(database, statement, replacements, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executed 'executeSqlStatement' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executed 'executeSqlStatement' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'executeSqlStatement'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'executeSqlStatement'.");
                     }
                     }
                     
@@ -270,7 +270,7 @@ should be passed as a parameter
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executing executeSqlTransactions({"+database+"},{"+statements+"},{"+rollbackFlag+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing executeSqlTransactions({"+database+"},{"+statements+"},{"+rollbackFlag+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -278,12 +278,12 @@ should be passed as a parameter
                     this._delegate.ExecuteSqlTransactions(database, statements, rollbackFlag, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executed 'executeSqlTransactions' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executed 'executeSqlTransactions' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'executeSqlTransactions'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'executeSqlTransactions'.");
                     }
                     }
                     
@@ -304,7 +304,7 @@ should be passed as a parameter
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executing existsDatabase({"+database+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing existsDatabase({"+database+"}).");
                }
 
                bool result = false;
@@ -313,12 +313,12 @@ should be passed as a parameter
                     result = this._delegate.ExistsDatabase(database);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executed 'existsDatabase' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executed 'existsDatabase' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'existsDatabase'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'existsDatabase'.");
                     }
                     }
                     return result;                    
@@ -340,7 +340,7 @@ should be passed as a parameter
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executing existsTable({"+database+"},{"+databaseTable+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executing existsTable({"+database+"},{"+databaseTable+"}).");
                }
 
                bool result = false;
@@ -349,12 +349,12 @@ should be passed as a parameter
                     result = this._delegate.ExistsTable(database, databaseTable);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"DatabaseBridge executed 'existsTable' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"DatabaseBridge executed 'existsTable' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'existsTable'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"DatabaseBridge no delegate for 'existsTable'.");
                     }
                     }
                     return result;                    
@@ -424,7 +424,7 @@ should be passed as a parameter
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "DatabaseBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "DatabaseBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

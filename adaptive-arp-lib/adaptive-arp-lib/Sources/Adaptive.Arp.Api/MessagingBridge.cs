@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -93,7 +93,7 @@ public class MessagingBridge : BasePIMBridge, IMessaging, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"MessagingBridge executing sendSMS({"+number+"},{"+text+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"MessagingBridge executing sendSMS({"+number+"},{"+text+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -101,12 +101,12 @@ public class MessagingBridge : BasePIMBridge, IMessaging, APIBridge
                     this._delegate.SendSMS(number, text, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"MessagingBridge executed 'sendSMS' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"MessagingBridge executed 'sendSMS' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"MessagingBridge no delegate for 'sendSMS'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"MessagingBridge no delegate for 'sendSMS'.");
                     }
                     }
                     
@@ -135,7 +135,7 @@ public class MessagingBridge : BasePIMBridge, IMessaging, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "MessagingBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "MessagingBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

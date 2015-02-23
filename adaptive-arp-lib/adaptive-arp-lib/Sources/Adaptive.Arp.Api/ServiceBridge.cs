@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -95,7 +95,7 @@ manipulated as needed by the application before submitting the ServiceRequest vi
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executing getServiceRequest({"+serviceToken+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceRequest({"+serviceToken+"}).");
                }
 
                ServiceRequest result = null;
@@ -104,12 +104,12 @@ manipulated as needed by the application before submitting the ServiceRequest vi
                     result = this._delegate.GetServiceRequest(serviceToken);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executed 'getServiceRequest' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executed 'getServiceRequest' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServiceRequest'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServiceRequest'.");
                     }
                     }
                     return result;                    
@@ -134,7 +134,7 @@ configured in the platform's XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executing getServiceToken({"+serviceName+"},{"+endpointName+"},{"+functionName+"},{"+method+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceToken({"+serviceName+"},{"+endpointName+"},{"+functionName+"},{"+method+"}).");
                }
 
                ServiceToken result = null;
@@ -143,12 +143,12 @@ configured in the platform's XML service definition file.
                     result = this._delegate.GetServiceToken(serviceName, endpointName, functionName, method);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executed 'getServiceToken' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executed 'getServiceToken' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServiceToken'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServiceToken'.");
                     }
                     }
                     return result;                    
@@ -172,7 +172,7 @@ configured in the platform's XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executing getServiceTokenByUri({"+uri+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServiceTokenByUri({"+uri+"}).");
                }
 
                ServiceToken result = null;
@@ -181,12 +181,12 @@ configured in the platform's XML service definition file.
                     result = this._delegate.GetServiceTokenByUri(uri);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executed 'getServiceTokenByUri' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executed 'getServiceTokenByUri' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServiceTokenByUri'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServiceTokenByUri'.");
                     }
                     }
                     return result;                    
@@ -206,7 +206,7 @@ configured in the platform's XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executing getServicesRegistered.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing getServicesRegistered.");
                }
 
                ServiceToken[] result = null;
@@ -215,12 +215,12 @@ configured in the platform's XML service definition file.
                     result = this._delegate.GetServicesRegistered();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executed 'getServicesRegistered' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executed 'getServicesRegistered' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServicesRegistered'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ServiceBridge no delegate for 'getServicesRegistered'.");
                     }
                     }
                     return result;                    
@@ -241,7 +241,7 @@ configured in the platform's XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executing invokeService({"+serviceRequest+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing invokeService({"+serviceRequest+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -249,12 +249,12 @@ configured in the platform's XML service definition file.
                     this._delegate.InvokeService(serviceRequest, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executed 'invokeService' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executed 'invokeService' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ServiceBridge no delegate for 'invokeService'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ServiceBridge no delegate for 'invokeService'.");
                     }
                     }
                     
@@ -279,7 +279,7 @@ XML service definition file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executing isServiceRegistered({"+serviceName+"},{"+endpointName+"},{"+functionName+"},{"+method+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executing isServiceRegistered({"+serviceName+"},{"+endpointName+"},{"+functionName+"},{"+method+"}).");
                }
 
                bool result = false;
@@ -288,12 +288,12 @@ XML service definition file.
                     result = this._delegate.IsServiceRegistered(serviceName, endpointName, functionName, method);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"ServiceBridge executed 'isServiceRegistered' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"ServiceBridge executed 'isServiceRegistered' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"ServiceBridge no delegate for 'isServiceRegistered'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"ServiceBridge no delegate for 'isServiceRegistered'.");
                     }
                     }
                     return result;                    
@@ -363,7 +363,7 @@ XML service definition file.
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "ServiceBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "ServiceBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

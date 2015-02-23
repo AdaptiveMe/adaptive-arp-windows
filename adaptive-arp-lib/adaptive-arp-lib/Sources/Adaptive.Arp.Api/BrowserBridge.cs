@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -92,7 +92,7 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"BrowserBridge executing openExtenalBrowser({"+url+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openExtenalBrowser({"+url+"}).");
                }
 
                bool result = false;
@@ -101,12 +101,12 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
                     result = this._delegate.OpenExtenalBrowser(url);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"BrowserBridge executed 'openExtenalBrowser' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executed 'openExtenalBrowser' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"BrowserBridge no delegate for 'openExtenalBrowser'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"BrowserBridge no delegate for 'openExtenalBrowser'.");
                     }
                     }
                     return result;                    
@@ -129,7 +129,7 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"BrowserBridge executing openInternalBrowser({"+url+"},{"+title+"},{"+backButtonText+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openInternalBrowser({"+url+"},{"+title+"},{"+backButtonText+"}).");
                }
 
                bool result = false;
@@ -138,12 +138,12 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
                     result = this._delegate.OpenInternalBrowser(url, title, backButtonText);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"BrowserBridge executed 'openInternalBrowser' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executed 'openInternalBrowser' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"BrowserBridge no delegate for 'openInternalBrowser'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"BrowserBridge no delegate for 'openInternalBrowser'.");
                     }
                     }
                     return result;                    
@@ -166,7 +166,7 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"BrowserBridge executing openInternalBrowserModal({"+url+"},{"+title+"},{"+backButtonText+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executing openInternalBrowserModal({"+url+"},{"+title+"},{"+backButtonText+"}).");
                }
 
                bool result = false;
@@ -175,12 +175,12 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
                     result = this._delegate.OpenInternalBrowserModal(url, title, backButtonText);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"BrowserBridge executed 'openInternalBrowserModal' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"BrowserBridge executed 'openInternalBrowserModal' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"BrowserBridge no delegate for 'openInternalBrowserModal'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"BrowserBridge no delegate for 'openInternalBrowserModal'.");
                     }
                     }
                     return result;                    
@@ -222,7 +222,7 @@ public class BrowserBridge : BaseUIBridge, IBrowser, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "BrowserBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "BrowserBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

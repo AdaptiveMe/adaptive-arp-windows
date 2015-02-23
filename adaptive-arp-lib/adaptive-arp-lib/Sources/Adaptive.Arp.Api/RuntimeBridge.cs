@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -90,7 +90,7 @@ public class RuntimeBridge : BaseSystemBridge, IRuntime, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"RuntimeBridge executing dismissApplication.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"RuntimeBridge executing dismissApplication.");
                }
 
                if (this._delegate != null)
@@ -98,12 +98,12 @@ public class RuntimeBridge : BaseSystemBridge, IRuntime, APIBridge
                     this._delegate.DismissApplication();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"RuntimeBridge executed 'dismissApplication' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"RuntimeBridge executed 'dismissApplication' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"RuntimeBridge no delegate for 'dismissApplication'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"RuntimeBridge no delegate for 'dismissApplication'.");
                     }
                     }
                     
@@ -123,7 +123,7 @@ public class RuntimeBridge : BaseSystemBridge, IRuntime, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"RuntimeBridge executing dismissSplashScreen.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"RuntimeBridge executing dismissSplashScreen.");
                }
 
                bool result = false;
@@ -132,12 +132,12 @@ public class RuntimeBridge : BaseSystemBridge, IRuntime, APIBridge
                     result = this._delegate.DismissSplashScreen();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"RuntimeBridge executed 'dismissSplashScreen' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"RuntimeBridge executed 'dismissSplashScreen' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"RuntimeBridge no delegate for 'dismissSplashScreen'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"RuntimeBridge no delegate for 'dismissSplashScreen'.");
                     }
                     }
                     return result;                    
@@ -167,7 +167,7 @@ public class RuntimeBridge : BaseSystemBridge, IRuntime, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "RuntimeBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "RuntimeBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

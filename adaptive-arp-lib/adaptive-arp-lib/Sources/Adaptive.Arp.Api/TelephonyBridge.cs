@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -92,7 +92,7 @@ public class TelephonyBridge : BaseCommunicationBridge, ITelephony, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"TelephonyBridge executing call({"+number+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"TelephonyBridge executing call({"+number+"}).");
                }
 
                ITelephonyStatus result = ITelephonyStatus.Unknown;
@@ -101,12 +101,12 @@ public class TelephonyBridge : BaseCommunicationBridge, ITelephony, APIBridge
                     result = this._delegate.Call(number);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"TelephonyBridge executed 'call' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"TelephonyBridge executed 'call' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"TelephonyBridge no delegate for 'call'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"TelephonyBridge no delegate for 'call'.");
                     }
                     }
                     return result;                    
@@ -134,7 +134,7 @@ public class TelephonyBridge : BaseCommunicationBridge, ITelephony, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "TelephonyBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "TelephonyBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

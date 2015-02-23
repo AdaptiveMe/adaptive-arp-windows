@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -41,10 +41,10 @@ namespace Adaptive.Arp.Api
      */
      public enum ICapabilitiesOrientation {
 
-          Portrait_Up,
-          Portrait_Down,
-          Landscape_Left,
-          Landscape_Right,
+          PortraitUp,
+          PortraitDown,
+          LandscapeLeft,
+          LandscapeRight,
           Unknown
 
      }

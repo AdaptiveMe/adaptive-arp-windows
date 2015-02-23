@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -92,7 +92,7 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing canRead({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing canRead({"+descriptor+"}).");
                }
 
                bool result = false;
@@ -101,12 +101,12 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
                     result = this._delegate.CanRead(descriptor);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'canRead' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'canRead' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'canRead'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'canRead'.");
                     }
                     }
                     return result;                    
@@ -127,7 +127,7 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing canWrite({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing canWrite({"+descriptor+"}).");
                }
 
                bool result = false;
@@ -136,12 +136,12 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
                     result = this._delegate.CanWrite(descriptor);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'canWrite' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'canWrite' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'canWrite'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'canWrite'.");
                     }
                     }
                     return result;                    
@@ -162,7 +162,7 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing create({"+descriptor+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing create({"+descriptor+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -170,12 +170,12 @@ public class FileBridge : BaseDataBridge, IFile, APIBridge
                     this._delegate.Create(descriptor, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'create' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'create' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'create'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'create'.");
                     }
                     }
                     
@@ -198,7 +198,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing delete({"+descriptor+"},{"+cascade+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing delete({"+descriptor+"},{"+cascade+"}).");
                }
 
                bool result = false;
@@ -207,12 +207,12 @@ deleted if the cascade parameter is set to true.
                     result = this._delegate.Delete(descriptor, cascade);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'delete' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'delete' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'delete'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'delete'.");
                     }
                     }
                     return result;                    
@@ -233,7 +233,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing exists({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing exists({"+descriptor+"}).");
                }
 
                bool result = false;
@@ -242,12 +242,12 @@ deleted if the cascade parameter is set to true.
                     result = this._delegate.Exists(descriptor);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'exists' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'exists' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'exists'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'exists'.");
                     }
                     }
                     return result;                    
@@ -268,7 +268,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing getContent({"+descriptor+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getContent({"+descriptor+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -276,12 +276,12 @@ deleted if the cascade parameter is set to true.
                     this._delegate.GetContent(descriptor, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'getContent' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'getContent' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'getContent'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'getContent'.");
                     }
                     }
                     
@@ -302,7 +302,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing getFileStorageType({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getFileStorageType({"+descriptor+"}).");
                }
 
                IFileSystemStorageType result = IFileSystemStorageType.Unknown;
@@ -311,12 +311,12 @@ deleted if the cascade parameter is set to true.
                     result = this._delegate.GetFileStorageType(descriptor);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'getFileStorageType' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'getFileStorageType' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'getFileStorageType'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'getFileStorageType'.");
                     }
                     }
                     return result;                    
@@ -337,7 +337,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing getFileType({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getFileType({"+descriptor+"}).");
                }
 
                IFileSystemType result = IFileSystemType.Unknown;
@@ -346,12 +346,12 @@ deleted if the cascade parameter is set to true.
                     result = this._delegate.GetFileType(descriptor);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'getFileType' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'getFileType' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'getFileType'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'getFileType'.");
                     }
                     }
                     return result;                    
@@ -372,7 +372,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing getSecurityType({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing getSecurityType({"+descriptor+"}).");
                }
 
                IFileSystemSecurity result = IFileSystemSecurity.Unknown;
@@ -381,12 +381,12 @@ deleted if the cascade parameter is set to true.
                     result = this._delegate.GetSecurityType(descriptor);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'getSecurityType' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'getSecurityType' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'getSecurityType'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'getSecurityType'.");
                     }
                     }
                     return result;                    
@@ -407,7 +407,7 @@ deleted if the cascade parameter is set to true.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing isDirectory({"+descriptor+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing isDirectory({"+descriptor+"}).");
                }
 
                bool result = false;
@@ -416,12 +416,12 @@ deleted if the cascade parameter is set to true.
                     result = this._delegate.IsDirectory(descriptor);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'isDirectory' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'isDirectory' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'isDirectory'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'isDirectory'.");
                     }
                     }
                     return result;                    
@@ -443,7 +443,7 @@ any results.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing listFiles({"+descriptor+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing listFiles({"+descriptor+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -451,12 +451,12 @@ any results.
                     this._delegate.ListFiles(descriptor, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'listFiles' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'listFiles' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'listFiles'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'listFiles'.");
                     }
                     }
                     
@@ -479,7 +479,7 @@ is a file, it will not yield any results.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing listFilesForRegex({"+descriptor+"},{"+regex+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing listFilesForRegex({"+descriptor+"},{"+regex+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -487,12 +487,12 @@ is a file, it will not yield any results.
                     this._delegate.ListFilesForRegex(descriptor, regex, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'listFilesForRegex' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'listFilesForRegex' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'listFilesForRegex'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'listFilesForRegex'.");
                     }
                     }
                     
@@ -514,7 +514,7 @@ is a file, it will not yield any results.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing mkDir({"+descriptor+"},{"+recursive+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing mkDir({"+descriptor+"},{"+recursive+"}).");
                }
 
                bool result = false;
@@ -523,12 +523,12 @@ is a file, it will not yield any results.
                     result = this._delegate.MkDir(descriptor, recursive);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'mkDir' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'mkDir' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'mkDir'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'mkDir'.");
                     }
                     }
                     return result;                    
@@ -553,7 +553,7 @@ new destination file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing move({"+source+"},{"+destination+"},{"+createPath+"},{"+overwrite+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing move({"+source+"},{"+destination+"},{"+createPath+"},{"+overwrite+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -561,12 +561,12 @@ new destination file.
                     this._delegate.Move(source, destination, createPath, overwrite, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'move' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'move' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'move'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'move'.");
                     }
                     }
                     
@@ -588,7 +588,7 @@ new destination file.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executing setContent({"+descriptor+"},{"+content+"},{"+callback+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executing setContent({"+descriptor+"},{"+content+"},{"+callback+"}).");
                }
 
                if (this._delegate != null)
@@ -596,12 +596,12 @@ new destination file.
                     this._delegate.SetContent(descriptor, content, callback);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"FileBridge executed 'setContent' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"FileBridge executed 'setContent' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"FileBridge no delegate for 'setContent'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"FileBridge no delegate for 'setContent'.");
                     }
                     }
                     
@@ -706,7 +706,7 @@ new destination file.
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "FileBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "FileBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

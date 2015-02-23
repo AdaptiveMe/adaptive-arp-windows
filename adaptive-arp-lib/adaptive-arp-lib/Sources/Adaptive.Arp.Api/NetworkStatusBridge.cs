@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -91,7 +91,7 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"NetworkStatusBridge executing addNetworkStatusListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing addNetworkStatusListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -99,12 +99,12 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
                     this._delegate.AddNetworkStatusListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"NetworkStatusBridge executed 'addNetworkStatusListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executed 'addNetworkStatusListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"NetworkStatusBridge no delegate for 'addNetworkStatusListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"NetworkStatusBridge no delegate for 'addNetworkStatusListener'.");
                     }
                     }
                     
@@ -124,7 +124,7 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"NetworkStatusBridge executing removeNetworkStatusListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing removeNetworkStatusListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -132,12 +132,12 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
                     this._delegate.RemoveNetworkStatusListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"NetworkStatusBridge executed 'removeNetworkStatusListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executed 'removeNetworkStatusListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"NetworkStatusBridge no delegate for 'removeNetworkStatusListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"NetworkStatusBridge no delegate for 'removeNetworkStatusListener'.");
                     }
                     }
                     
@@ -156,7 +156,7 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"NetworkStatusBridge executing removeNetworkStatusListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executing removeNetworkStatusListeners.");
                }
 
                if (this._delegate != null)
@@ -164,12 +164,12 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
                     this._delegate.RemoveNetworkStatusListeners();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"NetworkStatusBridge executed 'removeNetworkStatusListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"NetworkStatusBridge executed 'removeNetworkStatusListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"NetworkStatusBridge no delegate for 'removeNetworkStatusListeners'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"NetworkStatusBridge no delegate for 'removeNetworkStatusListeners'.");
                     }
                     }
                     
@@ -203,7 +203,7 @@ public class NetworkStatusBridge : BaseCommunicationBridge, INetworkStatus, APIB
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "NetworkStatusBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "NetworkStatusBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

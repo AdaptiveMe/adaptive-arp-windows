@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -96,7 +96,7 @@ public class AppContextBridge : IAppContext
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextBridge executing getContext.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextBridge executing getContext.");
                }
 
                Object result = null;
@@ -105,12 +105,12 @@ public class AppContextBridge : IAppContext
                     result = this._delegate.GetContext();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextBridge executed 'getContext' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextBridge executed 'getContext' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppContextBridge no delegate for 'getContext'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppContextBridge no delegate for 'getContext'.");
                     }
                     }
                     return result;                    
@@ -130,7 +130,7 @@ public class AppContextBridge : IAppContext
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextBridge executing getContextType.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextBridge executing getContextType.");
                }
 
                IOSType result = IOSType.Unknown;
@@ -139,12 +139,12 @@ public class AppContextBridge : IAppContext
                     result = this._delegate.GetContextType();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AppContextBridge executed 'getContextType' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AppContextBridge executed 'getContextType' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AppContextBridge no delegate for 'getContextType'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AppContextBridge no delegate for 'getContextType'.");
                     }
                     }
                     return result;                    

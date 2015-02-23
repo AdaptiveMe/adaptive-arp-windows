@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -93,7 +93,7 @@ changes please use the IDevice and IDisplay functions and listeners API respecti
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing getOrientationDefault.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing getOrientationDefault.");
                }
 
                ICapabilitiesOrientation result = ICapabilitiesOrientation.Unknown;
@@ -102,12 +102,12 @@ changes please use the IDevice and IDisplay functions and listeners API respecti
                     result = this._delegate.GetOrientationDefault();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'getOrientationDefault' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'getOrientationDefault' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'getOrientationDefault'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'getOrientationDefault'.");
                     }
                     }
                     return result;                    
@@ -128,7 +128,7 @@ support at least one orientation. This is usually PortaitUp.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing getOrientationsSupported.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing getOrientationsSupported.");
                }
 
                ICapabilitiesOrientation[] result = null;
@@ -137,12 +137,12 @@ support at least one orientation. This is usually PortaitUp.
                     result = this._delegate.GetOrientationsSupported();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'getOrientationsSupported' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'getOrientationsSupported' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'getOrientationsSupported'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'getOrientationsSupported'.");
                     }
                     }
                     return result;                    
@@ -163,7 +163,7 @@ support at least one orientation. This is usually PortaitUp.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing hasButtonSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasButtonSupport({"+type+"}).");
                }
 
                bool result = false;
@@ -172,12 +172,12 @@ support at least one orientation. This is usually PortaitUp.
                     result = this._delegate.HasButtonSupport(type);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasButtonSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasButtonSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasButtonSupport'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasButtonSupport'.");
                     }
                     }
                     return result;                    
@@ -199,7 +199,7 @@ the device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing hasCommunicationSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasCommunicationSupport({"+type+"}).");
                }
 
                bool result = false;
@@ -208,12 +208,12 @@ the device.
                     result = this._delegate.HasCommunicationSupport(type);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasCommunicationSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasCommunicationSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasCommunicationSupport'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasCommunicationSupport'.");
                     }
                     }
                     return result;                    
@@ -234,7 +234,7 @@ the device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing hasDataSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasDataSupport({"+type+"}).");
                }
 
                bool result = false;
@@ -243,12 +243,12 @@ the device.
                     result = this._delegate.HasDataSupport(type);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasDataSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasDataSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasDataSupport'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasDataSupport'.");
                     }
                     }
                     return result;                    
@@ -270,7 +270,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing hasMediaSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasMediaSupport({"+type+"}).");
                }
 
                bool result = false;
@@ -279,12 +279,12 @@ device.
                     result = this._delegate.HasMediaSupport(type);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasMediaSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasMediaSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasMediaSupport'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasMediaSupport'.");
                     }
                     }
                     return result;                    
@@ -305,7 +305,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing hasNetSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasNetSupport({"+type+"}).");
                }
 
                bool result = false;
@@ -314,12 +314,12 @@ device.
                     result = this._delegate.HasNetSupport(type);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasNetSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasNetSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasNetSupport'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasNetSupport'.");
                     }
                     }
                     return result;                    
@@ -341,7 +341,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing hasNotificationSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasNotificationSupport({"+type+"}).");
                }
 
                bool result = false;
@@ -350,12 +350,12 @@ device.
                     result = this._delegate.HasNotificationSupport(type);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasNotificationSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasNotificationSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasNotificationSupport'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasNotificationSupport'.");
                     }
                     }
                     return result;                    
@@ -376,7 +376,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing hasOrientationSupport({"+orientation+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasOrientationSupport({"+orientation+"}).");
                }
 
                bool result = false;
@@ -385,12 +385,12 @@ device.
                     result = this._delegate.HasOrientationSupport(orientation);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasOrientationSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasOrientationSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasOrientationSupport'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasOrientationSupport'.");
                     }
                     }
                     return result;                    
@@ -412,7 +412,7 @@ device.
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executing hasSensorSupport({"+type+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executing hasSensorSupport({"+type+"}).");
                }
 
                bool result = false;
@@ -421,12 +421,12 @@ device.
                     result = this._delegate.HasSensorSupport(type);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasSensorSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"CapabilitiesBridge executed 'hasSensorSupport' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasSensorSupport'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"CapabilitiesBridge no delegate for 'hasSensorSupport'.");
                     }
                     }
                     return result;                    
@@ -500,7 +500,7 @@ device.
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "CapabilitiesBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "CapabilitiesBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);

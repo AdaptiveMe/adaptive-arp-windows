@@ -27,7 +27,7 @@ Contributors:
 
 Release:
 
-    * @version v2.1.9
+    * @version v2.2.0
 
 -------------------------------------------| aut inveniam viam aut faciam |--------------------------------------------
 */
@@ -91,7 +91,7 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AccelerationBridge executing addAccelerationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing addAccelerationListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -99,12 +99,12 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
                     this._delegate.AddAccelerationListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AccelerationBridge executed 'addAccelerationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executed 'addAccelerationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AccelerationBridge no delegate for 'addAccelerationListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AccelerationBridge no delegate for 'addAccelerationListener'.");
                     }
                     }
                     
@@ -124,7 +124,7 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AccelerationBridge executing removeAccelerationListener({"+listener+"}).");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing removeAccelerationListener({"+listener+"}).");
                }
 
                if (this._delegate != null)
@@ -132,12 +132,12 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
                     this._delegate.RemoveAccelerationListener(listener);
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AccelerationBridge executed 'removeAccelerationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executed 'removeAccelerationListener' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AccelerationBridge no delegate for 'removeAccelerationListener'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AccelerationBridge no delegate for 'removeAccelerationListener'.");
                     }
                     }
                     
@@ -156,7 +156,7 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
 
                if (logger!=null)
                {
-                    logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AccelerationBridge executing removeAccelerationListeners.");
+                    logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executing removeAccelerationListeners.");
                }
 
                if (this._delegate != null)
@@ -164,12 +164,12 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
                     this._delegate.RemoveAccelerationListeners();
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.DEBUG, this.apiGroup.ToString(),"AccelerationBridge executed 'removeAccelerationListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
+                         logger.Log(ILoggingLogLevel.Debug, this.apiGroup.ToString(),"AccelerationBridge executed 'removeAccelerationListeners' in "+(TimerUtil.CurrentTimeMillis()-tIn)+"ms.");
                     }
                } else {
                     if (logger!=null)
                     {
-                         logger.Log(ILoggingLogLevel.ERROR, this.apiGroup.ToString(),"AccelerationBridge no delegate for 'removeAccelerationListeners'.");
+                         logger.Log(ILoggingLogLevel.Error, this.apiGroup.ToString(),"AccelerationBridge no delegate for 'removeAccelerationListeners'.");
                     }
                     }
                     
@@ -203,7 +203,7 @@ public class AccelerationBridge : BaseSensorBridge, IAcceleration, APIBridge
                     default:
                          // 404 - response null.
                          responseCode = 404;
-                         responseMessage = "AccelerationBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.1.9.";
+                         responseMessage = "AccelerationBridge does not provide the function '"+request.GetMethodName()+"' Please check your client-side API version; should be API version >= v2.2.0.";
                          break;
                }
                response.SetResponse(responseJSON);
