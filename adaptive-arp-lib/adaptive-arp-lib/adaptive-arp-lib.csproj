@@ -399,6 +399,7 @@
     <Compile Include="Sources\Adaptive.Arp.Impl\VideoDelegate.cs" />
     <Compile Include="Sources\Adaptive.Arp.Util\JSONProcessor.cs" />
     <Compile Include="Sources\Adaptive.Arp.Util\TimerUtil.cs" />
+    <Compile Include="Sources\Adaptive.Arp.Api\IServiceContentEncoding.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
